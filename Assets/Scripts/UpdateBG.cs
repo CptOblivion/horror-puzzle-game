@@ -7,18 +7,27 @@ public class UpdateBG : MonoBehaviour
 {
     public Texture2D outputTexture;
     public int repeatRender = 2;
-    Camera cam;
+    Camera camBG;
+    Camera camOB;
     public bool UpdateRender = true;
     public List<CameraPosition> camVolumes = new List<CameraPosition>();
     CameraPosition currentPosition;
     public bool SilentUpdates = true;
     private void Awake()
     {
-        cam = GetComponent<Camera>();
+        camBG = GetComponent<Camera>();
+        foreach(Camera testcam in transform.GetComponentsInChildren<Camera>())
+        {
+            if (testcam != camBG)
+            {
+                camOB = testcam;
+                break;
+            }
+        }
     }
     void Start()
     {
-        cam.enabled = false;
+        camBG.enabled = false;
     }
 
     public void CheckForUpdate()
@@ -44,7 +53,7 @@ public class UpdateBG : MonoBehaviour
     {
         Camera newCamera = currentPosition.newCamera;
         transform.SetPositionAndRotation(newCamera.transform.position, newCamera.transform.rotation);
-        cam.fieldOfView = newCamera.fieldOfView;
+        camBG.fieldOfView = newCamera.fieldOfView;
         PrepUpdate();
     }
 
@@ -56,14 +65,14 @@ public class UpdateBG : MonoBehaviour
     private void RenderBackground(bool silent = true) //actually do the update
     {
         float startTime = Time.realtimeSinceStartup;
-        for (int repeat = repeatRender; repeat > 0; repeat--) cam.Render();
+        for (int repeat = repeatRender; repeat > 0; repeat--) camBG.Render();
 
-        outputTexture.Resize(cam.activeTexture.width, cam.activeTexture.height);
+        outputTexture.Resize(camBG.activeTexture.width, camBG.activeTexture.height);
         outputTexture.Apply();
-        RenderTexture.active = cam.activeTexture;
-        outputTexture.ReadPixels(new Rect(0, 0, cam.activeTexture.width, cam.activeTexture.height), 0, 0);
+        RenderTexture.active = camBG.activeTexture;
+        outputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
         outputTexture.Apply();
-        TextureScale.Bilinear(outputTexture, 480, 270);
+        TextureScale.Bilinear(outputTexture, camOB.targetTexture.width, camOB.targetTexture.height);
         float elapsedTime = Time.realtimeSinceStartup - startTime;
         if (!silent) Debug.Log("Updated background: " + (elapsedTime*1000) + " ms");
     }
