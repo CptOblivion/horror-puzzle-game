@@ -19,6 +19,7 @@ public class TankControls : MonoBehaviour
 
     private void Start()
     {
+        GlobalTools.player = gameObject;
     }
 
     // Update is called once per frame
@@ -70,19 +71,9 @@ public class TankControls : MonoBehaviour
             Vector3 moveVec = transform.forward * move;
             characterController.Move(moveVec * Time.deltaTime);
         }
-
-        if (!characterController.isGrounded)
-        {
-            float feetDist = (characterController.height/2) - characterController.radius;
-            Vector3 feetPos = transform.position + new Vector3(0, -feetDist, 0);
-            RaycastHit hit;
-            if (Physics.SphereCast(feetPos, characterController.radius, Vector3.down, out hit, groundSnapDistance))
-            {
-
-                float dropDistance = hit.distance;
-                transform.position = transform.position + new Vector3 (0, -(dropDistance - characterController.skinWidth), 0);
-            }
-        }
+        GlobalTools.SnapToGround(characterController, groundSnapDistance);
+        
 
     }
 }
+
