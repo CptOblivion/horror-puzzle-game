@@ -19,7 +19,6 @@ public class ScrollAtPlayer : MonoBehaviour
         Vector3 ViewVec = SelfPos - TargetPos;
         Vector2 ScrollVec = new Vector2(ViewVec.x, ViewVec.y);
         float ScrollMag = ScrollVec.magnitude;
-        Debug.Log(ScrollMag);
         ScrollMag = 1 - Mathf.Clamp01(ScrollMag);
         
         ScrollPosition += ScrollVec.normalized * ScrollSpeed * ScrollMag;

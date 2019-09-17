@@ -17,18 +17,25 @@ public class GlitchMonster : MonoBehaviour
     public float GroundSnapDistance = 1;
     SphereCollider detectPlayer;
 
-    enum AIState { Idle, Activating, FollowingPlayer, FacingHome, ReturningHome, FacingIdle}
-    AIState aiState;
+    public enum AIState { Idle, Activating, FollowingPlayer, FacingHome, ReturningHome, FacingIdle}
+    [HideInInspector]
+    public AIState aiState;
 
     CharacterController characterController;
     Animator animator;
-    float ActivateTimer;
+    [HideInInspector]
+    public float ActivateTimer;
     float WalkPauseTimer;
     Vector3 SpawnPosition;
     Quaternion SpawnRotation;
     NavMeshPath path;
     Vector3 LocalGoal;
     Vector3 GlobalGoal;
+    
+    // not used yet, will eventually be used so pathing isn't recalculated every step for returning home
+    //bool MovingGoal = true;
+    //this will involve first coming up with some sort of function to remove locations from path when they're passed, though
+    //maybe check if path[1] is within an arc behind us? That would imply we've stepped past it
 
     private void Awake()
     {
@@ -51,8 +58,10 @@ public class GlitchMonster : MonoBehaviour
         if ((aiState != AIState.FollowingPlayer && aiState != AIState.Activating) && other.gameObject == GlobalTools.player && PlayerLeash() < LeashLength)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, (other.transform.position - transform.position), out hit))
+            Ray ray = new Ray(transform.position, (GlobalTools.player.transform.position - transform.position));
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             {
+                Debug.DrawLine(transform.position, hit.point);
                 if (hit.collider.gameObject == GlobalTools.player)
                 {
                     ChangeAIState(AIState.Activating);
@@ -175,13 +184,13 @@ public class GlitchMonster : MonoBehaviour
 
         animator.SetFloat("WalkSpeed", 0);
         WalkPauseTimer = WalkPause + Random.Range(-WalkPauseRand, WalkPauseRand);
-        if (NavMesh.CalculatePath(transform.position, GlobalGoal, NavMesh.AllAreas, path))
+        if (NavMesh.CalculatePath(transform.position + new Vector3(0, -characterController.height/2.1f, 0), GlobalGoal, NavMesh.AllAreas, path))
         {
             LocalGoal = path.corners[1];
         }
         else
         {
-            Debug.LogError("Unable to path to target!");
+            Debug.LogError("Unable to path to target!", gameObject);
             LocalGoal = GlobalGoal;
         }
     }
@@ -194,7 +203,7 @@ public class GlitchMonster : MonoBehaviour
             WalkPauseTimer -= Time.deltaTime;
             if (!NavMesh.Raycast(transform.position, targetLocation, out NavMeshHit hit, NavMesh.AllAreas)) //check a ray on the navmesh, if it doesn't hit anything we've got a straight shot to the target (eg if the player moved into sight since the last nav update)
             {
-                LocalGoal = GlobalGoal = targetLocation;
+                //LocalGoal = GlobalGoal = targetLocation;
             }
             TurnToFace(LocalGoal, TurnSpeed);
         }
@@ -210,6 +219,10 @@ public class GlitchMonster : MonoBehaviour
             Debug.DrawLine(point, point + new Vector3(0, 1, 0));
         }
         */
+        for(int i = 1; i < path.corners.Length; i++)
+        {
+            Debug.DrawLine(path.corners[i-1], path.corners[i]);
+        }
     }
 
     float PlayerLeash()

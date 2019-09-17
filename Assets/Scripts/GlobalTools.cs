@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class BGFrame
+{
+    [Range(1, 4)]
+    public int FrameNumber;
+    public float FrameTime = 0.1f;
+}
 public class GlobalTools : MonoBehaviour
 {
     public Camera startingCam;

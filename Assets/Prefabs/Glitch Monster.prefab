@@ -44,6 +44,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &626240763178911106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2194253557072547813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d4112305a598f4ebcaa5903736b8b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleColor: {r: 0.49355367, g: 0.25453895, b: 0.5188679, a: 0}
+  SafeColor: {r: 1, g: 0.6886792, b: 0.9861933, a: 0}
+  DangerColor: {r: 1, g: 0, b: 0, a: 0}
+  SafeDistance: 15
+--- !u!114 &3076548471738809370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2194253557072547813}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120ce73362c0e1e4797db86008105f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollSpeed: 0.005
+  DepthRemove: 0.1
 --- !u!1 &5629298509848821247
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,14 +142,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectRadius: 10
   WalkSpeed: 1
-  WalkPause: 0.25
-  WalkPauseRand: 0.25
-  TurnSpeed: 100
-  LeashLength: 11
+  WalkPause: 0.2
+  WalkPauseRand: 0.2
+  TurnSpeed: 5
+  LeashLength: 25
   WakeTime: 3
   WakeTurnSpeed: 1.6
-  HomeThreshold: 0.1
+  HomeThreshold: 0.2
   GroundSnapDistance: 1
+  aiState: 0
+  ActivateTimer: 0
 --- !u!54 &6190722598600405627
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,18 +187,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3076548471738809370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2194253557072547813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120ce73362c0e1e4797db86008105f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8704833169923754417
 PrefabInstance:
   m_ObjectHideFlags: 0
