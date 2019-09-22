@@ -1,0 +1,30 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerInteract : MonoBehaviour
+{
+    public InteractTarget target;
+    private void OnTriggerStay(Collider other)
+    {
+        InteractTarget testTarget = other.GetComponent<InteractTarget>();
+        if (testTarget && testTarget.enabled)
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position, other.transform.position - transform.position);
+            if (Physics.Raycast(ray, out hit, 5))
+            {
+                if (hit.collider == other)
+                {
+                    //TODO: priority system
+                    target = testTarget;
+                }
+            }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        target = null; //reset at the end of the frame
+    }
+}

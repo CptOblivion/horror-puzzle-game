@@ -7,10 +7,15 @@ public class GlitchMonster : MonoBehaviour
 {
     public float DetectRadius = 10;
     public float WalkSpeed = 1;
-    public float WalkPause = .25f;
+    [Tooltip("Pauses happen after every step, whereupon pathfinding updates- turning can only happen while pausing")]
+    public float WalkPauseMin = .25f;
+    [Tooltip("random amount of time added to the walk pause")]
     public float WalkPauseRand = .25f;
     public float TurnSpeed = 100;
-    public float LeashLength = 10; //how far it'll go from its spawn
+    [Tooltip("The object that defines the territory the monster is allowed to attack the player within")]
+    public AITerritory territory;
+    [Tooltip("If there's no territory set, the AI is tethered this distance from its spawn point")]
+    public float DefaultLeashLength = 10;
     public float WakeTime = 1;//how long it takes to activate after detecting player
     public float WakeTurnSpeed = .3f;
     public float HomeThreshold = .01f;
@@ -55,17 +60,23 @@ public class GlitchMonster : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
-        if ((aiState != AIState.FollowingPlayer && aiState != AIState.Activating) && other.gameObject == GlobalTools.player && PlayerLeash() < LeashLength)
+
+        //no longer checking if other is player??
+        if (other.gameObject == GlobalTools.player)
         {
-            RaycastHit hit;
-            Ray ray = new Ray(transform.position, (GlobalTools.player.transform.position - transform.position));
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            if ((aiState != AIState.FollowingPlayer && aiState != AIState.Activating) && PlayerInTerritory())
             {
-                Debug.DrawLine(transform.position, hit.point);
-                if (hit.collider.gameObject == GlobalTools.player)
+                RaycastHit hit;
+                Ray ray = new Ray(transform.position, (GlobalTools.player.transform.position - transform.position));
+                if (Physics.Raycast(ray, out hit, DetectRadius, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
                 {
-                    ChangeAIState(AIState.Activating);
+                    Debug.DrawLine(transform.position, hit.point);
+                    if (hit.collider.gameObject == GlobalTools.player)
+                    {
+                        ChangeAIState(AIState.Activating);
+                    }
                 }
+
             }
 
         }
@@ -77,7 +88,7 @@ public class GlitchMonster : MonoBehaviour
         if (aiState == AIState.Activating)
         {
             float LeashCurrent = (transform.position - SpawnPosition).magnitude;
-            if (LeashCurrent > LeashLength || PlayerLeash() > LeashLength)
+            if (!PlayerInTerritory())
             {
                 if (LeashCurrent <= HomeThreshold) ChangeAIState(AIState.FacingIdle);
                 else ChangeAIState(aiState = AIState.FacingHome);
@@ -89,7 +100,7 @@ public class GlitchMonster : MonoBehaviour
         else if (aiState == AIState.FollowingPlayer)
         {
             float LeashCurrent = (transform.position - SpawnPosition).magnitude;
-            if (LeashCurrent > LeashLength || PlayerLeash() > LeashLength)
+            if (!PlayerInTerritory())
             {
                 if (LeashCurrent <= HomeThreshold) ChangeAIState(AIState.FacingIdle);
                 else ChangeAIState(aiState = AIState.FacingHome);
@@ -183,7 +194,7 @@ public class GlitchMonster : MonoBehaviour
     {
 
         animator.SetFloat("WalkSpeed", 0);
-        WalkPauseTimer = WalkPause + Random.Range(-WalkPauseRand, WalkPauseRand);
+        WalkPauseTimer = WalkPauseMin + Random.Range(0, WalkPauseRand);
         if (NavMesh.CalculatePath(transform.position + new Vector3(0, -characterController.height/2.1f, 0), GlobalGoal, NavMesh.AllAreas, path))
         {
             LocalGoal = path.corners[1];
@@ -228,5 +239,20 @@ public class GlitchMonster : MonoBehaviour
     float PlayerLeash()
     {
         return (GlobalTools.player.transform.position - SpawnPosition).magnitude;
+    }
+    bool PlayerInTerritory()
+    {
+        if (territory)
+        {
+            return territory.PlayerInTerritory;
+        }
+        else if (PlayerLeash() < DefaultLeashLength)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

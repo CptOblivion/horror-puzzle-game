@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class TankControls : MonoBehaviour
 {
-    CharacterController characterController;
     public float WalkSpeed = 3;
     public float BackSpeed = 1;
     public float RunSpeed = 5;
     public float TurnSpeed = 1;
     public float groundSnapDistance = .5f;
     public Animator anim;
+
+    CharacterController characterController;
+    PlayerInteract playerInteract;
     Vector3 Velocity;
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerInteract = GetComponentInChildren<PlayerInteract>();
     }
 
     private void Start()
@@ -73,6 +76,13 @@ public class TankControls : MonoBehaviour
         }
         GlobalTools.SnapToGround(characterController, groundSnapDistance);
         
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playerInteract.target)
+            {
+                playerInteract.target.Interact();
+            }
+        }
 
     }
 }

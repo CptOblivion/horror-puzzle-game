@@ -12,7 +12,9 @@ public class BGFrame
 }
 public class GlobalTools : MonoBehaviour
 {
+    public static bool Paused = false;
     public Camera startingCam;
+    public Canvas overlayCanvas;
     public int Framerate = 24;
     public bool vSync = true;
     public static Camera currentCam;
@@ -46,5 +48,16 @@ public class GlobalTools : MonoBehaviour
             }
         }
 
+    }
+
+    public static void Pause()
+    {
+        Time.timeScale = 0;
+        Paused = true;
+    }
+    public static void Unpause()
+    {
+        Time.timeScale = 1;
+        Paused = false;
     }
 }

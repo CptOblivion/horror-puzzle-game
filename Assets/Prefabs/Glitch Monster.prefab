@@ -142,10 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DetectRadius: 10
   WalkSpeed: 1
-  WalkPause: 0.2
-  WalkPauseRand: 0.2
+  WalkPauseMin: 0.05
+  WalkPauseRand: 0.35
   TurnSpeed: 5
-  LeashLength: 25
+  territory: {fileID: 0}
+  DefaultLeashLength: 10
   WakeTime: 3
   WakeTurnSpeed: 1.6
   HomeThreshold: 0.2
@@ -204,42 +205,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: -8041603302084299374, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: -2284855406063528777, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: -7644368708306251204, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -7340334998597532675, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d43c4b37f20c87c42bc7c24d18700733, type: 2}
-    - target: {fileID: -6979905548736537151, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -6851027748750079766, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 860bc6da4a979274aa264ee282886bf3, type: 2}
-    - target: {fileID: -6057140222963153312, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -5161386112515498261, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: 7403436587081893460, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -299,57 +270,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -3389228970283832975, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: -6057140222963153312, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -2657966824314427079, guid: ff9c273d46a677343b8bce256ca9d62a,
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 860bc6da4a979274aa264ee282886bf3, type: 2}
+    - target: {fileID: -6057140222963153312, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -2324271141525611035, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: -7340334998597532675, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -2284855406063528777, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -2185335017238168669, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -629687096099946820, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 117319753914184426, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 830131347672130021, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d43c4b37f20c87c42bc7c24d18700733, type: 2}
     - target: {fileID: 1121063750183690423, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2293100923605628906, guid: ff9c273d46a677343b8bce256ca9d62a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3238393438065628717, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: -5161386112515498261, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -359,12 +300,57 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 7403436587081893460, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: -6851027748750079766, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 8005816762242766154, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: 117319753914184426, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -629687096099946820, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293100923605628906, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7644368708306251204, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2324271141525611035, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -3389228970283832975, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238393438065628717, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -6979905548736537151, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8041603302084299374, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111962883125049612, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -374,7 +360,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 9111962883125049612, guid: ff9c273d46a677343b8bce256ca9d62a,
+    - target: {fileID: 8005816762242766154, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2185335017238168669, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2657966824314427079, guid: ff9c273d46a677343b8bce256ca9d62a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 830131347672130021, guid: ff9c273d46a677343b8bce256ca9d62a,
         type: 3}
       propertyPath: m_Layer
       value: 9

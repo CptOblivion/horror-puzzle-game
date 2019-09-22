@@ -7,7 +7,7 @@ public class UpdateBG : MonoBehaviour
 {
     public Texture2D[] outputTextures = new Texture2D[4];
     public int repeatRender = 2;
-    public bool UpdateRender = true;
+    public bool UpdateRender = false;
     public List<CameraPosition> camVolumes = new List<CameraPosition>();
     public bool SilentUpdates = true;
     public MeshRenderer drawBG;
@@ -77,11 +77,13 @@ public class UpdateBG : MonoBehaviour
 
     public void PrepRender() //lets other objects tell this camera to update when the frame is ending
     {
+        //Debug.Log("Rendering");
         UpdateRender = true;
     }
 
     private void RenderBackground(int repeat = 1) //actually do the update
     {
+        //Debug.Log("RenderingIteration");
         for (; repeat > 0; repeat--)
         {
             camBG.Render();
