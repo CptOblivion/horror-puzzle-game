@@ -41,10 +41,16 @@ public class GlobalTools : MonoBehaviour
             float feetDist = (characterController.height / 2) - characterController.radius;
             Vector3 feetPos = characterController.transform.position + new Vector3(0, -feetDist, 0);
             RaycastHit hit;
+            //float safetyMargin = .01f;
             if (Physics.SphereCast(feetPos, characterController.radius, Vector3.down, out hit, GroundSnapDistance))
             {
-                float dropDistance = hit.distance;
-                characterController.transform.position = characterController.transform.position + new Vector3(0, -(dropDistance - characterController.skinWidth), 0);
+                //float angleMargin = .5f;
+                if (Vector3.Dot(hit.normal, characterController.transform.up) > Mathf.Sin(Mathf.Deg2Rad * characterController.slopeLimit))
+                {
+                    float dropDistance = hit.distance;
+                    characterController.transform.position = characterController.transform.position + new Vector3(0, -(dropDistance - characterController.skinWidth), 0);
+
+                }
             }
         }
 
