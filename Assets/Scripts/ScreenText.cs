@@ -46,7 +46,7 @@ public class ScreenText : MonoBehaviour
 
     private void Update()
     {
-        if (screenText.WaitAFrame)
+        if (canvas.enabled && screenText.WaitAFrame)
         {
             WaitAFrame = false;
         }

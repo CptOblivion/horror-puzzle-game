@@ -57,8 +57,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9174a83d95d994447954eb7a3eadeb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractTrigger: {fileID: 0}
+  InteractObject: {fileID: 5726970207689518460}
   Function: InteractWrongSide
+  InteractMessage: 
+  KeyItem: 
+  NoItemText: Locked.
+  GenericWrongItemText: 
+  customWrongItemText: []
+  ConsumeItem: 1
   OneUse: 0
 --- !u!1 &5726970207586182792
 GameObject:
@@ -332,8 +338,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9174a83d95d994447954eb7a3eadeb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InteractTrigger: {fileID: 0}
+  InteractObject: {fileID: 5726970207689518460}
   Function: Interact
+  InteractMessage: 
+  KeyItem: 
+  NoItemText: Locked.
+  GenericWrongItemText: 
+  customWrongItemText: []
+  ConsumeItem: 1
   OneUse: 0
 --- !u!1 &6982461620936065067
 GameObject:

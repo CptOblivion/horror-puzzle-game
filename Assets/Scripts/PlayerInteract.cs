@@ -25,6 +25,9 @@ public class PlayerInteract : MonoBehaviour
 
     private void LateUpdate()
     {
-        target = null; //reset at the end of the frame
+        if (!GlobalTools.Paused)
+        {
+            target = null; //reset at the end of the frame (leave it be while paused)
+        }
     }
 }

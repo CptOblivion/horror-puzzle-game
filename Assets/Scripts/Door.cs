@@ -15,16 +15,16 @@ public class Door : MonoBehaviour
     [Tooltip("Disables further interaction after opening")]
     public bool LockOpen = true;
     public bool UpdateBackground = false;
-    //TODO: make it so all other gamelogic and animations pause until door opening animation is done
     public bool HaltGame = true;
     public string LockedMessage;
     public string WrongSideMessage;
-    public Collider Rightside;
-    public Collider WrongSide;
+    //public Collider Rightside;
+    //public Collider WrongSide;
+
+    public AnimsWithOffset[] anims;
 
     bool toggling = false;
 
-    public AnimsWithOffset[] anims;
 
     public void Unlock()
     {
@@ -39,6 +39,11 @@ public class Door : MonoBehaviour
     public void ToggleLock()
     {
         Locked = !Locked;
+    }
+    public void UnlockAndOpen()
+    {
+        Unlock();
+        Interact();
     }
     public void Interact()
     {

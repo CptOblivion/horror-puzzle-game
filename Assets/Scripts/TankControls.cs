@@ -28,59 +28,62 @@ public class TankControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float move = 0;
-        float turn = 0;
-        if (Input.GetKey(KeyCode.W))
+        if (!GlobalTools.WasPaused)
         {
-            move += 1;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            move -= 1;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            turn -= 1;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            turn += 1;
-        }
-
-        turn = turn * TurnSpeed;
-
-        transform.Rotate(0, turn * Time.deltaTime, 0);
-        anim.SetBool("Running", false);
-        if (move > 0)
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
+            float move = 0;
+            float turn = 0;
+            if (Input.GetKey(KeyCode.W))
             {
-                move = RunSpeed;
-                anim.SetBool("Running", true);
+                move += 1;
             }
-            else
+            if (Input.GetKey(KeyCode.S))
             {
-                move = WalkSpeed;
+                move -= 1;
             }
-        }
-        else if (move < 0)
-        {
-            move = -BackSpeed;
-        }
-        anim.SetFloat("Speed", move);
-        
-        if (move != 0)
-        {
-            Vector3 moveVec = transform.forward * move;
-            characterController.Move(moveVec * Time.deltaTime);
-        }
-        GlobalTools.SnapToGround(characterController, groundSnapDistance);
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (playerInteract.target)
+            if (Input.GetKey(KeyCode.A))
             {
-                playerInteract.target.Interact();
+                turn -= 1;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                turn += 1;
+            }
+
+            turn = turn * TurnSpeed;
+
+            transform.Rotate(0, turn * Time.deltaTime, 0);
+            anim.SetBool("Running", false);
+            if (move > 0)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    move = RunSpeed;
+                    anim.SetBool("Running", true);
+                }
+                else
+                {
+                    move = WalkSpeed;
+                }
+            }
+            else if (move < 0)
+            {
+                move = -BackSpeed;
+            }
+            anim.SetFloat("Speed", move);
+
+            if (move != 0)
+            {
+                Vector3 moveVec = transform.forward * move;
+                characterController.Move(moveVec * Time.deltaTime);
+            }
+            GlobalTools.SnapToGround(characterController, groundSnapDistance);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (playerInteract.target)
+                {
+                    playerInteract.target.Interact();
+                }
             }
         }
 

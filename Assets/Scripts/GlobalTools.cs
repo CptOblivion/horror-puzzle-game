@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
-public class BGFrame
-{
-    [Range(1, 4)]
-    public int FrameNumber;
-    public float FrameTime = 0.1f;
-}
 public class GlobalTools : MonoBehaviour
 {
     public static bool Paused = false;
+    public static bool WasPaused = false;
     public Camera startingCam;
     public Canvas overlayCanvas;
     public int Framerate = 24;
@@ -33,6 +27,13 @@ public class GlobalTools : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
         Application.targetFrameRate = Framerate;
+    }
+    private void LateUpdate()
+    {
+        if (WasPaused)
+        {
+            WasPaused = false;
+        }
     }
     public static void SnapToGround(CharacterController characterController, float GroundSnapDistance)
     {
@@ -58,6 +59,7 @@ public class GlobalTools : MonoBehaviour
 
     public static void Pause()
     {
+        //Physics.autoSimulation = false;
         Time.timeScale = 0;
         Paused = true;
     }
@@ -65,5 +67,8 @@ public class GlobalTools : MonoBehaviour
     {
         Time.timeScale = 1;
         Paused = false;
+        GlobalTools.WasPaused = true;
+        //Physics.Simulate(Time.fixedUnscaledDeltaTime);
+        //Physics.autoSimulation = true;
     }
 }
