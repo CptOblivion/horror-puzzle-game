@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3350243629103001046}
   - component: {fileID: -2285503947211259533}
   m_Layer: 9
-  m_Name: SchoolWorld Key East1
+  m_Name: SchoolWorld Key West2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interact: 1
-  ItemName: Another School Key
-  ItemDescription: This one says "East Hall".
+  ItemName: School Key
+  ItemDescription: The tag says "West Hall".
   UseOnNothing: I can't use that here.
-  UseOnWrongThing: This won't unlock that.
+  UseOnWrongThing: I can't unlock that with this.
 --- !u!1 &3271150634491684024
 GameObject:
   m_ObjectHideFlags: 0
