@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TankControls : MonoBehaviour
 {
@@ -30,55 +31,38 @@ public class TankControls : MonoBehaviour
     {
         if (!GlobalTools.WasPaused)
         {
-            float move = 0;
-            float turn = 0;
-            if (Input.GetKey(KeyCode.W))
-            {
-                move += 1;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                move -= 1;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                turn -= 1;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                turn += 1;
-            }
+            Vector2 MoveInputs = GlobalTools.inputsGameplay.GetAction("Move").ReadValue<Vector2>();
 
-            turn = turn * TurnSpeed;
+            MoveInputs.x = MoveInputs.x * TurnSpeed;
 
-            transform.Rotate(0, turn * Time.deltaTime, 0);
+            transform.Rotate(0, MoveInputs.x * Time.deltaTime, 0);
             anim.SetBool("Running", false);
-            if (move > 0)
+            if (MoveInputs.y > 0)
             {
-                if (Input.GetKey(KeyCode.LeftShift))
+                if (GlobalTools.inputsGameplay.GetAction("Run").ReadValue<float>() > 0)
                 {
-                    move = RunSpeed;
+                    MoveInputs.y = RunSpeed;
                     anim.SetBool("Running", true);
                 }
                 else
                 {
-                    move = WalkSpeed;
+                    MoveInputs.y = WalkSpeed;
                 }
             }
-            else if (move < 0)
+            else if (MoveInputs.y < 0)
             {
-                move = -BackSpeed;
+                MoveInputs.y = -BackSpeed;
             }
-            anim.SetFloat("Speed", move);
+            anim.SetFloat("Speed", MoveInputs.y);
 
-            if (move != 0)
+            if (MoveInputs.y != 0)
             {
-                Vector3 moveVec = transform.forward * move;
+                Vector3 moveVec = transform.forward * MoveInputs.y;
                 characterController.Move(moveVec * Time.deltaTime);
             }
             GlobalTools.SnapToGround(characterController, groundSnapDistance);
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (GlobalTools.inputsGameplay.GetAction("Interact").triggered)
             {
                 if (playerInteract.target)
                 {

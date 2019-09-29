@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class ScreenText : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class ScreenText : MonoBehaviour
         {
             if (Paused)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Return))
+                if (GlobalTools.inputsMenus.GetAction("Submit").triggered || GlobalTools.inputsMenus.GetAction("Cancel").triggered)
                 {
                     canvas.enabled = false;
                     GlobalTools.Unpause();

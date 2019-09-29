@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class InventorySlot
 {
+    [Tooltip("the inventory slot background object")]
     public GameObject slotContainer;
-    //[HideInInspector]
+    [HideInInspector]
     public InventoryItem item = null;
-    //[HideInInspector]
+    [HideInInspector]
     public GameObject instantiatedObject = null;
 
 }
@@ -24,17 +28,22 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] InventoryList = new InventorySlot[9];
     public int inventoryGridWidth = 3;
     public int inventoryGridHeight = 3;
-    public int CurrentItemIndex = 0;
+    public Button defaultButton;
+    public Text itemTitle;
+    public Text itemDescription;
+    public Canvas inventoryScreenCanvas;
+    public float ItemSpinSpeed = 180;
 
     public static InventoryManager inventoryManager;
+    public static EventSystem eventSystem;
 
-    Canvas canvas;
+    GameObject LastSelected;
     bool InventoryOpen = false;
     int[,] slotGrid;
     private void Awake()
     {
         inventoryManager = this;
-        canvas = GetComponent<Canvas>();
+        eventSystem = FindObjectOfType<EventSystem>();
         slotGrid = new int[inventoryGridWidth, inventoryGridHeight];
         int i = 0;
         for (int y = 0; y < inventoryGridHeight; y++)
@@ -48,7 +57,7 @@ public class InventoryManager : MonoBehaviour
     }
     void Start()
     {
-        canvas.enabled = false;
+        inventoryScreenCanvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,7 +65,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!GlobalTools.Paused)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if(GlobalTools.inputsGameplay.GetAction("Pause").triggered)
             {
                 OpenInventory();
             }
@@ -65,31 +74,60 @@ public class InventoryManager : MonoBehaviour
         {
             if (InventoryOpen)
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if(GlobalTools.inputsMenus.GetAction("Cancel").triggered)
                 {
                     CloseInventory();
                 }
-                else if (Input.GetKeyDown(KeyCode.Space))
+                if (eventSystem.currentSelectedGameObject != LastSelected)
                 {
-                    UseItem();
+                    UpdateItemText();
                 }
             }
         }
     }
 
+    void UpdateItemText()
+    {
+        LastSelected = eventSystem.currentSelectedGameObject;
+        bool slotSelected = false;
+        foreach (InventorySlot slot in InventoryList)
+        {
+            if (slot.slotContainer == LastSelected)
+            {
+                if (slot.item)
+                {
+                    itemTitle.text = slot.item.ItemName;
+                    itemDescription.text = slot.item.ItemDescription;
+                    slotSelected = true;
+                }
+                break;
+            }
+        }
+        if (!slotSelected)
+        {
+            itemTitle.text = "";
+            itemDescription.text = "";
+        }
+    }
     public void OpenInventory()
     {
         GlobalTools.Pause();
         InventoryOpen = true;
-        canvas.enabled = true;
-        CurrentItemIndex = 0;
+        inventoryScreenCanvas.gameObject.SetActive(true);
         inventoryManager.UpdateInventoryScreen();
+        if (defaultButton)
+        {
+            eventSystem.SetSelectedGameObject(null);
+            eventSystem.SetSelectedGameObject(defaultButton.gameObject);
+            LastSelected = defaultButton.gameObject;
+        }
+        UpdateItemText();
     }
     public void CloseInventory()
     {
         GlobalTools.Unpause();
         InventoryOpen = false;
-        canvas.enabled = false;
+        inventoryScreenCanvas.gameObject.SetActive(false);
     }
     void UpdateInventoryScreen()
     {
@@ -116,11 +154,14 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    public void UseItem()
+    public void UseItem(int slot)
     {
-        InventoryItem currentItem = InventoryList[CurrentItemIndex].item;
+        //InventoryItem currentItem = InventoryList[CurrentItemIndex].item;
+        InventoryItem currentItem = InventoryList[slot].item;
+        //Debug.Log("using item");
         if (!currentItem)
         {
+            //Debug.Log("empty slot");
             return;
         }
         CloseInventory();

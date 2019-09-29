@@ -48,7 +48,7 @@ public class InteractTarget : MonoBehaviour
         else
         {
             ScreenText.DisplayText(NoItemText);
-            Debug.Log(NoItemText);
+            //Debug.Log(NoItemText);
         }
     }
     public string GetWrongItemText(InventoryItem item)

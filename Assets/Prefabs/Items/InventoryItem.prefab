@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2447419648652401541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8068065974709700922}
+  m_Layer: 9
+  m_Name: Model Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8068065974709700922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2447419648652401541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4692796787443800195}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3202526802724324644
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,8 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3350243629103001046}
   - component: {fileID: -2285503947211259533}
+  - component: {fileID: 4619549059334173698}
   m_Layer: 9
-  m_Name: SchoolWorld Key West2
+  m_Name: InventoryItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,10 +56,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3202526802724324644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.435275, y: 5.7985206, z: 7.1465797}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7649630039502261925}
+  - {fileID: 4692796787443800195}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,10 +77,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Interact: 1
-  ItemName: School Key
-  ItemDescription: The tag says "West Hall".
-  UseOnNothing: I can't use that here.
-  UseOnWrongThing: I can't unlock that with this.
+  ItemName: Unnamed Item
+  ItemDescription: No Description
+  UseOnNothing: I can't use this here.
+  UseOnWrongThing: I can't use this on that.
+--- !u!114 &4619549059334173698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3202526802724324644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e16fbb661c2ed4293296169d6c6265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TipAngle: -45
 --- !u!1 &3271150634491684024
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7649630039502261925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -121,3 +166,34 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!1 &3515782055328691419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4692796787443800195}
+  m_Layer: 9
+  m_Name: Model Flattener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4692796787443800195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515782055328691419}
+  m_LocalRotation: {x: 0, y: 0, z: 0.00008726013, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 0.0001}
+  m_Children:
+  - {fileID: 8068065974709700922}
+  m_Father: {fileID: 3350243629103001046}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.01}

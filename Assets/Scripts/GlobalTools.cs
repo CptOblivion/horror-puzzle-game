@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class GlobalTools : MonoBehaviour
@@ -14,11 +16,19 @@ public class GlobalTools : MonoBehaviour
     public static Camera currentCam;
     public static GameObject player;
     public static GlobalTools globalTools;
+    public InputActionAsset inputActionAsset;
+    public static InputActionAsset inputActions;
+    public static InputActionMap inputsGameplay;
+    public static InputActionMap inputsMenus;
+
+    PlayerInput playerInput;
     public enum LayerMasks { Default, TransparentFX, IngoreRaycast, Blank0, Water, UI, Blank1, Blank2, PostProcessing, RenderOBJ, RenderBG, Clickable, ClickOcclude }
     private void Awake()
     {
         globalTools = this;
         currentCam = startingCam;
+        playerInput = this.GetComponent<PlayerInput>();
+        inputActions = this.inputActionAsset;
     }
     void Start()
     {
@@ -27,6 +37,11 @@ public class GlobalTools : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
         Application.targetFrameRate = Framerate;
+
+        inputsGameplay = inputActions.GetActionMap("Gameplay");
+        inputsMenus = inputActions.GetActionMap("Menus");
+        inputsGameplay.Enable();
+        //inputsMenus.Disable();
     }
     private void LateUpdate()
     {
@@ -59,16 +74,19 @@ public class GlobalTools : MonoBehaviour
 
     public static void Pause()
     {
-        //Physics.autoSimulation = false;
         Time.timeScale = 0;
         Paused = true;
+        //globalTools.playerInput.SwitchCurrentActionMap("Menus");
+        inputsGameplay.Disable();
+        //inputsMenus.Enable();
     }
     public static void Unpause()
     {
         Time.timeScale = 1;
         Paused = false;
         GlobalTools.WasPaused = true;
-        //Physics.Simulate(Time.fixedUnscaledDeltaTime);
-        //Physics.autoSimulation = true;
+        //globalTools.playerInput.SwitchCurrentActionMap("Gameplay");
+        inputsGameplay.Enable();
+        //inputsMenus.Disable();
     }
 }
