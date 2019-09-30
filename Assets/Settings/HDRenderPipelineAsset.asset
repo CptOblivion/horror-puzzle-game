@@ -35,7 +35,7 @@ MonoBehaviour:
     supportVolumetrics: 1
     increaseResolutionOfVolumetrics: 0
     supportLightLayers: 1
-    supportDistortion: 0
+    supportDistortion: 1
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
     supportTransparentDepthPostpass: 1
