@@ -9598,11 +9598,11 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_RenderingPathCustomFrameSettings:
     bitDatas:
-      data1: 69284255760157
+      data1: 69278665624580
       data2: 4539628424389459968
   renderingPathCustomFrameSettingsOverrideMask:
     mask:
-      data1: 0
+      data1: 5598524189
       data2: 0
   defaultFrameSettings: 0
   m_Version: 5
@@ -15887,15 +15887,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 407519752766852851, guid: 334841f466ff9114591cbdc75a2ce383,
-        type: 3}
-      propertyPath: m_UIInputModule
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8293799566251966238, guid: 334841f466ff9114591cbdc75a2ce383,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 407519752766852851, guid: 334841f466ff9114591cbdc75a2ce383,
+        type: 3}
+      propertyPath: m_UIInputModule
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8293799566251966227, guid: 334841f466ff9114591cbdc75a2ce383,
         type: 3}
@@ -16071,6 +16071,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293799566251966226, guid: 334841f466ff9114591cbdc75a2ce383,
+        type: 3}
+      propertyPath: renderingPathCustomFrameSettingsOverrideMask.mask.data1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293799566251966226, guid: 334841f466ff9114591cbdc75a2ce383,
+        type: 3}
+      propertyPath: m_RenderingPathCustomFrameSettings.bitDatas.data1
+      value: 69284264148765
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 334841f466ff9114591cbdc75a2ce383, type: 3}
