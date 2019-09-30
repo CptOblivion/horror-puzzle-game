@@ -33,6 +33,9 @@ public class InventoryManager : MonoBehaviour
     public Text itemDescription;
     public Canvas inventoryScreenCanvas;
     public float ItemSpinSpeed = 180;
+    public static List<GameObject> CancelOrder = new List<GameObject>();
+    public static GameObject CancelOrderCurrent;
+    public static bool CancelTap = false;
 
     public static InventoryManager inventoryManager;
     public static EventSystem eventSystem;
@@ -74,7 +77,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (InventoryOpen)
             {
-                if(GlobalTools.inputsMenus.GetAction("Cancel").triggered)
+                if (CanCancel(this.gameObject))
                 {
                     CloseInventory();
                 }
@@ -83,6 +86,14 @@ public class InventoryManager : MonoBehaviour
                     UpdateItemText();
                 }
             }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (CancelTap)
+        {
+            CancelTap = false;
         }
     }
 
@@ -122,6 +133,8 @@ public class InventoryManager : MonoBehaviour
             LastSelected = defaultButton.gameObject;
         }
         UpdateItemText();
+        CancelOrder = new List<GameObject> { inventoryManager.gameObject };
+        CancelOrderCurrent = inventoryManager.gameObject;
     }
     public void CloseInventory()
     {
@@ -245,5 +258,45 @@ public class InventoryManager : MonoBehaviour
             inventoryManager.InventoryList[i].item = null;
             //inventoryManager.UpdateInventoryScreen();
         }
+    }
+
+    public static void SetCancelOwner(GameObject obj)
+    {
+        CancelOrder.Add(obj);
+        CancelOrderCurrent = obj;
+    }
+    public static void DecrementCancelOrder(GameObject obj = null)
+    {
+        if (obj != null)
+        {
+            int index = CancelOrder.IndexOf(obj);
+            CancelOrder.RemoveRange(index, CancelOrder.Count - index);
+        }
+        else
+        {
+            CancelOrder.RemoveAt(CancelOrder.Count - 1);
+        }
+        CancelOrderCurrent = CancelOrder[CancelOrder.Count - 1];
+        CancelTap = true;
+    }
+    public static bool CanCancel(GameObject obj)
+    {
+        if (!CancelTap && CancelOrderCurrent == obj && GlobalTools.inputsMenus.GetAction("Cancel").triggered)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

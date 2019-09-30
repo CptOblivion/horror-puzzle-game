@@ -89,12 +89,21 @@ public class UpdateBG : MonoBehaviour
             camBG.Render();
         }
 
-        currentOutputTexture.Resize(camBG.activeTexture.width, camBG.activeTexture.height);
-        currentOutputTexture.Apply();
-        RenderTexture.active = camBG.activeTexture;
-        currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
-        currentOutputTexture.Apply();
-        TextureScale.Bilinear(currentOutputTexture, camOB.targetTexture.width, camOB.targetTexture.height);
+        if (camBG.targetTexture.width != camOB.targetTexture.width)
+        {
+            currentOutputTexture.Resize(camBG.activeTexture.width, camBG.activeTexture.height);
+            currentOutputTexture.Apply();
+            RenderTexture.active = camBG.activeTexture;
+            currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
+            currentOutputTexture.Apply();
+            TextureScale.Bilinear(currentOutputTexture, camOB.targetTexture.width, camOB.targetTexture.height);
+        }
+        else
+        {
+            RenderTexture.active = camBG.activeTexture;
+            currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
+            currentOutputTexture.Apply();
+        }
     }
     private void Awake()
     {
