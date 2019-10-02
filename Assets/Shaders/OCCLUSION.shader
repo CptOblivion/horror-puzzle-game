@@ -5,7 +5,7 @@
         Pass
         {
             Name "DepthOnly"
-			Tags {"LightMode" = "DepthOnly"}
+			Tags {"Queue" = "Geometry-1000"}
 
 			ZWrite On
 			ColorMask 0

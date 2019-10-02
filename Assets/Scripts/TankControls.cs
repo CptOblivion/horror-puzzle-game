@@ -62,8 +62,9 @@ public class TankControls : MonoBehaviour
             }
             GlobalTools.SnapToGround(characterController, groundSnapDistance);
 
-            if (GlobalTools.inputsGameplay.FindAction("Interact").triggered)
+            if (!GlobalTools.Paused && !GlobalTools.WasPaused && GlobalTools.inputsGameplay.FindAction("Submit").triggered)
             {
+                Debug.Log("click");
                 if (playerInteract.target)
                 {
                     playerInteract.target.Interact();

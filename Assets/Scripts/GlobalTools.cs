@@ -10,7 +10,6 @@ public class GlobalTools : MonoBehaviour
     public static bool Paused = false;
     public static bool WasPaused = false;
     public Camera startingCam;
-    public Canvas overlayCanvas;
     public int Framerate = 24;
     public bool vSync = true;
     public static Camera currentCam;
@@ -19,7 +18,7 @@ public class GlobalTools : MonoBehaviour
     public InputActionAsset inputActionAsset;
     public static InputActionAsset inputActions;
     public static InputActionMap inputsGameplay;
-    public static InputActionMap inputsMenus;
+    //public static InputActionMap inputsMenus;
 
     PlayerInput playerInput;
     public enum LayerMasks { Default, TransparentFX, IngoreRaycast, Blank0, Water, UI, Blank1, Blank2, PostProcessing, RenderOBJ, RenderBG, Clickable, ClickOcclude }
@@ -39,7 +38,7 @@ public class GlobalTools : MonoBehaviour
         Application.targetFrameRate = Framerate;
 
         inputsGameplay = inputActions.FindActionMap("Gameplay");
-        inputsMenus = inputActions.FindActionMap("Menus");
+        //inputsMenus = inputActions.FindActionMap("Menus");
         inputsGameplay.Enable();
         //inputsMenus.Disable();
     }
@@ -77,7 +76,7 @@ public class GlobalTools : MonoBehaviour
         Time.timeScale = 0;
         Paused = true;
         //globalTools.playerInput.SwitchCurrentActionMap("Menus");
-        inputsGameplay.Disable();
+        //inputsGameplay.Disable();
         //inputsMenus.Enable();
     }
     public static void Unpause()
@@ -86,7 +85,7 @@ public class GlobalTools : MonoBehaviour
         Paused = false;
         GlobalTools.WasPaused = true;
         //globalTools.playerInput.SwitchCurrentActionMap("Gameplay");
-        inputsGameplay.Enable();
+        //inputsGameplay.Enable();
         //inputsMenus.Disable();
     }
 }

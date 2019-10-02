@@ -10,7 +10,7 @@ public class UpdateBG : MonoBehaviour
     public bool UpdateRender = false;
     public List<CameraPosition> camVolumes = new List<CameraPosition>();
     public bool SilentUpdates = true;
-    public MeshRenderer drawBG;
+    public RawImage drawBG;
 
     Texture2D currentOutputTexture;
     Camera camBG;
@@ -57,7 +57,8 @@ public class UpdateBG : MonoBehaviour
         {
             CurrentFrameTiming = frameTiming[0].FrameTime;
             currentOutputTexture = outputTextures[(frameTiming[0].FrameNumber - 1) % FrameCount];
-            drawBG.material.SetTexture("_Color", currentOutputTexture);
+            drawBG.texture = currentOutputTexture;
+            //drawBG.material.SetTexture("_Color", currentOutputTexture);
         }
 
         PrepRender();
@@ -135,7 +136,7 @@ public class UpdateBG : MonoBehaviour
             {
                 UpdateAnims(i);
                 currentOutputTexture = outputTextures[i];
-                if (i == 0) RenderBackground(repeatRender);
+                if (i == 0 && repeatRender > 1) RenderBackground(repeatRender - 1);
                 RenderBackground();
 
             }
@@ -169,14 +170,16 @@ public class UpdateBG : MonoBehaviour
 
                 //we'll need to make sure we're setting the right texture here
 
-                drawBG.material.SetTexture("_Color", currentOutputTexture);
+                drawBG.texture = currentOutputTexture;
+                //drawBG.material.SetTexture("_Color", currentOutputTexture);
                 //drawBG.material.mainTexture = currentOutputTexture;
             }
         }
         else
         {
             currentOutputTexture = outputTextures[0];
-            drawBG.material.SetTexture("_Color", currentOutputTexture);
+            drawBG.texture = currentOutputTexture;
+            //drawBG.material.SetTexture("_Color", currentOutputTexture);
         }
     }
 }
