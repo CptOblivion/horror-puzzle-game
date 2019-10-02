@@ -55,7 +55,7 @@ public class ScreenText : MonoBehaviour
         {
             if (Paused)
             {
-                if (GlobalTools.inputsMenus.GetAction("Submit").triggered || GlobalTools.inputsMenus.GetAction("Cancel").triggered)
+                if (GlobalTools.inputsMenus.FindAction("Submit").triggered || GlobalTools.inputsMenus.FindAction("Cancel").triggered)
                 {
                     canvas.enabled = false;
                     GlobalTools.Unpause();

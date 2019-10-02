@@ -38,8 +38,8 @@ public class GlobalTools : MonoBehaviour
         }
         Application.targetFrameRate = Framerate;
 
-        inputsGameplay = inputActions.GetActionMap("Gameplay");
-        inputsMenus = inputActions.GetActionMap("Menus");
+        inputsGameplay = inputActions.FindActionMap("Gameplay");
+        inputsMenus = inputActions.FindActionMap("Menus");
         inputsGameplay.Enable();
         //inputsMenus.Disable();
     }

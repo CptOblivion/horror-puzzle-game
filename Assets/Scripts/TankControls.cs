@@ -31,7 +31,7 @@ public class TankControls : MonoBehaviour
     {
         if (!GlobalTools.WasPaused)
         {
-            Vector2 MoveInputs = GlobalTools.inputsGameplay.GetAction("Move").ReadValue<Vector2>();
+            Vector2 MoveInputs = GlobalTools.inputsGameplay.FindAction("Move").ReadValue<Vector2>();
 
             MoveInputs.x = MoveInputs.x * TurnSpeed;
 
@@ -39,7 +39,7 @@ public class TankControls : MonoBehaviour
             anim.SetBool("Running", false);
             if (MoveInputs.y > 0)
             {
-                if (GlobalTools.inputsGameplay.GetAction("Run").ReadValue<float>() > 0)
+                if (GlobalTools.inputsGameplay.FindAction("Run").ReadValue<float>() > 0)
                 {
                     MoveInputs.y = RunSpeed;
                     anim.SetBool("Running", true);
@@ -62,7 +62,7 @@ public class TankControls : MonoBehaviour
             }
             GlobalTools.SnapToGround(characterController, groundSnapDistance);
 
-            if (GlobalTools.inputsGameplay.GetAction("Interact").triggered)
+            if (GlobalTools.inputsGameplay.FindAction("Interact").triggered)
             {
                 if (playerInteract.target)
                 {

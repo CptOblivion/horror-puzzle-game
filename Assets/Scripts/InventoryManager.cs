@@ -68,7 +68,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!GlobalTools.Paused)
         {
-            if(GlobalTools.inputsGameplay.GetAction("Pause").triggered)
+            if(GlobalTools.inputsGameplay.FindAction("Pause").triggered)
             {
                 OpenInventory();
             }
@@ -281,7 +281,7 @@ public class InventoryManager : MonoBehaviour
     }
     public static bool CanCancel(GameObject obj)
     {
-        if (!CancelTap && CancelOrderCurrent == obj && GlobalTools.inputsMenus.GetAction("Cancel").triggered)
+        if (!CancelTap && CancelOrderCurrent == obj && GlobalTools.inputsMenus.FindAction("Cancel").triggered)
         {
             return true;
         }
