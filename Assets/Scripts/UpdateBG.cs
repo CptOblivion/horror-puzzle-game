@@ -47,6 +47,7 @@ public class UpdateBG : MonoBehaviour
         CameraData cameraData = newCamera.GetComponent<CameraData>();
         transform.SetPositionAndRotation(newCamera.transform.position, newCamera.transform.rotation);
         camBG.fieldOfView = newCamera.fieldOfView;
+        camOB.fieldOfView = newCamera.fieldOfView;
         frameTiming = cameraData.frameTiming;
         //just in case we've left FrameCount at higher than 1 without setting a framerate, let's not render frames that won't be used
         if (frameTiming.Length > 0) FrameCount = cameraData.FrameCount;

@@ -15,6 +15,14 @@ public class MoveCameraToPosition : MonoBehaviour
         currentCam.transform.position = cam.transform.position;
         currentCam.transform.rotation = cam.transform.rotation;
         currentCam.fieldOfView = cam.fieldOfView;
+        foreach (Camera newCam in currentCam.GetComponentsInChildren<Camera>())
+        {
+            if (newCam != currentCam)
+            {
+                newCam.fieldOfView = currentCam.fieldOfView;
+                break;
+            }
+        }
         this.enabled = false;
     }
 }
