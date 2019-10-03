@@ -15,6 +15,7 @@ public class ScreenText : MonoBehaviour
     static float DisplayTimer;
     static bool Paused = false;
     bool WaitAFrame = false;
+    GameObject previewOb;
 
     private void Awake()
     {
@@ -26,12 +27,17 @@ public class ScreenText : MonoBehaviour
         canvas.enabled = false;
     }
 
-    public static void DisplayText(string text, bool pause = true, float displayTime = -1)
+    public static void DisplayText(string text, bool pause = true, float displayTime = -1, GameObject showObject = null)
     {
         screenText.WaitAFrame = true;
         //Debug.Log(text);
         screenText.canvas.enabled = true;
         screenText.textOb.text = text;
+        if (showObject)
+        {
+            screenText.previewOb = GameObject.Instantiate(showObject, screenText.canvas.transform);
+            InventoryManager.eventSystem.SetSelectedGameObject(screenText.canvas.gameObject);
+        }
         if (pause)
         {
             GlobalTools.Pause();
@@ -57,6 +63,10 @@ public class ScreenText : MonoBehaviour
             {
                 if (GlobalTools.inputsGameplay.FindAction("Submit").triggered || GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
                 {
+                    if (previewOb != null)
+                    {
+                        Destroy(previewOb);
+                    }
                     canvas.enabled = false;
                     GlobalTools.Unpause();
                     Paused = false;
@@ -70,6 +80,10 @@ public class ScreenText : MonoBehaviour
                 }
                 else
                 {
+                    if (previewOb!= null)
+                    {
+                        Destroy(previewOb);
+                    }
                     canvas.enabled = false;
                 }
             }

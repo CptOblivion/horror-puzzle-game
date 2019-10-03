@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingCam: {fileID: 8293799566251966224}
-  overlayCanvas: {fileID: 0}
   Framerate: -1
   vSync: 1
   inputActionAsset: {fileID: -944628639613478452, guid: a9c39b2561c976e45b6c0a56d27e7231,
@@ -90,6 +89,7 @@ GameObject:
   - component: {fileID: 8293799566251966224}
   - component: {fileID: 8293799566251966225}
   - component: {fileID: 8293799566251966228}
+  - component: {fileID: 5471073952169231738}
   - component: {fileID: 4221292854674440473}
   - component: {fileID: 8264199128251557575}
   m_Layer: 10
@@ -183,11 +183,25 @@ MonoBehaviour:
   - {fileID: 2800000, guid: dd93a8c4b382b654aa94f4521e5172a8, type: 3}
   - {fileID: 2800000, guid: c49f839f9168bf445ab694e297f86609, type: 3}
   - {fileID: 2800000, guid: 28a318937892d85448436ec952bb89e5, type: 3}
-  repeatRender: 2
+  repeatRender: 1
   UpdateRender: 0
   camVolumes: []
   SilentUpdates: 1
   drawBG: {fileID: 0}
+--- !u!114 &5471073952169231738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293799566251966238}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b64f238d60348f391e9195f959bfa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blurShader: {fileID: 4800000, guid: 710b1a74b0bf740b69560af018bfc578, type: 3}
+  ssrShader: {fileID: 4800000, guid: 99b385b2ea6424888bc29368bad785ca, type: 3}
 --- !u!114 &4221292854674440473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +342,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 512
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 8400000, guid: 88616fef45dd72249af6eb71126dd403, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3

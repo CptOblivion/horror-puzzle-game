@@ -21,7 +21,7 @@ public class ScrollAtPlayer : MonoBehaviour
         float ScrollMag = ScrollVec.magnitude;
         ScrollMag = 1 - Mathf.Clamp01(ScrollMag);
         
-        ScrollPosition += ScrollVec.normalized * ScrollSpeed * ScrollMag;
+        ScrollPosition += ScrollVec.normalized * ScrollSpeed * ScrollMag * Time.deltaTime;
         mat.SetFloat("_ScrollX", ScrollPosition.x);
         mat.SetFloat("_ScrollY", ScrollPosition.y);
     }

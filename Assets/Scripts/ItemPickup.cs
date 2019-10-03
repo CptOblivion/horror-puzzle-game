@@ -9,7 +9,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (InventoryManager.AddItem(item))
         {
-            ScreenText.DisplayText(item.ItemName);
+            ScreenText.DisplayText(item.ItemName, showObject:item.gameObject);
             GameObject.Destroy(gameObject);
         }
         else
