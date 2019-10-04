@@ -49,6 +49,7 @@ Shader "StandardShadowed"
 
     CGINCLUDE
         #define UNITY_SETUP_BRDF_INPUT MetallicSetup
+
     ENDCG
 
     SubShader
@@ -91,7 +92,13 @@ Shader "StandardShadowed"
             #pragma vertex vertBase
             #pragma fragment fragBase
             #include "UnityStandardCoreForward.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
 			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
+
 
             ENDCG
         }
@@ -128,6 +135,12 @@ Shader "StandardShadowed"
             #pragma vertex vertAdd
             #pragma fragment fragAdd
             #include "UnityStandardCoreForward.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
 
             ENDCG
         }
@@ -158,6 +171,12 @@ Shader "StandardShadowed"
             #pragma fragment fragShadowCaster
 
             #include "UnityStandardShadow.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
 
             ENDCG
         }
@@ -193,6 +212,12 @@ Shader "StandardShadowed"
             #pragma fragment fragDeferred
 
             #include "UnityStandardCore.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
 
             ENDCG
         }
@@ -218,6 +243,12 @@ Shader "StandardShadowed"
             #pragma shader_feature EDITOR_VISUALIZATION
 
             #include "UnityStandardMeta.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
             ENDCG
         }
     }
@@ -258,6 +289,12 @@ Shader "StandardShadowed"
             #pragma vertex vertBase
             #pragma fragment fragBase
             #include "UnityStandardCoreForward.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
 
             ENDCG
         }
@@ -290,6 +327,12 @@ Shader "StandardShadowed"
             #pragma vertex vertAdd
             #pragma fragment fragAdd
             #include "UnityStandardCoreForward.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
 
             ENDCG
         }
@@ -314,6 +357,12 @@ Shader "StandardShadowed"
             #pragma fragment fragShadowCaster
 
             #include "UnityStandardShadow.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
 
             ENDCG
         }
@@ -339,6 +388,12 @@ Shader "StandardShadowed"
             #pragma shader_feature EDITOR_VISUALIZATION
 
             #include "UnityStandardMeta.cginc"
+			//for Forward rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/AutoLight.cginc"
+			//for Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityDeferredLibrary.cginc"
+			//for Forward & Deferred rendering
+			#include "Assets/Psychose Interactive/NGSS/Libraries/UnityShadowLibrary.cginc"
             ENDCG
         }
     }
