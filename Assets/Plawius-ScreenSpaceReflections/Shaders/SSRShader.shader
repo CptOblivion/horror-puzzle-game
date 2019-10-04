@@ -296,8 +296,8 @@ Shader "Hidden/PlawiusSSR"
 	{
 		float4 normal_spec = read_normal_spec(i.uv);
 		float4 result = tex2D(_MainTex, i.uv);
-
-		return (normal_spec.a < 0.001) ? result : calculateSSR(i, result, normal_spec);
+		half4 output = (normal_spec.a < 0.001) ? result : calculateSSR(i, result, normal_spec);
+		return abs(output);
 	}
 
 	half4 frag_lerp (v2f i) : COLOR

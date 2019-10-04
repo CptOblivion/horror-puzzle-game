@@ -14,7 +14,7 @@ public class UpdateBG : MonoBehaviour
 
     Texture2D currentOutputTexture;
     Camera camBG;
-    Camera camOB;
+    public Camera camOB;
     CameraPosition currentPosition;
     int FrameCount;
     BGFrame[] frameTiming;
@@ -110,6 +110,7 @@ public class UpdateBG : MonoBehaviour
     private void Awake()
     {
         camBG = GetComponent<Camera>();
+        /*
         foreach (Camera testcam in transform.GetComponentsInChildren<Camera>())
         {
             if (testcam != camBG)
@@ -118,6 +119,7 @@ public class UpdateBG : MonoBehaviour
                 break;
             }
         }
+        */
         currentOutputTexture = outputTextures[0];
     }
     void Start()

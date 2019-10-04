@@ -6,6 +6,7 @@ Properties {
 }
  
 SubShader {
+
     Pass {
         Material {
             Emission [_Emission]    
