@@ -398,6 +398,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135669487}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &152929145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 152929146}
+  - component: {fileID: 152929147}
+  m_Layer: 0
+  m_Name: Splat (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &152929146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152929145}
+  m_LocalRotation: {x: -0.21531704, y: 0.14925553, z: 0.070116624, w: 0.9625201}
+  m_LocalPosition: {x: 8.03, y: 8.89, z: -12.93}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -25.812, y: 16.596, z: 4.505}
+--- !u!114 &152929147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152929145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &166560369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2705,6 +2750,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6782004420875203861}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &443644737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 443644738}
+  m_Layer: 0
+  m_Name: Decals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &443644738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443644737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.486898, y: -6.4905787, z: 27.42979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1202391808}
+  - {fileID: 1859489573}
+  - {fileID: 1057161672}
+  - {fileID: 2024246595}
+  - {fileID: 152929146}
+  - {fileID: 1780119516}
+  - {fileID: 1880489461}
+  - {fileID: 782637369}
+  - {fileID: 2132703786}
+  - {fileID: 739436437}
+  - {fileID: 1974481313}
+  - {fileID: 2053241047}
+  - {fileID: 1123646308}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &448929251
 GameObject:
   m_ObjectHideFlags: 0
@@ -5425,6 +5513,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 390dc14fc1c3f4340839186e42bff87e, type: 3}
+--- !u!1 &739436436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739436437}
+  - component: {fileID: 739436438}
+  m_Layer: 0
+  m_Name: Splat (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &739436437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739436436}
+  m_LocalRotation: {x: -0.28502342, y: -0.013815692, z: -0.122463994, w: -0.9505648}
+  m_LocalPosition: {x: 8.95, y: 6.43, z: -26.79}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 32.58, y: 366.547, z: 16.597}
+--- !u!114 &739436438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739436436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &757955084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5700,6 +5833,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &782637368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 782637369}
+  - component: {fileID: 782637370}
+  m_Layer: 0
+  m_Name: Splat (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &782637369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782637368}
+  m_LocalRotation: {x: 0.7234839, y: -0.25660896, z: -0.62621504, w: 0.1362996}
+  m_LocalPosition: {x: 11.7, y: 11.96, z: -23.41}
+  m_LocalScale: {x: 6.4958396, y: 6.4958396, z: 6.4958396}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -7.1320004, y: -100.367004, z: -146.891}
+--- !u!114 &782637370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782637368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1 &794537902 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7379455041935132202, guid: bdcf9d35d12bb5845a8160fa1122308b,
@@ -7063,6 +7241,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 995762099}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1057161671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057161672}
+  - component: {fileID: 1057161673}
+  m_Layer: 0
+  m_Name: Splat (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1057161672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057161671}
+  m_LocalRotation: {x: -0.085025966, y: -0, z: -0, w: 0.9963788}
+  m_LocalPosition: {x: 3.64, y: 7.79, z: -15.77}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -9.755, y: 0, z: 0}
+--- !u!114 &1057161673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057161671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &1079472854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7599,6 +7822,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1106355959}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1123646307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123646308}
+  - component: {fileID: 1123646309}
+  m_Layer: 0
+  m_Name: Splat (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123646308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123646307}
+  m_LocalRotation: {x: -0.28502342, y: -0.013815692, z: -0.122463994, w: -0.9505648}
+  m_LocalPosition: {x: 4.61, y: 6.77, z: -26.49}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 32.58, y: 366.547, z: 16.597}
+--- !u!114 &1123646309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123646307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &1129825826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8324,6 +8592,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1614373271}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1202391803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202391808}
+  - component: {fileID: 1202391804}
+  m_Layer: 0
+  m_Name: Splat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1202391804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202391803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
+--- !u!4 &1202391808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202391803}
+  m_LocalRotation: {x: -0.21737085, y: -0.15478389, z: 0.034934405, w: 0.96310514}
+  m_LocalPosition: {x: 2.46, y: 9.12, z: -12.67}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -24.072, y: -20.071001, z: 8.476001}
 --- !u!1001 &1236452470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12396,6 +12709,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757158333}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1780119515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1780119516}
+  - component: {fileID: 1780119517}
+  m_Layer: 0
+  m_Name: Splat (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1780119516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780119515}
+  m_LocalRotation: {x: -0.13721883, y: -0.424683, z: 0.18013538, w: 0.8765652}
+  m_LocalPosition: {x: 9.77, y: 8.19, z: -12.99}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -5.0230002, y: -52.847004, z: 25.723001}
+--- !u!114 &1780119517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780119515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1 &1782082052
 GameObject:
   m_ObjectHideFlags: 0
@@ -12510,8 +12868,8 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 11654
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 3.8773506, w: 4.184076}
-  m_UseBoundingSphereOverride: 1
+  m_BoundingSphereOverride: {x: 0, y: 0.2578125, z: 0.03515625, w: -0.0546875}
+  m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1795590853 stripped
@@ -12764,6 +13122,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 390dc14fc1c3f4340839186e42bff87e, type: 3}
+--- !u!1 &1859489572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1859489573}
+  - component: {fileID: 1859489574}
+  m_Layer: 0
+  m_Name: Splat (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1859489573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859489572}
+  m_LocalRotation: {x: -0.2311034, y: -0, z: -0, w: 0.97292924}
+  m_LocalPosition: {x: 2.09, y: 10.39, z: -12.99}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -26.724, y: 0, z: 0}
+--- !u!114 &1859489574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859489572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!4 &1861899806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7905213850628069613, guid: 1dcb79b0caf814946a60764b01bcef07,
@@ -12880,6 +13283,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1874246112}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1880489460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880489461}
+  - component: {fileID: 1880489462}
+  m_Layer: 0
+  m_Name: Splat (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1880489461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880489460}
+  m_LocalRotation: {x: 0.08702183, y: -0.43773493, z: -0.26965103, w: 0.85328996}
+  m_LocalPosition: {x: 0.21, y: 9.84, z: -18.04}
+  m_LocalScale: {x: 4.52262, y: 4.52262, z: 4.52262}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -5.0230002, y: -52.847004, z: -32.577}
+--- !u!114 &1880489462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880489460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &1905490010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13275,6 +13723,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -4207443722817456029, guid: c3fce986b4fead14287b6d988c55d8b3, type: 3}
+--- !u!114 &1929953061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929953056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c53cdb9ab36104982f8ec5fd0412e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CubeMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1946958460
 GameObject:
   m_ObjectHideFlags: 0
@@ -13392,6 +13853,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf0aae03b2924742a1504f035ba7efd, type: 3}
+--- !u!1 &1974481312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1974481313}
+  - component: {fileID: 1974481314}
+  m_Layer: 0
+  m_Name: Splat (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1974481313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974481312}
+  m_LocalRotation: {x: -0.28502342, y: -0.013815692, z: -0.122463994, w: -0.9505648}
+  m_LocalPosition: {x: 0.6, y: 7.29, z: -26.01}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 32.58, y: 366.547, z: 16.597}
+--- !u!114 &1974481314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974481312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1 &1991636887
 GameObject:
   m_ObjectHideFlags: 0
@@ -13462,6 +13968,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991636887}
   m_CullTransparentMesh: 0
+--- !u!1 &2024246594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024246595}
+  - component: {fileID: 2024246596}
+  m_Layer: 0
+  m_Name: Splat (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2024246595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024246594}
+  m_LocalRotation: {x: -0.21901076, y: 0.20465559, z: 0.05755039, w: 0.9522806}
+  m_LocalPosition: {x: 12.66, y: 8.14, z: -12.81}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -26.147001, y: 23.962002, z: 1.274}
+--- !u!114 &2024246596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024246594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &2025236277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13679,6 +14230,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1649281175}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2053241046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053241047}
+  - component: {fileID: 2053241048}
+  m_Layer: 0
+  m_Name: Splat (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2053241047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053241046}
+  m_LocalRotation: {x: -0.28502342, y: -0.013815692, z: -0.122463994, w: -0.9505648}
+  m_LocalPosition: {x: 7.18, y: 5.94, z: -26.37}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 32.58, y: 366.547, z: 16.597}
+--- !u!114 &2053241048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053241046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1001 &2063282813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14161,6 +14757,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 390dc14fc1c3f4340839186e42bff87e, type: 3}
+--- !u!1 &2132703785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2132703786}
+  - component: {fileID: 2132703787}
+  m_Layer: 0
+  m_Name: Splat (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2132703786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132703785}
+  m_LocalRotation: {x: -0.28502342, y: -0.013815692, z: -0.122463994, w: -0.9505648}
+  m_LocalPosition: {x: 12.12544, y: 5.81, z: -28.062784}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 443644738}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 32.58, y: 366.547, z: 16.597}
+--- !u!114 &2132703787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132703785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897fd5d212ca50c47aa48f2bf412fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Kind: 0
+  m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
 --- !u!1 &2133299166
 GameObject:
   m_ObjectHideFlags: 0
