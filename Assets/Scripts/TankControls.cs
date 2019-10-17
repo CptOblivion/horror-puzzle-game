@@ -32,10 +32,8 @@ public class TankControls : MonoBehaviour
         if (!GlobalTools.WasPaused)
         {
             Vector2 MoveInputs = GlobalTools.inputsGameplay.FindAction("Move").ReadValue<Vector2>();
-
-            MoveInputs.x = MoveInputs.x * TurnSpeed;
-
-            transform.Rotate(0, MoveInputs.x * Time.deltaTime, 0);
+            
+            //shape inputs
             anim.SetBool("Running", false);
             if (MoveInputs.y > 0)
             {
@@ -55,6 +53,11 @@ public class TankControls : MonoBehaviour
             }
             anim.SetFloat("Speed", MoveInputs.y);
 
+            //turning
+            MoveInputs.x = MoveInputs.x * TurnSpeed;
+            transform.Rotate(0, MoveInputs.x * Time.deltaTime, 0);
+
+            //moving
             if (MoveInputs.y != 0)
             {
                 Vector3 moveVec = transform.forward * MoveInputs.y;
@@ -62,6 +65,7 @@ public class TankControls : MonoBehaviour
             }
             GlobalTools.SnapToGround(characterController, groundSnapDistance);
 
+            //interacting with the "use" button
             if (!GlobalTools.Paused && !GlobalTools.WasPaused && GlobalTools.inputsGameplay.FindAction("Submit").triggered)
             {
                 Debug.Log("click");

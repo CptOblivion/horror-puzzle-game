@@ -57,14 +57,15 @@ public class GlobalTools : MonoBehaviour
             Vector3 feetPos = characterController.transform.position + new Vector3(0, -feetDist, 0);
             RaycastHit hit;
             //float safetyMargin = .01f;
-            if (Physics.SphereCast(feetPos, characterController.radius, Vector3.down, out hit, GroundSnapDistance))
+            if (Physics.SphereCast(feetPos, characterController.radius, -characterController.transform.up, out hit, GroundSnapDistance))
             {
+                Debug.DrawLine(feetPos, hit.point);
                 //float angleMargin = .5f;
-                if (Vector3.Dot(hit.normal, characterController.transform.up) > Mathf.Sin(Mathf.Deg2Rad * characterController.slopeLimit))
+                float HitSlopeAngle = Vector3.Dot(hit.normal, characterController.transform.up);
+                if (HitSlopeAngle > Mathf.Sin(Mathf.Deg2Rad * characterController.slopeLimit) && hit.point.y < feetPos.y)
                 {
                     float dropDistance = hit.distance;
                     characterController.transform.position = characterController.transform.position + new Vector3(0, -(dropDistance - characterController.skinWidth), 0);
-
                 }
             }
         }

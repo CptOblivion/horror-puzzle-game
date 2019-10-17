@@ -277,10 +277,13 @@ Shader "Hidden/PlawiusSSR"
 
 	float4 read_normal_spec(float2 uv)
 	{
+		float pi = 3.14;
 		#ifdef LEGACY_DEFERRED
 			return tex2D (_CameraNormalsTexture, uv);
 		#else
-			return float4(tex2D( _CameraGBufferTexture2, uv).rgb, tex2D (_CameraGBufferTexture1, uv).a );
+			float strength = pow(tex2D (_CameraGBufferTexture1, uv).a, 4.)*1.2;
+			return float4(tex2D( _CameraGBufferTexture2, uv).rgb, max(min(strength, 1.), 0.));
+			//return float4(tex2D( _CameraGBufferTexture2, uv).rgb, tex2D (_CameraGBufferTexture1, uv).a);
 		#endif
 	}
 
