@@ -10,9 +10,8 @@ public class PlayerInteract : MonoBehaviour
         InteractTarget testTarget = other.GetComponent<InteractTarget>();
         if (testTarget && testTarget.enabled)
         {
-            RaycastHit hit;
             Ray ray = new Ray(transform.position, other.transform.position - transform.position);
-            if (Physics.Raycast(ray, out hit, 5))
+            if (Physics.Raycast(ray, out RaycastHit hit, 5))
             {
                 if (hit.collider == other)
                 {

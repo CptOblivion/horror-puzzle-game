@@ -14,7 +14,6 @@ public class TankControls : MonoBehaviour
 
     CharacterController characterController;
     PlayerInteract playerInteract;
-    Vector3 Velocity;
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -29,7 +28,7 @@ public class TankControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GlobalTools.WasPaused)
+        if (! GlobalTools.Paused && !GlobalTools.WasPaused)
         {
             Vector2 MoveInputs = GlobalTools.inputsGameplay.FindAction("Move").ReadValue<Vector2>();
             
@@ -54,7 +53,7 @@ public class TankControls : MonoBehaviour
             anim.SetFloat("Speed", MoveInputs.y);
 
             //turning
-            MoveInputs.x = MoveInputs.x * TurnSpeed;
+            MoveInputs.x *= TurnSpeed;
             transform.Rotate(0, MoveInputs.x * Time.deltaTime, 0);
 
             //moving

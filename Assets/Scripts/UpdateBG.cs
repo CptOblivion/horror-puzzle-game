@@ -158,7 +158,12 @@ public class UpdateBG : MonoBehaviour
             Debug.Log("waiting (Check UpdateBG if this shows up! Should be a black screen while it's happening)");
             foreach (Texture2D tex in outputTextures)
             {
-                tex.SetPixels(new Color[] { Color.black });
+                Color[] colors = new Color[tex.width * tex.height];
+                for (int i = 0; i < colors.Length; i++)
+                {
+                    colors[i] = Color.black;
+                }
+                tex.SetPixels(colors);
                 tex.Apply();
             }
         }

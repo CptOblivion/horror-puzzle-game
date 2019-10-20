@@ -1289,7 +1289,7 @@ GameObject:
   - component: {fileID: 1635592547}
   - component: {fileID: 1635592546}
   m_Layer: 5
-  m_Name: SetSelection
+  m_Name: SelectionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1308,6 +1308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectOnWake: {fileID: 622291255}
+  moveSound: {fileID: 8300000, guid: 4d389b1677db3b54eb2913e86600eb04, type: 3}
 --- !u!224 &1635592547
 RectTransform:
   m_ObjectHideFlags: 0

@@ -9,11 +9,11 @@ using UnityEngine.SceneManagement;
 public class GlobalTools : MonoBehaviour
 {
 
-    public static bool Paused = false;
-    public static bool WasPaused = false;
     public Camera startingCam;
     public int Framerate = 24;
     public bool vSync = true;
+    public static bool Paused = false;
+    public static bool WasPaused = false;
     public static bool startup = true;
     public static Camera currentCam;
     public static GameObject player;
@@ -60,9 +60,8 @@ public class GlobalTools : MonoBehaviour
         {
             float feetDist = (characterController.height / 2) - characterController.radius;
             Vector3 feetPos = characterController.transform.position + new Vector3(0, -feetDist, 0);
-            RaycastHit hit;
             //float safetyMargin = .01f;
-            if (Physics.SphereCast(feetPos, characterController.radius, -characterController.transform.up, out hit, GroundSnapDistance))
+            if (Physics.SphereCast(feetPos, characterController.radius, -characterController.transform.up, out RaycastHit hit, GroundSnapDistance))
             {
                 Debug.DrawLine(feetPos, hit.point);
                 //float angleMargin = .5f;
@@ -76,6 +75,7 @@ public class GlobalTools : MonoBehaviour
         }
 
     }
+
 
     public static void Pause()
     {

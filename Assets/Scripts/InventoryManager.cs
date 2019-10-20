@@ -25,18 +25,34 @@ public class CustomWrongItemText
 }
 public class InventoryManager : MonoBehaviour
 {
-    public InventorySlot[] InventoryList = new InventorySlot[9];
-    public static InventoryItem[] Inventory;
+    public static InventoryItem[] Inventory; //the actual inventory
+    public InventorySlot[] InventoryList = new InventorySlot[9]; //the display inventory
+
     public int inventoryGridWidth = 3;
     public int inventoryGridHeight = 3;
+
+    [Tooltip("Which button to select when the menu opens")]
     public Button defaultButton;
+    [Tooltip("The text object that will display the name of the currently selected item")]
     public Text itemTitle;
+    [Tooltip("The text object that will display the description of the currently selected item")]
     public Text itemDescription;
+    [Tooltip("The canvas that contains the inventory screen")]
     public Canvas inventoryScreenCanvas;
+    [Tooltip("How fast to spin the currently selected item, in degrees/second")]
     public float ItemSpinSpeed = 180;
+
+    public AudioClip menuOpenSound;
+    public AudioClip menuMoveSound;
+    public AudioClip buttonPressSound;
+    public AudioClip noItemSound;
+
+    //a list of the hierarchy of objects that the cancel button will back its way through
     public static List<GameObject> CancelOrder = new List<GameObject>();
+    //this object holds the current command of the cancel input
     public static GameObject CancelOrderCurrent;
-    public static bool CancelTap = false;
+    //prevents repeating the input multiple times in one frame
+    public static bool CancelTap = false; 
 
     public static InventoryManager inventoryManager;
     public static EventSystem eventSystem;
@@ -46,6 +62,8 @@ public class InventoryManager : MonoBehaviour
     int[,] slotGrid;
     private void Awake()
     {
+
+        //initialize the inventory, if it doesn't already exist
         if (Inventory == null)
         {
             Inventory = new InventoryItem[InventoryList.Length];
@@ -68,13 +86,13 @@ public class InventoryManager : MonoBehaviour
         inventoryScreenCanvas.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!GlobalTools.Paused)
         {
             if(GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
             {
+                PlaySFX.Play(menuOpenSound);
                 OpenInventory();
             }
         }
@@ -88,6 +106,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 if (eventSystem.currentSelectedGameObject != LastSelected)
                 {
+                    PlaySFX.Play(menuMoveSound);
                     UpdateItemText();
                 }
             }
@@ -182,9 +201,11 @@ public class InventoryManager : MonoBehaviour
         //Debug.Log("using item");
         if (!currentItem)
         {
+            PlaySFX.Play(noItemSound);
             //Debug.Log("empty slot");
             return;
         }
+        PlaySFX.Play(buttonPressSound);
         CloseInventory();
         InteractTarget target = GlobalTools.player.GetComponentInChildren<PlayerInteract>().target;
         if (currentItem.Interact)

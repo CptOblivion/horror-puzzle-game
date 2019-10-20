@@ -894,27 +894,22 @@ PrefabInstance:
       propertyPath: m_HDR
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3277150686046319112, guid: eb1fe439947ba074b89cb1712695c0f2,
-        type: 3}
-      propertyPath: m_Name
-      value: Backing
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526207518719740041, guid: eb1fe439947ba074b89cb1712695c0f2,
+    - target: {fileID: 4529521120302901194, guid: eb1fe439947ba074b89cb1712695c0f2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7969407859564355474}
-    - target: {fileID: 7526207518719740041, guid: eb1fe439947ba074b89cb1712695c0f2,
+    - target: {fileID: 4529521120302901194, guid: eb1fe439947ba074b89cb1712695c0f2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitToMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 7421078649442499618, guid: eb1fe439947ba074b89cb1712695c0f2,
+    - target: {fileID: 7064552292548413031, guid: eb1fe439947ba074b89cb1712695c0f2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7969407859564355474}
-    - target: {fileID: 7421078649442499618, guid: eb1fe439947ba074b89cb1712695c0f2,
+    - target: {fileID: 7064552292548413031, guid: eb1fe439947ba074b89cb1712695c0f2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame

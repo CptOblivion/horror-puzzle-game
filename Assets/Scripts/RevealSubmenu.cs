@@ -18,7 +18,7 @@ public class RevealSubmenu : MonoBehaviour
     {
         submenuParent.gameObject.SetActive(true);
         InventoryManager.eventSystem.SetSelectedGameObject(autoSelect.gameObject);
-        InventoryManager.SetCancelOwner(this.gameObject);
+        InventoryManager.SetCancelOwner(gameObject);
         //Debug.Log(InventoryManager.CancelOrder);
     }
     void Update()
@@ -38,10 +38,16 @@ public class RevealSubmenu : MonoBehaviour
         }
             if (!selected)
         {
-            submenuParent.gameObject.SetActive(false);
-            this.enabled = false;
-            InventoryManager.DecrementCancelOrder(this.gameObject);
-            InventoryManager.eventSystem.SetSelectedGameObject(this.gameObject);
+            Cancel();
         }
+    }
+
+    public void Cancel()
+    {
+        //Debug.Log("canceling " + gameObject);
+        submenuParent.gameObject.SetActive(false);
+        InventoryManager.DecrementCancelOrder(gameObject);
+        InventoryManager.eventSystem.SetSelectedGameObject(gameObject);
+        this.enabled = false;
     }
 }
