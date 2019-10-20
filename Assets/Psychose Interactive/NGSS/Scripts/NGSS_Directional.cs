@@ -105,13 +105,18 @@ public class NGSS_Directional : MonoBehaviour
     [Tooltip("If one, softness across cascades will be matched using splits distribution, resulting in realistic soft-ness over distance.\nIf zero the softness distribution will be based on cascade index, resulting in blurrier shadows over distance thus less realistic.")]
     public float NGSS_CASCADES_SOFTNESS_NORMALIZATION = 1f;
 
-
+    /*
+    //not used, disabling to get warning message to go away
     [Header("GLOBAL SETTINGS")]
     [Tooltip("Enable it to let NGSS_Directional control global shadows settings through this component.\nDisable it if you want to manage shadows settings through Unity Quality & Graphics Settings panel.")]
     private bool GLOBAL_SETTINGS_OVERRIDE = false;
+    */
 
+    /*
+    //not used, disabling to get warning message to go away
     [Tooltip("Shadows projection.\nRecommeded StableFit as it helps stabilizing shadows as camera moves.")]
     private ShadowProjection GLOBAL_SHADOWS_PROJECTION = ShadowProjection.StableFit;
+    */
 
     [Tooltip("Sets the maximum distance at wich shadows are visible from camera.\nThis option affects your shadow distance in Quality Settings.")]
     private float GLOBAL_SHADOWS_DISTANCE = 150f;
@@ -120,9 +125,12 @@ public class NGSS_Directional : MonoBehaviour
     [Tooltip("Number of cascades the shadowmap will have. This option affects your cascade counts in Quality Settings.\nYou should entierly disable Cascaded Shadows (Graphics Menu) if you are targeting low-end devices.")]
     private int GLOBAL_CASCADES_COUNT = 4;
 
+    /*
+    //not used, disabling to get warning message to go away
     [Range(0.01f, 0.25f)]
     [Tooltip("Used for the cascade stitching algorithm.\nCompute cascades splits distribution exponentially in a x*2^n form.\nIf 4 cascades, set this value to 0.1. If 2 cascades, set it to 0.25.\nThis option affects your cascade splits in Quality Settings.")]
     private float GLOBAL_CASCADES_SPLIT_VALUE = 0.1f;
+    */
 
     /****************************************************************/
 

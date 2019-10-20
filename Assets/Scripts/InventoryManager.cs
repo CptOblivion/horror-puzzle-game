@@ -26,6 +26,7 @@ public class CustomWrongItemText
 public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] InventoryList = new InventorySlot[9];
+    public static InventoryItem[] Inventory;
     public int inventoryGridWidth = 3;
     public int inventoryGridHeight = 3;
     public Button defaultButton;
@@ -45,6 +46,10 @@ public class InventoryManager : MonoBehaviour
     int[,] slotGrid;
     private void Awake()
     {
+        if (Inventory == null)
+        {
+            Inventory = new InventoryItem[InventoryList.Length];
+        }
         inventoryManager = this;
         eventSystem = FindObjectOfType<EventSystem>();
         slotGrid = new int[inventoryGridWidth, inventoryGridHeight];
@@ -144,8 +149,11 @@ public class InventoryManager : MonoBehaviour
     }
     void UpdateInventoryScreen()
     {
-        foreach (InventorySlot slot in InventoryList)
+        
+        for(int i = 0; i <Inventory.Length; i++)
         {
+            InventorySlot slot = InventoryList[i];
+            slot.item = Inventory[i];
             if (slot.item == null)
             {
                 if (slot.instantiatedObject)
@@ -217,11 +225,11 @@ public class InventoryManager : MonoBehaviour
     public static bool AddItem(InventoryItem item)
     {
         bool Added = false;
-        for (int i = 0; i < inventoryManager.InventoryList.Length; i++)
+        for (int i = 0; i < Inventory.Length; i++)
         {
-            if (inventoryManager.InventoryList[i].item == null)
+            if (Inventory[i] == null)
             {
-                inventoryManager.InventoryList[i].item = item;
+                Inventory[i] = item;
                 Added = true;
                 //inventoryManager.UpdateInventoryScreen();
                 break;
@@ -233,29 +241,29 @@ public class InventoryManager : MonoBehaviour
     {
         bool removed = false;
         int i = 0;
-        for (; i < inventoryManager.InventoryList.Length; i++)
+        for (; i < Inventory.Length; i++)
         {
-            if (inventoryManager.InventoryList[i].item.gameObject.name == itemName)
+            if (Inventory[i].gameObject.name == itemName)
             {
-                inventoryManager.InventoryList[i].item = null;
+                Inventory[i] = null;
                 removed = true;
                 break;
             }
         }
         if (removed)
         {
-            for (; i < inventoryManager.InventoryList.Length-1; i++)
+            for (; i < Inventory.Length-1; i++)
             {
-                if (inventoryManager.InventoryList[i + 1].item == null)
+                if (Inventory[i + 1] == null)
                 {
                     break;
                 }
                 else
                 {
-                    inventoryManager.InventoryList[i].item = inventoryManager.InventoryList[i + 1].item;
+                    Inventory[i] = Inventory[i + 1];
                 }
             }
-            inventoryManager.InventoryList[i].item = null;
+            Inventory[i] = null;
             //inventoryManager.UpdateInventoryScreen();
         }
     }
@@ -289,14 +297,5 @@ public class InventoryManager : MonoBehaviour
         {
             return false;
         }
-    }
-
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }

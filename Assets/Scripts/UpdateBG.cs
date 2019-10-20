@@ -39,6 +39,10 @@ public class UpdateBG : MonoBehaviour
                 UpdatePosition();
             }
         }
+        else
+        {
+            //Debug.Log("No active camera volumes (remaining on current camera, just a heads up)");
+        }
     }
 
     private void UpdatePosition()
@@ -149,7 +153,16 @@ public class UpdateBG : MonoBehaviour
         }
 
         //playing back pre-rendered frames (animated or still)
-        if (frameTiming.Length > 0) //don't animate if there's no frameTiming
+        if (frameTiming == null)
+        {
+            Debug.Log("waiting (Check UpdateBG if this shows up! Should be a black screen while it's happening)");
+            foreach (Texture2D tex in outputTextures)
+            {
+                tex.SetPixels(new Color[] { Color.black });
+                tex.Apply();
+            }
+        }
+        else if (frameTiming.Length > 0) //don't animate if there's no frameTiming
         {
             CurrentFrameTiming -= Time.deltaTime;
             if (CurrentFrameTiming <= 0)

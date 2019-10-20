@@ -170,12 +170,15 @@ public class SSREffect : MonoBehaviour
 	
 	protected void Start()
 	{
+        /*
+        //SystemInfo.supportsImageEffects always returns true now, disabling to get rid of warning message
 		// Disable if we don't support image effects
 		if (!SystemInfo.supportsImageEffects) {
 			enabled = false;
 			Debug.Log("[SSR] Image Effects is not supported");
 			return;
 		}
+        */
 	}
 
 	// Performs one blur iteration.

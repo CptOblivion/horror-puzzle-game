@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GlobalTools : MonoBehaviour
 {
+
     public static bool Paused = false;
     public static bool WasPaused = false;
     public Camera startingCam;
     public int Framerate = 24;
     public bool vSync = true;
+    public static bool startup = true;
     public static Camera currentCam;
     public static GameObject player;
     public static GlobalTools globalTools;
@@ -20,17 +23,19 @@ public class GlobalTools : MonoBehaviour
     public static InputActionMap inputsGameplay;
     //public static InputActionMap inputsMenus;
 
-    PlayerInput playerInput;
+    //PlayerInput playerInput;
     public enum LayerMasks { Default, TransparentFX, IngoreRaycast, Blank0, Water, UI, Blank1, Blank2, PostProcessing, RenderOBJ, RenderBG, Clickable, ClickOcclude }
     private void Awake()
     {
         globalTools = this;
         currentCam = startingCam;
-        playerInput = this.GetComponent<PlayerInput>();
+        //playerInput = this.GetComponent<PlayerInput>();
         inputActions = this.inputActionAsset;
+        Unpause();
     }
     void Start()
     {
+        //startup = true;
         if (!vSync)
         {
             QualitySettings.vSyncCount = 0;
@@ -88,5 +93,23 @@ public class GlobalTools : MonoBehaviour
         //globalTools.playerInput.SwitchCurrentActionMap("Gameplay");
         //inputsGameplay.Enable();
         //inputsMenus.Disable();
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    public void QuitToMenu()
+    {
+        //should add an unsaved game warning popup or something
+        startup = false; //let's not re-run those splash screens, eh?
+        InventoryManager.Inventory = null; //we'll take the inventory from scene to scene, but not to the main menu.
+
+
+        SceneManager.LoadScene("MainMenu");
     }
 }
