@@ -762,7 +762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 76.5}
+  m_AnchoredPosition: {x: 0, y: 88.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7355256598404704520
@@ -804,9 +804,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'THE DANG PROGRAMMER HASN''T MADE
+  m_Text: 'THE DANG PROGRAMMER HASN''T
 
-    A SAVE SYSTEM YET.
+    MADE A SAVE SYSTEM YET.
+
 
     ARE YOU SURE YOU WANT TO QUIT?'
 --- !u!1 &2126224930004846698
@@ -843,7 +844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 76.5}
+  m_AnchoredPosition: {x: 0, y: 88.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4560088409903265828
@@ -885,9 +886,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'THE DANG PROGRAMMER HASN''T MADE
+  m_Text: 'THE DANG PROGRAMMER HASN''T
 
-    A SAVE SYSTEM YET.
+    MADE A SAVE SYSTEM YET.
+
 
     ARE YOU SURE YOU WANT TO QUIT?'
 --- !u!1 &2907301739514129707
