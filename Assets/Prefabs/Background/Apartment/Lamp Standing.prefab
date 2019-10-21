@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 8888926040328716263}
   - component: {fileID: 432567237326144977}
   - component: {fileID: 6141855421537188136}
+  - component: {fileID: 3108012119731113228}
   m_Layer: 10
   m_Name: Lamp Standing
   m_TagString: Untagged
@@ -344,6 +345,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3108012119731113228
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548600748705959412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0046883025, y: 0.004688302, z: 0.018932803}
+  m_Center: {x: 0.0000000018626451, y: -0.000000014901159, z: 0.009382804}
 --- !u!1 &7307474452803158192
 GameObject:
   m_ObjectHideFlags: 0

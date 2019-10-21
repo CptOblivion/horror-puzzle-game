@@ -607,16 +607,6 @@ PrefabInstance:
       propertyPath: field of view
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 8293799566251966228, guid: 334841f466ff9114591cbdc75a2ce383,
-        type: 3}
-      propertyPath: ResizeRender
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8293799566251966228, guid: 334841f466ff9114591cbdc75a2ce383,
-        type: 3}
-      propertyPath: drawBG
-      value: 
-      objectReference: {fileID: 7969407858797838683}
     - target: {fileID: 8293799566251966224, guid: 334841f466ff9114591cbdc75a2ce383,
         type: 3}
       propertyPath: field of view
@@ -677,6 +667,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8293799566251966228, guid: 334841f466ff9114591cbdc75a2ce383,
+        type: 3}
+      propertyPath: ResizeRender
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293799566251966228, guid: 334841f466ff9114591cbdc75a2ce383,
+        type: 3}
+      propertyPath: drawBG
+      value: 
+      objectReference: {fileID: 7969407858797838683}
     - target: {fileID: 407519752766852851, guid: 334841f466ff9114591cbdc75a2ce383,
         type: 3}
       propertyPath: m_UIInputModule
