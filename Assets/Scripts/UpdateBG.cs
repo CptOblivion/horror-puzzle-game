@@ -102,7 +102,7 @@ public class UpdateBG : MonoBehaviour
             RenderTexture.active = camBG.activeTexture;
             currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
             currentOutputTexture.Apply();
-            TextureScale.Bilinear(currentOutputTexture, camOB.targetTexture.width, camOB.targetTexture.height);
+            DownscaleTex(currentOutputTexture, camBG.targetTexture.width/camOB.targetTexture.width);
         }
         else
         {
@@ -110,6 +110,32 @@ public class UpdateBG : MonoBehaviour
             currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
             currentOutputTexture.Apply();
         }
+    }
+
+    void DownscaleTex(Texture2D tex, int factor)
+    {
+        int[] size = new int[] { tex.width / factor, tex.height / factor };
+        Color[] colorArray = new Color[size[0]*size[1]];
+        //tex.Resize(tex.width / factor, tex.height / factor);
+        for(int y = 0; y < size[1]; y++)
+        {
+            for (int x = 0; x < size[0]; x++)
+            {
+                Color[] PixelBlock = tex.GetPixels(x * factor, y * factor, factor, factor);
+                Color PixelColor = Color.black;
+                foreach (Color pixel in PixelBlock)
+                {
+                    PixelColor += pixel;
+                }
+                PixelColor /= factor * factor;
+                colorArray[size[0]*y+x] = PixelColor;
+                //tex.SetPixel(x, y, PixelColor);
+            }
+        }
+        tex.Resize(size[0], size[1]);
+        tex.SetPixels(colorArray);
+        tex.Apply();
+
     }
     private void Awake()
     {
