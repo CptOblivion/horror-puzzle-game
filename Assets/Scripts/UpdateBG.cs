@@ -12,6 +12,9 @@ public class UpdateBG : MonoBehaviour
     public bool SilentUpdates = true;
     public RawImage drawBG;
 
+    //TODO: create BG rendertexture at runtime scaled based on a factor property (that way it's changeable in quality settings, also ensures it's an exact multiple of the target resolution)
+    //render into OB texture while in editor? (for preview reasons)
+
     Texture2D currentOutputTexture;
     Camera camBG;
     public Camera camOB;
@@ -101,7 +104,7 @@ public class UpdateBG : MonoBehaviour
             currentOutputTexture.Apply();
             RenderTexture.active = camBG.activeTexture;
             currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
-            currentOutputTexture.Apply();
+            //currentOutputTexture.Apply();
             DownscaleTex(currentOutputTexture, camBG.targetTexture.width/camOB.targetTexture.width);
         }
         else
@@ -114,9 +117,9 @@ public class UpdateBG : MonoBehaviour
 
     void DownscaleTex(Texture2D tex, int factor)
     {
+        //TODO: Add threading (slice image into sections equal to number of cores, process each slice in its own thread)
         int[] size = new int[] { tex.width / factor, tex.height / factor };
         Color[] colorArray = new Color[size[0]*size[1]];
-        //tex.Resize(tex.width / factor, tex.height / factor);
         for(int y = 0; y < size[1]; y++)
         {
             for (int x = 0; x < size[0]; x++)
@@ -129,7 +132,6 @@ public class UpdateBG : MonoBehaviour
                 }
                 PixelColor /= factor * factor;
                 colorArray[size[0]*y+x] = PixelColor;
-                //tex.SetPixel(x, y, PixelColor);
             }
         }
         tex.Resize(size[0], size[1]);

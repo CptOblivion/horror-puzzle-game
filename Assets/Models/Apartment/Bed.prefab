@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5575307161150985288
+--- !u!1 &165111047440774838
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8864246843321509467}
-  - component: {fileID: 459128796126207085}
-  - component: {fileID: 6152953236069982356}
-  - component: {fileID: 8287286213983118340}
-  m_Layer: 10
-  m_Name: Bedside Table
+  - component: {fileID: 470880192473359621}
+  - component: {fileID: 2025635987806752893}
+  - component: {fileID: 689671953122589314}
+  m_Layer: 0
+  m_Name: Pillow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8864246843321509467
+--- !u!4 &470880192473359621
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575307161150985288}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -11.69343, y: -0.0000010430406, z: -5.8331056}
-  m_LocalScale: {x: 23.845556, y: 25.869192, z: 30.800344}
-  m_Children:
-  - {fileID: 3651380292053531007}
-  m_Father: {fileID: 0}
+  m_GameObject: {fileID: 165111047440774838}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.005164687, y: 0.0066921758, z: 0.022771345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5386606450209182989}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -5.1660004}
---- !u!33 &459128796126207085
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2025635987806752893
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575307161150985288}
-  m_Mesh: {fileID: -861256726244969231, guid: eea21eeb26888444ea5e2d3a336f83fe, type: 3}
---- !u!23 &6152953236069982356
+  m_GameObject: {fileID: 165111047440774838}
+  m_Mesh: {fileID: 4747795219173961485, guid: 320f188c2b419e94ca27d152f9d6434f, type: 3}
+--- !u!23 &689671953122589314
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575307161150985288}
+  m_GameObject: {fileID: 165111047440774838}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9bde729fb079ae44da8443118e40b6db, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,20 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8287286213983118340
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575307161150985288}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.019999994, z: 0.019999996}
-  m_Center: {x: 0, y: 0, z: 0.009999998}
---- !u!1 &6207560118389789784
+--- !u!1 &8978572224073901854
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,45 +86,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3651380292053531007}
-  - component: {fileID: 7210492146583563049}
-  - component: {fileID: 6656278205551230647}
-  m_Layer: 9
-  m_Name: Bedside Table
+  - component: {fileID: 5386606450209182989}
+  - component: {fileID: 4006537607583690555}
+  - component: {fileID: 7252657778207953858}
+  m_Layer: 0
+  m_Name: Bed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3651380292053531007
+--- !u!4 &5386606450209182989
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6207560118389789784}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8864246843321509467}
+  m_GameObject: {fileID: 8978572224073901854}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -10.035, y: -0.00000083896396, z: -5.01}
+  m_LocalScale: {x: 91.33133, y: 104.6182, z: 28.21108}
+  m_Children:
+  - {fileID: 470880192473359621}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7210492146583563049
+--- !u!33 &4006537607583690555
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6207560118389789784}
-  m_Mesh: {fileID: -861256726244969231, guid: eea21eeb26888444ea5e2d3a336f83fe, type: 3}
---- !u!23 &6656278205551230647
+  m_GameObject: {fileID: 8978572224073901854}
+  m_Mesh: {fileID: 6508942946276188115, guid: 320f188c2b419e94ca27d152f9d6434f, type: 3}
+--- !u!23 &7252657778207953858
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6207560118389789784}
+  m_GameObject: {fileID: 8978572224073901854}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -150,7 +136,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a33f34bb938cd124fba03ed906db86eb, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
