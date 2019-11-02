@@ -11,10 +11,12 @@ public class UpdateBG : MonoBehaviour
     public List<CameraPosition> camVolumes = new List<CameraPosition>();
     public bool SilentUpdates = true;
     public RawImage drawBG;
+    public int BGScale = 3;
 
     //TODO: create BG rendertexture at runtime scaled based on a factor property (that way it's changeable in quality settings, also ensures it's an exact multiple of the target resolution)
     //render into OB texture while in editor? (for preview reasons)
 
+    public static RenderTexture BGTexture;
     Texture2D currentOutputTexture;
     Camera camBG;
     public Camera camOB;
@@ -101,10 +103,11 @@ public class UpdateBG : MonoBehaviour
         if (camBG.targetTexture.width != camOB.targetTexture.width)
         {
             currentOutputTexture.Resize(camBG.activeTexture.width, camBG.activeTexture.height);
-            currentOutputTexture.Apply();
+            //currentOutputTexture.Apply();
             RenderTexture.active = camBG.activeTexture;
             currentOutputTexture.ReadPixels(new Rect(0, 0, camBG.activeTexture.width, camBG.activeTexture.height), 0, 0);
-            //currentOutputTexture.Apply();
+
+            currentOutputTexture.Apply();
             DownscaleTex(currentOutputTexture, camBG.targetTexture.width/camOB.targetTexture.width);
         }
         else
@@ -142,6 +145,15 @@ public class UpdateBG : MonoBehaviour
     private void Awake()
     {
         camBG = GetComponent<Camera>();
+        if (BGTexture == null)
+        {
+            int[] texSize = { camOB.targetTexture.width * BGScale, camOB.targetTexture.height * BGScale};
+            Debug.Log("Background Render Texture Size: " + texSize[0] + " x " + texSize[1]);
+            BGTexture = new RenderTexture(texSize[0], texSize[1], 0);
+            //BGTexture.useMipMap = true;
+            BGTexture.antiAliasing = 1;
+            BGTexture.filterMode = FilterMode.Point;
+        }
         /*
         foreach (Camera testcam in transform.GetComponentsInChildren<Camera>())
         {
@@ -156,6 +168,8 @@ public class UpdateBG : MonoBehaviour
     }
     void Start()
     {
+        camBG.targetTexture = BGTexture;
+        camOB.clearFlags = CameraClearFlags.Color;
 
         camBG.enabled = false;
         RenderBackground();

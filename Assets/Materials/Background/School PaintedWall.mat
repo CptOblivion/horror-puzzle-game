@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: ecf723fd42cf7f54e80d43b0eb54e449, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4573b2f5804e70e4badded24ad3ee6c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -154,7 +154,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BumpScale: 0.015
+    - _BumpScale: 0.14
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -199,7 +199,7 @@ Material:
     - _EnableWind: 0
     - _EnergyConservingSpecularColor: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.551
+    - _Glossiness: 0.6
     - _GlossyReflections: 1
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02

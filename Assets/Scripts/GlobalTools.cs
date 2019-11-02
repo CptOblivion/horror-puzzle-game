@@ -12,6 +12,8 @@ public class GlobalTools : MonoBehaviour
     public Camera startingCam;
     public int Framerate = 24;
     public bool vSync = true;
+    public bool PauseOnFocusLoss = true;
+
     public static bool Paused = false;
     public static bool WasPaused = false;
     public static bool startup = true;
@@ -52,6 +54,24 @@ public class GlobalTools : MonoBehaviour
         if (WasPaused)
         {
             WasPaused = false;
+        }
+    }
+    private void OnApplicationFocus(bool focus)
+    {
+        InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+        if (inventoryManager && !focus)
+        {
+            if (PauseOnFocusLoss)
+            {
+                if (!GlobalTools.Paused)
+                {
+                    inventoryManager.OpenInventory();
+                }
+            }
+            else
+            {
+                Debug.Log("Focus lost, carrying on nonetheless!",globalTools);
+            }
         }
     }
     public static void SnapToGround(CharacterController characterController, float GroundSnapDistance)

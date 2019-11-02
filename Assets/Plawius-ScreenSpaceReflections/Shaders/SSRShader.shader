@@ -105,6 +105,7 @@ Shader "Hidden/PlawiusSSR"
 	float3 getViewNormal(float2 uv_coords, float4 normal_spec)
 	{
 		//float4 normal_spec = tex2D (_CameraNormalsTexture, uv_coords);
+		//float3 world_normal = float3(normal_spec.xy * 2.0 - 1.0, normal_spec.z);
 		float3 world_normal = normal_spec.xyz * 2.0 - 1.0;
 		
 		float3 view_normal = mul ((float3x3)unity_WorldToCamera, world_normal);
@@ -136,6 +137,8 @@ Shader "Hidden/PlawiusSSR"
 		return saturate((val - min_val) / (max_val - min_val));
 	}
 
+
+
 	//	float rand(float2 co){
 	//    	return frac(sin(dot(co.xy ,float2(12.9898,78.233))) * 43758.5453);
 	//	}
@@ -158,6 +161,10 @@ Shader "Hidden/PlawiusSSR"
 		float3 view_position_normalized = normalize(view_position);
 		
 		// ---------------------------
+		//at glancing angles past 45 degrees, it looks like the reflection vector stands back up instead of laying down flat (reflection approaches infinitely flat as view_position approaches perpendicular to view_normal)
+
+		float reflect_fix_factor = -min((dot(view_normal, view_position_normalized) -.707) * (1/.707), 0); //full strength at perpendicular to normal, 0 strength at 45 degrees
+		
 		float3 view_reflect = normalize( reflect(view_position_normalized, view_normal) );
 		
 		float lerp_factor = saturate(normal_spec.w);
@@ -230,6 +237,8 @@ Shader "Hidden/PlawiusSSR"
 					float dist_center = distance(screen_start_pos.xy , float2(0.5, 0.5));
 					float screendedgefact = saturate(dist_center) * 2.0;
 					screendedgefact = 1.0 - screendedgefact * screendedgefact;
+					//screendedgefact = abs(screendedgefact);
+					screendedgefact = max(screendedgefact, 0);
 
 					lerp_factor *= screendedgefact;
 					lerp_factor *= 1.0 - (float)curr_sample_num / (float)_MaxIter;
@@ -239,7 +248,6 @@ Shader "Hidden/PlawiusSSR"
 					
 					main_image.w = lerp_factor;
 					// ---------------------------
-					main_image = abs(main_image);
 					return main_image;
 				}
 				else
@@ -300,7 +308,7 @@ Shader "Hidden/PlawiusSSR"
 		float4 normal_spec = read_normal_spec(i.uv);
 		float4 result = tex2D(_MainTex, i.uv);
 		half4 output = (normal_spec.a < 0.001) ? result : calculateSSR(i, result, normal_spec);
-		return abs(output);
+		return output;
 	}
 
 	half4 frag_lerp (v2f i) : COLOR

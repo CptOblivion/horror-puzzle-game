@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
+
 
 [System.Serializable]
 public class InventorySlot
@@ -62,7 +64,6 @@ public class InventoryManager : MonoBehaviour
     int[,] slotGrid;
     private void Awake()
     {
-
         //initialize the inventory, if it doesn't already exist
         if (Inventory == null)
         {

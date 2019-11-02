@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     public InteractTarget target;
+    bool TargetSetThisFrame = false;
     private void OnTriggerStay(Collider other)
     {
         InteractTarget testTarget = other.GetComponent<InteractTarget>();
@@ -17,6 +18,11 @@ public class PlayerInteract : MonoBehaviour
                 {
                     //TODO: priority system
                     target = testTarget;
+                    TargetSetThisFrame = true;
+                }
+                else
+                {
+                    Debug.Log(hit.collider.name);
                 }
             }
         }
@@ -26,7 +32,14 @@ public class PlayerInteract : MonoBehaviour
     {
         if (!GlobalTools.Paused)
         {
-            target = null; //reset at the end of the frame (leave it be while paused)
+            if (TargetSetThisFrame)
+            {
+                TargetSetThisFrame = false;
+            }
+            else
+            {
+                target = null; //reset at the end of the frame (leave it be while paused)
+            }
         }
     }
 }
