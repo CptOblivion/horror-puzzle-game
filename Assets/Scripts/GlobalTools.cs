@@ -23,6 +23,7 @@ public class GlobalTools : MonoBehaviour
     public InputActionAsset inputActionAsset;
     public static InputActionAsset inputActions;
     public static InputActionMap inputsGameplay;
+    public static FullScreenMode WindowMode = FullScreenMode.Windowed;
     //public static InputActionMap inputsMenus;
 
     //PlayerInput playerInput;
@@ -34,15 +35,18 @@ public class GlobalTools : MonoBehaviour
         //playerInput = this.GetComponent<PlayerInput>();
         inputActions = this.inputActionAsset;
         Unpause();
+        Cursor.visible = false;
     }
     void Start()
     {
+        //TODO: Read from config file on startup
         //startup = true;
         if (!vSync)
         {
             QualitySettings.vSyncCount = 0;
         }
         Application.targetFrameRate = Framerate;
+        Screen.fullScreenMode = WindowMode;
 
         inputsGameplay = inputActions.FindActionMap("Gameplay");
         //inputsMenus = inputActions.FindActionMap("Menus");
@@ -79,7 +83,8 @@ public class GlobalTools : MonoBehaviour
         if (!characterController.isGrounded)
         {
             float feetDist = (characterController.height / 2) - characterController.radius;
-            Vector3 feetPos = characterController.transform.position + new Vector3(0, -feetDist, 0);
+            //Vector3 feetPos = characterController.transform.position + new Vector3(0, -feetDist, 0);
+            Vector3 feetPos = characterController.transform.position - characterController.transform.up * feetDist;// new Vector3(0, -feetDist, 0);
             //float safetyMargin = .01f;
             if (Physics.SphereCast(feetPos, characterController.radius, -characterController.transform.up, out RaycastHit hit, GroundSnapDistance))
             {
@@ -89,7 +94,8 @@ public class GlobalTools : MonoBehaviour
                 if (HitSlopeAngle > Mathf.Sin(Mathf.Deg2Rad * characterController.slopeLimit) && hit.point.y < feetPos.y)
                 {
                     float dropDistance = hit.distance;
-                    characterController.transform.position = characterController.transform.position + new Vector3(0, -(dropDistance - characterController.skinWidth), 0);
+                    //characterController.transform.position = characterController.transform.position + new Vector3(0, -(dropDistance - characterController.skinWidth), 0);
+                    characterController.transform.position = characterController.transform.position - characterController.transform.up * (dropDistance - characterController.skinWidth);
                 }
             }
         }
@@ -131,5 +137,21 @@ public class GlobalTools : MonoBehaviour
 
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ToggleFullscreen()
+    {
+        if (WindowMode == FullScreenMode.Windowed)
+        {
+            WindowMode = FullScreenMode.FullScreenWindow;
+        }
+        else
+        {
+            WindowMode = FullScreenMode.Windowed;
+        }
+        //TODO: Update config file here
+
+        //and apply
+        Screen.fullScreenMode = WindowMode;
     }
 }

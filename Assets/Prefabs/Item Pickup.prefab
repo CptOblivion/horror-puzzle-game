@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9174a83d95d994447954eb7a3eadeb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoverName: Unnamed Item
   InteractObject: {fileID: 0}
   Function: Pickup
   InteractMessage: 

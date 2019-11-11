@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class InteractTarget : MonoBehaviour
 {
+    [Tooltip("Name to show when aiming at the object")]
+    public string HoverName = "";
+    [Tooltip("Text to display when interacting (if no key item assigned)")]
+    public string InteractMessage = "";
     [Tooltip("Object to call a function on (if blank, calls on self)")]
     public GameObject InteractObject;
     [Tooltip("Function to call")]
     public string Function = "Interact";
-    [Tooltip("Text to display when interacting (if no key item assigned)")]
-    public string InteractMessage = "";
     [Tooltip("name of the inventory item required to interact with this (leave empty if none)")]
     public InventoryItem KeyItem;
     [Tooltip("What to say when attempting to interact without an item (if a keyitem is assigned)")]
@@ -21,28 +23,49 @@ public class InteractTarget : MonoBehaviour
     public CustomWrongItemText[] customWrongItemText = new CustomWrongItemText[] { };
     [Tooltip("If true, the inventory item is removed upon use")]
     public bool ConsumeItem = true;
-
-    //oneuse targets disable themselves after interacting
+    [Tooltip("oneuse targets disable themselves after interacting")]
     public bool OneUse = false;
+
+    //prevents the function from being called until the displayed text is dismissed
+    bool TextDelay = false;
+
+    private void Update()
+    {
+        if (TextDelay && Time.timeScale > 0)
+        {
+            Interact(false);
+        }
+    }
+
     public void Interact(bool useItem = false)
     {
         if (useItem || (!useItem && !KeyItem))
         {
-            if (InteractObject)
+            if (InteractMessage != "" && TextDelay == false)
             {
-                InteractObject.SendMessage(Function);
+                ScreenText.DisplayText(InteractMessage);
+                TextDelay = true;
+            }
+            else if (InteractObject)
+            {
+                if (Function != "") 
+                {
+                    InteractObject.SendMessage(Function); 
+                }
+                TextDelay = false;
             }
             else
             {
-                SendMessage(Function);
+                if (Function != "")
+                {
+                    SendMessage(Function);
+                }
+                TextDelay = false;
             }
+
             if (OneUse)
             {
                 gameObject.SetActive(false);
-            }
-            if (InteractMessage != "")
-            {
-                ScreenText.DisplayText(InteractMessage);
             }
         }
         else

@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 4dcfe5b306952af4cac7f47a90d24212, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -1264,6 +1264,7 @@ MonoBehaviour:
   startingCam: {fileID: 0}
   Framerate: 24
   vSync: 1
+  PauseOnFocusLoss: 1
   inputActionAsset: {fileID: -944628639613478452, guid: a9c39b2561c976e45b6c0a56d27e7231,
     type: 3}
 --- !u!114 &1381049660

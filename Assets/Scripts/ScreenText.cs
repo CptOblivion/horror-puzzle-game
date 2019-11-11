@@ -32,6 +32,7 @@ public class ScreenText : MonoBehaviour
         screenText.WaitAFrame = true;
         //Debug.Log(text);
         screenText.canvas.enabled = true;
+        text = text.Replace("\\n", "\n");
         screenText.textOb.text = text;
         if (showObject)
         {

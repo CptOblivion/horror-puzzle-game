@@ -57,10 +57,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9174a83d95d994447954eb7a3eadeb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoverName: Door
   InteractObject: {fileID: 5726970207689518460}
   Function: InteractWrongSide
   InteractMessage: 
-  KeyItem: 
+  KeyItem: {fileID: 0}
   NoItemText: Locked.
   GenericWrongItemText: 
   customWrongItemText: []
@@ -168,8 +169,6 @@ MonoBehaviour:
   HaltGame: 1
   LockedMessage: Locked.
   WrongSideMessage: Doesn't open from this side...
-  Rightside: {fileID: 0}
-  WrongSide: {fileID: 0}
   anims:
   - anim: {fileID: 5726970207586182799}
     Offset: 0
@@ -240,6 +239,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -338,10 +338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9174a83d95d994447954eb7a3eadeb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HoverName: Door
   InteractObject: {fileID: 5726970207689518460}
   Function: Interact
   InteractMessage: 
-  KeyItem: 
+  KeyItem: {fileID: 0}
   NoItemText: Locked.
   GenericWrongItemText: 
   customWrongItemText: []
@@ -412,6 +413,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

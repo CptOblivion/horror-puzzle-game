@@ -12,6 +12,8 @@ public class TankControls : MonoBehaviour
     public float groundSnapDistance = .5f;
     public Animator anim;
 
+    bool InitDelay = true;
+
     CharacterController characterController;
     PlayerInteract playerInteract;
     void Awake()
@@ -23,12 +25,18 @@ public class TankControls : MonoBehaviour
     private void Start()
     {
         GlobalTools.player = gameObject;
+        characterController.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (! GlobalTools.Paused && !GlobalTools.WasPaused)
+        if (InitDelay)
+        {
+            InitDelay = false;
+            characterController.enabled = true;
+        }
+        else if (! GlobalTools.Paused && !GlobalTools.WasPaused)
         {
             Vector2 MoveInputs = GlobalTools.inputsGameplay.FindAction("Move").ReadValue<Vector2>();
             
