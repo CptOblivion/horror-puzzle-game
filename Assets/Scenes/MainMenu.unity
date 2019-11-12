@@ -792,7 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5b0286c73b76a4f8a0624df7bc72e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkipSplashScreens: 1
+  SkipSplashScreens: 0
   enableOnEnd: {fileID: 1635592545}
   splashScreens:
   - image: {fileID: 0}
@@ -910,7 +910,7 @@ PrefabInstance:
     - target: {fileID: 6137004968019418683, guid: 839ead092e9530d41837b5d4d5bc0d42,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -47
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 6137004968019418683, guid: 839ead092e9530d41837b5d4d5bc0d42,
         type: 3}
@@ -1000,6 +1000,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 909796262}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &909796264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4177057030319878007, guid: 839ead092e9530d41837b5d4d5bc0d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 909796262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1055226964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23dd4750bf3792543a8130b8463b689f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ContinueButton: {fileID: 909796264}
+  menuManager: {fileID: 1635592546}
 --- !u!1 &1635592545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1377,7 @@ PrefabInstance:
     - target: {fileID: 6137004968019418683, guid: 839ead092e9530d41837b5d4d5bc0d42,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -9
+      value: -46.999996
       objectReference: {fileID: 0}
     - target: {fileID: 6137004968019418683, guid: 839ead092e9530d41837b5d4d5bc0d42,
         type: 3}

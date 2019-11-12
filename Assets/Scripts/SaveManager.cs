@@ -22,8 +22,10 @@ public class SaveManager
     public static string scene;
     public static string SaveLocation;
     public static float? LastSaveTime;
+    public static int SaveSlot = 0;
+    public static string SaveName = Application.persistentDataPath + "/SaveGame" + SaveSlot;
 
-    public static void LoadSaveFile(int SaveSlot = 0)
+    public static void LoadSaveFile()
     {
         if (File.Exists(Application.persistentDataPath + "/SaveGame" + SaveSlot))
         {
@@ -49,7 +51,7 @@ public class SaveManager
         }
     }
 
-    public static void SaveSaveFile(int SaveSlot = 0)
+    public static void SaveSaveFile()
     {
         if (InventoryManager.Inventory != null)
         {

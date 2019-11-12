@@ -152,18 +152,6 @@ public class GlobalTools : MonoBehaviour
         //inputsMenus.Disable();
     }
 
-    public string TimeSinceLastSave()
-    {
-        if (SaveManager.LastSaveTime == null)
-        {
-            return "You have not saved!";
-        }
-        else
-        {
-            int MinutesSinceLastSave = (int)((Time.unscaledTime - SaveManager.LastSaveTime) / 60);
-            return "It has been " + MinutesSinceLastSave + " since your last save.";
-        }
-    }
 
     public void QuitGame()
     {
