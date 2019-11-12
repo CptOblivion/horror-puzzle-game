@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class AnimsWithOffset
@@ -10,6 +11,7 @@ public class AnimsWithOffset
 }
 public class Door : MonoBehaviour
 {
+    public string SaveName = "";
     public bool Locked = false;
     public bool Closed = true;
     [Tooltip("Disables further interaction after opening")]
@@ -18,6 +20,8 @@ public class Door : MonoBehaviour
     public bool HaltGame = true;
     public string LockedMessage;
     public string WrongSideMessage;
+
+    string savePrefix;
     //public Collider Rightside;
     //public Collider WrongSide;
 
@@ -25,60 +29,19 @@ public class Door : MonoBehaviour
 
     bool toggling = false;
 
-
-    public void Unlock()
+    private void Start()
     {
-        Locked = false;
-    }
-
-    public void Lock()
-    {
-        Locked = true;
-    }
-
-    public void ToggleLock()
-    {
-        Locked = !Locked;
-    }
-    public void UnlockAndOpen()
-    {
-        Unlock();
-        Interact();
-    }
-    public void Interact()
-    {
-        if (Locked)
+        savePrefix = SceneManager.GetActiveScene().name + " Door ";
+        if (SaveName != "")
         {
-            //Debug.Log(LockedMessage);
-            ScreenText.DisplayText(LockedMessage);
-        }
-        else
-        {
-            toggling = true;
-            foreach (InteractTarget interactTarget in GetComponentsInChildren<InteractTarget>())
+            bool? closed = SaveManager.GetBool(savePrefix + SaveName);
+            if (closed != null && closed == false)
             {
-                interactTarget.enabled = false;
-            }
-            Closed = !Closed;
-            foreach(AnimsWithOffset animWithOffset in anims)
-            {
-                animWithOffset.anim[animWithOffset.anim.clip.name].speed = 0;
-                animWithOffset.anim[animWithOffset.anim.clip.name].time = -animWithOffset.Offset;
-                animWithOffset.anim.Play();
-            }
-            if (HaltGame)
-            {
-                Time.timeScale = 0;
+                Locked = false;
+                InteractSkip();
             }
         }
     }
-
-    public void InteractWrongSide()
-    {
-        //Debug.Log(WrongSideMessage);
-        ScreenText.DisplayText(WrongSideMessage);
-    }
-
     private void Update()
     {
         if (!GlobalTools.Paused)
@@ -116,4 +79,80 @@ public class Door : MonoBehaviour
             }
         }
     }
+
+    public void Unlock()
+    {
+        Locked = false;
+    }
+
+    public void Lock()
+    {
+        Locked = true;
+    }
+
+    public void ToggleLock()
+    {
+        Locked = !Locked;
+    }
+    public void UnlockAndOpen()
+    {
+        Unlock();
+        Interact();
+    }
+    void InteractSkip()
+    {
+        Closed = !Closed;
+        if (LockOpen)
+        {
+            foreach (InteractTarget interactTarget in GetComponentsInChildren<InteractTarget>())
+            {
+                interactTarget.enabled = false;
+            }
+        }
+        foreach (AnimsWithOffset animWithOffset in anims)
+        {
+            animWithOffset.anim[animWithOffset.anim.clip.name].speed = 0;
+            animWithOffset.anim[animWithOffset.anim.clip.name].time = animWithOffset.anim.clip.length;
+            animWithOffset.anim.Play();
+        }
+
+    }
+    public void Interact()
+    {
+        if (Locked)
+        {
+            //Debug.Log(LockedMessage);
+            ScreenText.DisplayText(LockedMessage);
+        }
+        else
+        {
+            toggling = true;
+            foreach (InteractTarget interactTarget in GetComponentsInChildren<InteractTarget>())
+            {
+                interactTarget.enabled = false;
+            }
+            Closed = !Closed;
+            if (SaveName != "")
+            {
+                SaveManager.SetBool(savePrefix + SaveName, Closed);
+            }
+            foreach (AnimsWithOffset animWithOffset in anims)
+            {
+                animWithOffset.anim[animWithOffset.anim.clip.name].speed = 0;
+                animWithOffset.anim[animWithOffset.anim.clip.name].time = -animWithOffset.Offset;
+                animWithOffset.anim.Play();
+            }
+            if (HaltGame)
+            {
+                Time.timeScale = 0;
+            }
+        }
+    }
+
+    public void InteractWrongSide()
+    {
+        //Debug.Log(WrongSideMessage);
+        ScreenText.DisplayText(WrongSideMessage);
+    }
+
 }

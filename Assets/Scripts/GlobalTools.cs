@@ -10,20 +10,25 @@ public class GlobalTools : MonoBehaviour
 {
 
     public Camera startingCam;
-    public int Framerate = 24;
-    public bool vSync = true;
-    public bool PauseOnFocusLoss = true;
+
+    //ini settings (hardcoded for now)
+    public int DefaultFramerate = 60;
+    public int DefaultVSync = 0;
+    public bool DefaultPauseOnFocusLoss = true;
+    public bool DefaultBarrelDistortion = true;
+    public float DefaultVolumeMaster = -10;
+    public float DefaultVolumeMusic = 0;
+    public float DefaultVolumeSound = 0;
 
     public static bool Paused = false;
     public static bool WasPaused = false;
-    public static bool startup = true;
+    public static bool StartupFinished = true; //track if the game has started or if this is just a scene change
     public static Camera currentCam;
     public static GameObject player;
     public static GlobalTools globalTools;
     public InputActionAsset inputActionAsset;
     public static InputActionAsset inputActions;
     public static InputActionMap inputsGameplay;
-    public static FullScreenMode WindowMode = FullScreenMode.Windowed;
     //public static InputActionMap inputsMenus;
 
     //PlayerInput playerInput;
@@ -36,17 +41,43 @@ public class GlobalTools : MonoBehaviour
         inputActions = this.inputActionAsset;
         Unpause();
         Cursor.visible = false;
+
+        if (!StartupFinished)
+        {
+            if (!PlayerPrefs.HasKey("VSync"))
+                PlayerPrefs.SetInt("VSync", DefaultVSync);
+            QualitySettings.vSyncCount = PlayerPrefs.GetInt("VSync");
+
+            if (!PlayerPrefs.HasKey("Target Framerate"))
+                PlayerPrefs.SetInt("Target Framerate", DefaultFramerate);
+            Application.targetFrameRate = PlayerPrefs.GetInt("Target Framerate");
+
+            if (!PlayerPrefs.HasKey("Fullscreen mode"))
+                PlayerPrefs.SetInt("Fullscreen mode", (int)FullScreenMode.Windowed);
+            Screen.fullScreenMode = (FullScreenMode)PlayerPrefs.GetInt("Window mode");
+
+            if (!PlayerPrefs.HasKey("Pause on focus loss"))
+                PlayerPrefs.SetInt("Pause on focus loss", DefaultPauseOnFocusLoss ? 1 : 0);
+
+            if (!PlayerPrefs.HasKey("Barrel distortion"))
+                PlayerPrefs.SetInt("Barrel distortion", DefaultBarrelDistortion ? 1 : 0);
+
+            //TODO: link this up to something, add menu controls
+            if (!PlayerPrefs.HasKey("Volume master"))
+                PlayerPrefs.SetFloat("Volume master", DefaultVolumeMaster);
+            if (!PlayerPrefs.HasKey("Volume music"))
+                PlayerPrefs.SetFloat("Volume music", DefaultVolumeMusic);
+            if (!PlayerPrefs.HasKey("Volume sound"))
+                PlayerPrefs.SetFloat("Volume sound", DefaultVolumeSound);
+        }
     }
     void Start()
     {
-        //TODO: Read from config file on startup
-        //startup = true;
-        if (!vSync)
+        if (!StartupFinished)
         {
-            QualitySettings.vSyncCount = 0;
+            StartupFinished = true;
         }
-        Application.targetFrameRate = Framerate;
-        Screen.fullScreenMode = WindowMode;
+
 
         inputsGameplay = inputActions.FindActionMap("Gameplay");
         //inputsMenus = inputActions.FindActionMap("Menus");
@@ -65,7 +96,7 @@ public class GlobalTools : MonoBehaviour
         InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
         if (inventoryManager && !focus)
         {
-            if (PauseOnFocusLoss)
+            if (PlayerPrefs.GetInt("Pause on focus loss") == 1)
             {
                 if (!GlobalTools.Paused)
                 {
@@ -121,6 +152,19 @@ public class GlobalTools : MonoBehaviour
         //inputsMenus.Disable();
     }
 
+    public string TimeSinceLastSave()
+    {
+        if (SaveManager.LastSaveTime == null)
+        {
+            return "You have not saved!";
+        }
+        else
+        {
+            int MinutesSinceLastSave = (int)((Time.unscaledTime - SaveManager.LastSaveTime) / 60);
+            return "It has been " + MinutesSinceLastSave + " since your last save.";
+        }
+    }
+
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -132,7 +176,7 @@ public class GlobalTools : MonoBehaviour
     public void QuitToMenu()
     {
         //should add an unsaved game warning popup or something
-        startup = false; //let's not re-run those splash screens, eh?
+        StartupFinished = false; //let's not re-run those splash screens, eh?
         InventoryManager.Inventory = null; //we'll take the inventory from scene to scene, but not to the main menu.
 
 
@@ -141,17 +185,35 @@ public class GlobalTools : MonoBehaviour
 
     public void ToggleFullscreen()
     {
-        if (WindowMode == FullScreenMode.Windowed)
-        {
-            WindowMode = FullScreenMode.FullScreenWindow;
-        }
-        else
-        {
-            WindowMode = FullScreenMode.Windowed;
-        }
-        //TODO: Update config file here
 
-        //and apply
-        Screen.fullScreenMode = WindowMode;
+        if (Screen.fullScreenMode == FullScreenMode.Windowed)
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        else
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        PlayerPrefs.SetInt("Fullscreen mode", (int)Screen.fullScreenMode);
+
+    }
+
+    public void NewGame()
+    {
+        string[] levelTags = { "newgame" };
+        SaveManager.ClearSaveData();
+        LevelLoader.LoadLevel("Apartment", levelTags);
+    }
+    public void SaveGame()
+    {
+        SaveManager.SaveSaveFile();
+    }
+
+    public void LoadGame()
+    {
+        SaveManager.LoadSaveFile();
+        LevelLoader.LoadLevel(SaveManager.scene, new string[] { SaveManager.SaveLocation });
+    }
+    public void ChairSave()
+    {
+        SaveManager.SaveLocation = "SavedAtChair";
+        SaveGame();
+        ScreenText.DisplayText("Game Saved");
     }
 }

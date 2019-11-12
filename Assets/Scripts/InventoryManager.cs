@@ -22,13 +22,14 @@ public class InventorySlot
 [System.Serializable]
 public class CustomWrongItemText
 {
-    public InventoryItem Item;
+    public string ItemName;
     public string Message = "";
 }
 public class InventoryManager : MonoBehaviour
 {
+    public static int InventorySize = 9;
     public static InventoryItem[] Inventory; //the actual inventory
-    public InventorySlot[] InventoryList = new InventorySlot[9]; //the display inventory
+    public InventorySlot[] InventoryList = new InventorySlot[InventorySize]; //the display inventory
 
     public int inventoryGridWidth = 3;
     public int inventoryGridHeight = 3;
@@ -67,7 +68,7 @@ public class InventoryManager : MonoBehaviour
         //initialize the inventory, if it doesn't already exist
         if (Inventory == null)
         {
-            Inventory = new InventoryItem[InventoryList.Length];
+            Inventory = new InventoryItem[InventorySize];
         }
         inventoryManager = this;
         eventSystem = FindObjectOfType<EventSystem>();
@@ -218,7 +219,7 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                if (target.KeyItem == currentItem)
+                if (target.KeyItem.name == currentItem.name)
                 {
                     target.Interact(true);
                     if (target.ConsumeItem)
@@ -228,7 +229,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 else
                 {
-                    string text = target.GetWrongItemText(currentItem);
+                    string text = target.GetWrongItemText(currentItem.name);
                     if (text == "")
                     {
                         text = currentItem.UseOnWrongThing;

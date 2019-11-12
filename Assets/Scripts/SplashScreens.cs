@@ -33,6 +33,8 @@ public class SplashScreens : MonoBehaviour
     float DisplayTimer = 0;
     float HoldTimer = 0;
 
+    static bool SplashScreenDone = false;
+
     VideoPlayer videoPlayer;
     AudioSource audioSource;
     RawImage rawImage;
@@ -41,7 +43,7 @@ public class SplashScreens : MonoBehaviour
         videoPlayer = GetComponent<VideoPlayer>();
         audioSource = GetComponent<AudioSource>();
         rawImage = GetComponent<RawImage>();
-        if (SkipSplashScreens) GlobalTools.startup = false;
+        if (SkipSplashScreens) SplashScreenDone = true;
     }
     void Start()
     {
@@ -50,7 +52,7 @@ public class SplashScreens : MonoBehaviour
         {
             FadeHold = .001f;
         }
-        if (!GlobalTools.startup)
+        if (SplashScreenDone)
         {
             if (enableOnEnd)
             {

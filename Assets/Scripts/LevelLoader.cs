@@ -62,7 +62,8 @@ public class LevelLoader : MonoBehaviour
     {
         Tags = Tags ?? new string[0];
         Scene = SceneName;
+        SaveManager.scene = SceneName;
         SceneManager.LoadScene("LoadingScreen");
-        LevelLoader.LevelTags = Tags;
+        LevelTags = Tags;
     }
 }

@@ -74,12 +74,12 @@ public class InteractTarget : MonoBehaviour
             //Debug.Log(NoItemText);
         }
     }
-    public string GetWrongItemText(InventoryItem item)
+    public string GetWrongItemText(string itemName)
     {
         string feedback = GenericWrongItemText;
         foreach (CustomWrongItemText wrongItem in customWrongItemText)
         {
-            if (wrongItem.Item == item)
+            if (wrongItem.ItemName == itemName)
             {
                 feedback = wrongItem.Message;
                 break;
