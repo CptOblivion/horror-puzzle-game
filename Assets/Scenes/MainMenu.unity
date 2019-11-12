@@ -796,7 +796,7 @@ MonoBehaviour:
   enableOnEnd: {fileID: 1635592545}
   splashScreens:
   - image: {fileID: 0}
-    video: {fileID: 32900000, guid: 350817c95612dee4bae9dd5cc28c0bda, type: 3}
+    video: {fileID: 32900000, guid: aade9b4a9ce9ef841bd7464a181cea95, type: 3}
     DisplayTime: 0
     HoldTime: 1
   FadeOut: 1
