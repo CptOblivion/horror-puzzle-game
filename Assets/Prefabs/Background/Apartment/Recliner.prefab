@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9017926394471910176}
   - component: {fileID: 7293524408779235218}
   - component: {fileID: 6081166567117877858}
-  - component: {fileID: 2776479825373352764}
   m_Layer: 9
   m_Name: Recliner
   m_TagString: Untagged
@@ -80,19 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2776479825373352764
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4004087671703251010}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.029155415, y: 0.018264547, z: 0.02073384}
-  m_Center: {x: -0.0000000011258386, y: -0.00065107597, z: 0.010366919}
 --- !u!1 &4182285929816052244
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@
 		_Zoom ("Zoom", range(1,30)) = 1
 		_Barrel ("Barrel Distortion", Range(-2,2)) = 0
 		_PhosphorBleed ("Phosphor Bleed", Range(0,10)) = .5
+		_PhosphorBleed2 ("Phosphor Bleed Alt", Range(0, 2)) = .5
 		_Intensity ("Grid Intensity", Range(0,1)) = 1
+		_gridToggle ("Grid algorithm toggle (REMEMBER TO REMOVE)", Range(0,1)) = 1
     }
     SubShader
     {
@@ -45,9 +47,11 @@
             sampler2D _MainTex;
 			float4 _MainTex_TexelSize;
 			half _PhosphorBleed;
+			half _PhosphorBleed2;
 			float _Zoom;
 			half _Intensity;
 			half _Barrel;
+			int _gridToggle;
 
             fixed4 frag (v2f i) : SV_Target
             {
@@ -58,7 +62,7 @@
 				//barrel distortion
 				i.uv = i.uv*2-1; //centered coordinates
 				
-				i.uv /= _Zoom + pow(min(_Barrel, 0) * -.5, .75);
+				i.uv /= _Zoom + pow(min(_Barrel, 0) * -.5, .81);
 
 				half dist = length(i.uv);
 				i.uv /= (1+ _Barrel * dist * dist);
@@ -75,6 +79,7 @@
 				//chromatic abberation, sort of, so the pixel bleed matches the image pixels
 				float2 uvShift = i.uv;
 				fixed3 mainTexShifted = imageRaw;
+
 				uvShift.x += _MainTex_TexelSize/3;
 				mainTexShifted.r = tex2D(_MainTex, uvShift).r;
 				uvShift.x -= _MainTex_TexelSize/1.5;
@@ -82,12 +87,21 @@
 
 				//pixel grid
 				i.uv /= pixelSize;
-				fixed3 pixelRGB = {i.uv.x*6. - 1.,i.uv.x*6. - 3.,i.uv.x*6. - 5.};
-				pixelRGB = abs(pixelRGB % 6. - 3.);
-				pixelRGB *= 1.+_PhosphorBleed;
-				pixelRGB -=2.;
-				pixelRGB *= bleed;
-				pixelRGB = pow(pixelRGB, .4545);
+				
+				fixed3 pixelRGB = 0;
+				if (_gridToggle < 1){
+					pixelRGB = fixed3(-.5, .25, 1);
+					pixelRGB = sin(i.uv.x * 6.28 - pixelRGB * 3.14) * _PhosphorBleed2 + 1-_PhosphorBleed2;
+				}
+
+				else{
+					pixelRGB = fixed3(i.uv.x*6. - 1.,i.uv.x*6. - 3.,i.uv.x*6. - 5.);
+					pixelRGB = abs(pixelRGB % 6. - 3.);
+					pixelRGB *= 1.+_PhosphorBleed;
+					pixelRGB -=2.;
+					pixelRGB *= bleed;
+					pixelRGB = pow(pixelRGB, .4545);
+				}
 
 				//horizontal lines
 				pixelRGB *= 1-abs(frac(i.uv[1])*2-1);
@@ -96,6 +110,8 @@
 				//pixel grid strength
 				mainTexShifted = pixelRGB * mainTexShifted;
 				col.rgb = lerp(imageRaw, mainTexShifted*2, pow(_Intensity, .4545));
+				//pixelRGB.g = 0;
+				//pixelRGB.r = 0;
 
 				//apply borders
 				col.rgb *= clip;
