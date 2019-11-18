@@ -33,7 +33,7 @@ public class SplashScreens : MonoBehaviour
     float DisplayTimer = 0;
     float HoldTimer = 0;
 
-    static bool SplashScreenDone = false;
+    public static bool SplashScreenDone = false;
 
     VideoPlayer videoPlayer;
     AudioSource audioSource;

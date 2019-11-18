@@ -164,7 +164,7 @@ public class GlobalTools : MonoBehaviour
     public void QuitToMenu()
     {
         //should add an unsaved game warning popup or something
-        StartupFinished = false; //let's not re-run those splash screens, eh?
+        SplashScreens.SplashScreenDone = true; //let's not re-run those splash screens, eh?
         InventoryManager.Inventory = null; //we'll take the inventory from scene to scene, but not to the main menu.
 
 
@@ -184,6 +184,7 @@ public class GlobalTools : MonoBehaviour
 
     public void NewGame()
     {
+        LevelLoader.ClearTemp = true;
         string[] levelTags = { "newgame" };
         SaveManager.ClearSaveData();
         LevelLoader.LoadLevel("Apartment", levelTags);
@@ -195,6 +196,7 @@ public class GlobalTools : MonoBehaviour
 
     public void LoadGame()
     {
+        LevelLoader.ClearTemp = true;
         SaveManager.LoadSaveFile();
         LevelLoader.LoadLevel(SaveManager.scene, new string[] { SaveManager.SaveLocation });
     }

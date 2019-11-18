@@ -366,6 +366,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: dd93a8c4b382b654aa94f4521e5172a8, type: 3}
   - {fileID: 2800000, guid: c49f839f9168bf445ab694e297f86609, type: 3}
   - {fileID: 2800000, guid: 28a318937892d85448436ec952bb89e5, type: 3}
+  tempTex: {fileID: 2800000, guid: 235d88104470da84e8413ebb80385d16, type: 3}
   repeatRender: 1
   UpdateRender: 0
   camVolumes: []

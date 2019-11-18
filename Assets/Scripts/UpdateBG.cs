@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UpdateBG : MonoBehaviour
 {
     public Texture2D[] outputTextures = new Texture2D[4];
+    public Texture2D tempTex;
     public int repeatRender = 2;
     public bool UpdateRender = false;
     public List<CameraPosition> camVolumes = new List<CameraPosition>();
@@ -65,7 +66,7 @@ public class UpdateBG : MonoBehaviour
         //camOB.clearFlags = CameraClearFlags.Color;
 
         camBG.enabled = false;
-        camOB.enabled = false;
+        //camOB.enabled = false;
         //RenderBackground();
     }
     private void LateUpdate()
@@ -140,6 +141,7 @@ public class UpdateBG : MonoBehaviour
             //drawBG.texture = currentOutputTexture;
             Graphics.Blit(currentOutputTexture, camOB.targetTexture);
         }
+        /*
         if (WaitABit > 0)
         {
             WaitABit --;
@@ -148,6 +150,7 @@ public class UpdateBG : MonoBehaviour
         {
             camOB.enabled = true;
         }
+        */
     }
 
     public void CheckForUpdate()
@@ -276,6 +279,13 @@ public class UpdateBG : MonoBehaviour
         tex.Resize(size[0], size[1]);
         tex.SetPixels(colorArray);
         tex.Apply();
+
+    }
+    public void SaveImage()
+    {
+        RenderTexture.active = camOB.targetTexture;
+        tempTex.ReadPixels(new Rect(0, 0, camOB.targetTexture.width, camOB.targetTexture.height), 0, 0);
+        tempTex.Apply();
 
     }
 }
