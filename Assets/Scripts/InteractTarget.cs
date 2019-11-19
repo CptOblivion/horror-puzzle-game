@@ -9,6 +9,8 @@ public class InteractTarget : MonoBehaviour
     public string HoverName = "";
     [Tooltip("Text to display when interacting (if no key item assigned)")]
     public string InteractMessage = "";
+    [Tooltip("if true, displays a confirmation dialog allowing the player to cancel the interaction")]
+    public bool InteractMessageConfirmation = false;
     [Tooltip("Object to call a function on (if blank, calls on self)")]
     public GameObject InteractObject;
     [Tooltip("Function to call")]
@@ -33,7 +35,21 @@ public class InteractTarget : MonoBehaviour
     {
         if (TextDelay && Time.timeScale > 0)
         {
-            Interact(false);
+            if (InteractMessageConfirmation)
+            {
+                if (ScreenText.SelectedOption == "Confirm")
+                {
+                    Interact(false);
+                }
+                else
+                {
+                    TextDelay = false;
+                }
+            }
+            else
+            {
+                Interact(false);
+            }
         }
     }
 
@@ -43,7 +59,12 @@ public class InteractTarget : MonoBehaviour
         {
             if (InteractMessage != "" && TextDelay == false)
             {
-                ScreenText.DisplayText(InteractMessage);
+                string[] MessageOptions = null;
+                if (InteractMessageConfirmation)
+                {
+                    MessageOptions = new string[] { "Cancel", "Confirm" };
+                }
+                ScreenText.DisplayText(InteractMessage, ButtonOptions:MessageOptions);
                 TextDelay = true;
             }
             else if (InteractObject)

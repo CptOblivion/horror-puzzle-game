@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class ScreenText : MonoBehaviour
 {
     public static ScreenText screenText;
 
+    public Button buttonTemplate;
     public Text textOb;
     public float DefaultDisplayTime = 5;
+    public float Margins = 20;
+    public float ButtonGap = 20;
 
     Canvas canvas;
     static float DisplayTimer;
     static bool Paused = false;
     bool WaitAFrame = false;
     GameObject previewOb;
+    public static string SelectedOption = null;
+
+    GameObject buttonParent; //track the button parent object, if it exists
 
     private void Awake()
     {
@@ -27,8 +34,10 @@ public class ScreenText : MonoBehaviour
         canvas.enabled = false;
     }
 
-    public static void DisplayText(string text, bool pause = true, float displayTime = -1, GameObject showObject = null)
+    public static void DisplayText(string text, bool pause = true, float displayTime = -1, GameObject showObject = null, string[] ButtonOptions = null)
     {
+        //start a list of all the things we're showing on the screen to keep track of what goes where
+        List<GameObject> DisplayList = new List<GameObject>();
         screenText.WaitAFrame = true;
         //Debug.Log(text);
         screenText.canvas.enabled = true;
@@ -37,12 +46,47 @@ public class ScreenText : MonoBehaviour
         if (showObject)
         {
             screenText.previewOb = GameObject.Instantiate(showObject, screenText.canvas.transform);
+            DisplayList.Add(screenText.previewOb); //the preview object goes on top
             InventoryManager.eventSystem.SetSelectedGameObject(screenText.canvas.gameObject);
         }
+        DisplayList.Add(screenText.textOb.gameObject); //next up is the text itself
         if (pause)
         {
             GlobalTools.Pause();
             Paused = true;
+            if (ButtonOptions == null)
+            {
+                screenText.buttonParent = null;
+            }
+            else
+            {
+                //the buttons are arranged under a parent object so they can be close together regardless of how many things are on screen
+                screenText.buttonParent = new GameObject("ButtonParent");
+                screenText.buttonParent.transform.SetParent(screenText.transform, false);
+                DisplayList.Add(screenText.buttonParent); //the buttons go at the bottom
+
+                for (int i = 0; i < ButtonOptions.Length; i++)
+                {
+                    GameObject ButtonOb = Instantiate(screenText.buttonTemplate.gameObject, screenText.buttonParent.transform);
+                    if (i == 0)
+                    {
+                        EventSystem.current.SetSelectedGameObject(ButtonOb);
+
+                    }
+                    ButtonOb.name = ButtonOptions[i];
+                    ButtonOb.transform.localPosition = new Vector3(0, i * -screenText.ButtonGap + (ButtonOptions.Length - 1) * screenText.ButtonGap/2 );
+                    ButtonOb.GetComponentInChildren<Text>().text = ButtonOptions[i];
+                }
+            }
+
+            float CanvasHeight = screenText.canvas.rootCanvas.pixelRect.height;
+            float EntrySpacing = (CanvasHeight - screenText.Margins * 2) / (DisplayList.Count + 1);
+            float position = CanvasHeight/2 - screenText.Margins - EntrySpacing;
+            foreach(GameObject ob in DisplayList)
+            {
+                ob.transform.localPosition = new Vector3(0, position, 0);
+                position -= EntrySpacing;
+            }
         }
         else
         {
@@ -62,13 +106,20 @@ public class ScreenText : MonoBehaviour
         {
             if (Paused)
             {
-                if (GlobalTools.inputsGameplay.FindAction("Submit").triggered || GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
+                if (GlobalTools.inputsGameplay.FindAction("Submit").triggered)
                 {
-                    if (previewOb != null)
+                    if (screenText.buttonParent != null)
                     {
-                        Destroy(previewOb);
+                        SelectedOption = EventSystem.current.currentSelectedGameObject.name;
                     }
-                    canvas.enabled = false;
+                    CloseScreenTex();
+                    GlobalTools.Unpause();
+                    Paused = false;
+                }
+                else if (GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
+                {
+                    SelectedOption = null;
+                    CloseScreenTex();
                     GlobalTools.Unpause();
                     Paused = false;
                 }
@@ -81,13 +132,21 @@ public class ScreenText : MonoBehaviour
                 }
                 else
                 {
-                    if (previewOb!= null)
-                    {
-                        Destroy(previewOb);
-                    }
-                    canvas.enabled = false;
+                    CloseScreenTex();
                 }
             }
         }
+    }
+    void CloseScreenTex()
+    {
+        if (previewOb != null)
+        {
+            Destroy(previewOb);
+        }
+        if (screenText.buttonParent != null)
+        {
+            Destroy(screenText.buttonParent);
+        }
+        canvas.enabled = false;
     }
 }

@@ -12813,11 +12813,6 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5583556611945086024, guid: 13abba034801a61449842a7d96a431a5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6573228914799567792, guid: 13abba034801a61449842a7d96a431a5,
         type: 3}
       propertyPath: AnimObs.Array.size
@@ -12917,6 +12912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: frameTiming.Array.data[7].FrameTime
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583556611945086024, guid: 13abba034801a61449842a7d96a431a5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13abba034801a61449842a7d96a431a5, type: 3}
