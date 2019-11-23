@@ -1,0 +1,16 @@
+ObNames: Player
+CamNames: TVCloseup
+
+SCRIPT
+0 Player MoveTo -5.898,0.8300001,-3.71 0 GroundSnap=true //snap to TV
+0 Player TurnTo 0,-94,0 0
+0 CameraChange TVCloseup
+0 Dialogue "There's something in the TV?"
+//wait here
++0 EndDialogue
+
++0 Dialogue "I'd better have a closer look."
++0 EndDialogue
++0 Player Move 0,-.5,0 2 Local=true
++0 Player PlayAnim CrawlIntoTV
++2 LoadLevel School

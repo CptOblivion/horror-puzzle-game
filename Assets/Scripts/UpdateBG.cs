@@ -28,7 +28,6 @@ public class UpdateBG : MonoBehaviour
     int CurrentFrame;
     float CurrentFrameTiming = 0;
     Animation[] AnimObs;
-    int WaitABit = 2;
 
     private void Awake()
     {
@@ -197,7 +196,7 @@ public class UpdateBG : MonoBehaviour
             //drawBG.material.SetTexture("_Color", currentOutputTexture);
         }
 
-        PrepRender();
+        UpdateCamera();
     }
     private void UpdateAnims(float t)
     {
@@ -212,10 +211,16 @@ public class UpdateBG : MonoBehaviour
 
     }
 
-    public void PrepRender() //lets other objects tell this camera to update at the end of the frame
+    public void UpdateCamera(CameraPosition positionOverride = null) //lets other objects tell this camera to update at the end of the frame
     {
         //Debug.Log("Rendering");
         UpdateRender = true;
+        if (positionOverride != null)
+        {
+            currentPosition = positionOverride;
+            UpdatePosition();
+            Debug.Log("updating camera");
+        }
     }
 
     private void RenderBackground(int repeat = 1) //actually do the update

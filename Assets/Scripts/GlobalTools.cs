@@ -25,6 +25,7 @@ public class GlobalTools : MonoBehaviour
     public static bool StartupFinished = true; //track if the game has started or if this is just a scene change
     public static Camera currentCam;
     public static GameObject player;
+    public static GameObject cutsceneOverlay;
     public static GlobalTools globalTools;
     public InputActionAsset inputActionAsset;
     public static InputActionAsset inputActions;
@@ -41,6 +42,8 @@ public class GlobalTools : MonoBehaviour
         inputActions = this.inputActionAsset;
         Unpause();
         Cursor.visible = false;
+        cutsceneOverlay = GameObject.Find("CutsceneOverlay");
+        cutsceneOverlay.SetActive(false);
 
         if (!StartupFinished)
         {
@@ -109,7 +112,7 @@ public class GlobalTools : MonoBehaviour
             }
         }
     }
-    public static void SnapToGround(CharacterController characterController, float GroundSnapDistance)
+    public static void SnapToGround(CharacterController characterController, float GroundSnapDistance = .5f)
     {
         if (!characterController.isGrounded)
         {

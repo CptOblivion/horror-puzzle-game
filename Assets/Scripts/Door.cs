@@ -62,7 +62,7 @@ public class Door : MonoBehaviour
                     toggling = false;
                     if (UpdateBackground)
                     {
-                        GlobalTools.currentCam.GetComponent<UpdateBG>().PrepRender();
+                        GlobalTools.currentCam.GetComponent<UpdateBG>().UpdateCamera();
                     }
                     if (!LockOpen)
                     {
