@@ -7,7 +7,7 @@ public class CameraPositionCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CameraPosition cameraPosition = other.GetComponent<CameraPosition>();
-        if (cameraPosition)
+        if (!GlobalTools.Paused && cameraPosition)
         {
             UpdateBG updateBG = GlobalTools.currentCam.GetComponent<UpdateBG>();
             updateBG.camVolumes.Add(cameraPosition);

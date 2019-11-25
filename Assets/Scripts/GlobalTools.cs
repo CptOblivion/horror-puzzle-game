@@ -43,7 +43,10 @@ public class GlobalTools : MonoBehaviour
         Unpause();
         Cursor.visible = false;
         cutsceneOverlay = GameObject.Find("CutsceneOverlay");
-        cutsceneOverlay.SetActive(false);
+        if (cutsceneOverlay)
+        {
+            cutsceneOverlay.SetActive(false);
+        }
 
         if (!StartupFinished)
         {
@@ -208,5 +211,13 @@ public class GlobalTools : MonoBehaviour
         SaveManager.SaveLocation = "SavedAtChair";
         SaveGame();
         ScreenText.DisplayText("Game Saved");
+    }
+    public void CutsceneResume()
+    {
+        CutsceneManager.currentCutsceneManager.ResumeFromPause();
+    }
+    public void CutsceneSkip()
+    {
+        CutsceneManager.currentCutsceneManager.SkipCutscene();
     }
 }

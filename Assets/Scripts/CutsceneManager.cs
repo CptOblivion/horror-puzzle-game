@@ -36,15 +36,18 @@ public class CutsceneManager : MonoBehaviour
     public TextAsset CutsceneFile;
     public GameObject[] ControlledObjects;
     public MoveCameraToPosition[] CameraPositions;
+    public bool ActivateWithObject = false;
 
     public static bool CutscenePlaying;
     public static CutsceneManager currentCutsceneManager;
+
 
 
     string[] ControlledObjectNames;
     string[] CameraNames;
 
     List<string> CutsceneScriptParsed;
+    List<CutsceneMoveHelper> ActiveMoves;
     List<CutsceneMoveToHelper> ActiveMoveTos;
     List<CutsceneTurnToHelper> ActiveTurnTos;
 
@@ -57,7 +60,10 @@ public class CutsceneManager : MonoBehaviour
     int DialogueIteration; //track the number of times we've looped on the current dialogue
     bool DialogueCleared; //track if the player has hit confirm on the dialogue
     bool Paused; //dialogue has its own special pause screen, so we'll track pauses separately from the global pause
+    bool LoadingLevel = false;
+    bool WasPaused = false;
     Text dialogueText;
+    GameObject cutscenePause;
     GameObject HUD;
 
     char[] charWhiteSpace = new char[] { ' ', '\t' };
@@ -65,25 +71,27 @@ public class CutsceneManager : MonoBehaviour
     char[] charColon = new char[] { ':' };
     char[] charComma = new char[] { ',' };
     string[] newLine = new string[] { "\r\n", "\n" };
-    string[] GlobalCommands = new string[] {"Dialogue", "EndDialogue",  "CameraChange", "PlaySound", "LoadLevel"};
-    string[] ObjectCommands = new string[] {"Move", "MoveTo", "TurnTo", "PlayAnim" };
+    string[] GlobalCommands = new string[] {"Dialogue", "EndDialogue",  "CameraChange", "PlaySound", "LoadLevel", "EndCutscene"};
+    string[] ObjectCommands = new string[] {"Move", "MoveTo", "TurnTo", "Animation", "Animator" };
 
 
     private void Awake()
     {
-        //gameObject.SetActive(false);
-        this.enabled = false;
+        Disable();
         dialogueText = GlobalTools.cutsceneOverlay.GetComponentInChildren<Text>();
         //dialogueText.transform.parent.parent.gameObject.SetActive(false);
         HUD = GameObject.Find("HUD");
     }
     private void Start()
     {
+        cutscenePause = GameObject.Find("CutscenePause");
+        cutscenePause.SetActive(false);
         //parsing the cutscene script file into pieces
         {
             CutsceneScriptParsed = new List<string>();
             ControlledObjectNames = new string[ControlledObjects.Length];
             CameraNames = new string[CameraPositions.Length];
+            ActiveMoves = new List<CutsceneMoveHelper>();
             ActiveMoveTos = new List<CutsceneMoveToHelper>();
             ActiveTurnTos = new List<CutsceneTurnToHelper>();
 
@@ -353,13 +361,31 @@ public class CutsceneManager : MonoBehaviour
     {
         if (!Paused)
         {
+            if (GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
+            {
+                Paused = true;
+                Time.timeScale = 0;
+                cutscenePause.SetActive(true);
+            }
+        }
+        else
+        {
+
+            if (GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
+            {
+                ResumeFromPause();
+            }
+        }
+        if (!Paused)
+        {
 
             if (DialogueOpen && !DialogueCleared)
             {
-                if (GlobalTools.inputsGameplay.FindAction("Submit").triggered)
+                if (GlobalTools.inputsGameplay.FindAction("Submit").triggered && !WasPaused)
                 {
+                    Debug.Log(WasPaused);
                     DialogueCleared = true;
-                    dialogueText.transform.parent.parent.gameObject.SetActive(false);
+                    dialogueText.transform.parent.gameObject.SetActive(false);
                 }
             }
 
@@ -371,261 +397,357 @@ public class CutsceneManager : MonoBehaviour
             float Timestamp;
             GameObject obj;
             string Command;
-            while (true)
+
+            if (CurrentLine >= CutsceneScriptParsed.Count)
             {
-                Line = CutsceneScriptParsed[CurrentLine].Split(charWhiteSpace);
-                LinePos = 0;
-
-                FileLineNumber = int.Parse(Line[LinePos]);
-                LinePos++;
-
-                DialogueFlag = false;
-                if (Line[LinePos] == "D")
+                Disable();
+            }
+            else
+            {
+                while (true)
                 {
-                    DialogueFlag = true;
+                    Line = CutsceneScriptParsed[CurrentLine].Split(charWhiteSpace);
+                    LinePos = 0;
+
+                    FileLineNumber = int.Parse(Line[LinePos]);
                     LinePos++;
-                }
 
-                Timestamp = float.Parse(Line[LinePos]);
-                LinePos++;
+                    DialogueFlag = false;
+                    if (Line[LinePos] == "D")
+                    {
+                        DialogueFlag = true;
+                        LinePos++;
+                    }
 
-                if (Timestamp > CutsceneTime) //we haven't reached the next command yet
-                {
-                    break;
-                }
-
-                obj = null;
-                if (System.Array.Exists(ControlledObjectNames, s => s.Equals(Line[LinePos])))
-                {
-                    obj = ControlledObjects[System.Array.IndexOf(ControlledObjectNames, Line[LinePos])];
+                    Timestamp = float.Parse(Line[LinePos]);
                     LinePos++;
-                }
 
-                Command = Line[LinePos];
-                LinePos++;
-
-                int ArgsCount = Line.Length - LinePos;
-                string[] args = new string[] { };
-                if (ArgsCount > 0)
-                {
-                    args = new string[ArgsCount];
-                    for (int i = 0; i < args.Length; i++, LinePos++)
+                    if (Timestamp > CutsceneTime) //we haven't reached the next command yet
                     {
-                        args[i] = Line[LinePos];
-                    }
-                }
-
-                int ArgIndex = 0;
-
-                //check for and execute command
-                if (Command == "Move")
-                {
-
-                }
-                    
-                else if (Command == "MoveTo")
-                {
-                    CutsceneMoveToHelper newMoveTo = new CutsceneMoveToHelper();
-                    newMoveTo.Obj = obj;
-
-                    string[] PostitionAxes = args[ArgIndex].Split(charComma);
-                    newMoveTo.Destination = new Vector3(float.Parse(PostitionAxes[0]), float.Parse(PostitionAxes[1]), float.Parse(PostitionAxes[2]));
-                    ArgIndex++;
-
-                    newMoveTo.Time = float.Parse(args[ArgIndex]);
-                    ArgIndex++;
-
-                    string[] OptionalArgs = new string[args.Length - ArgIndex];
-                    System.Array.Copy(args, 2, OptionalArgs, 0, args.Length - ArgIndex);
-                    string CurrentArg;
-                    for (int i = 0; i < OptionalArgs.Length; i++)
-                    {
-                        CurrentArg = OptionalArgs[i];
-                        if (CurrentArg.StartsWith("Animation"))
-                        {
-                            newMoveTo.Animation = CurrentArg.Split(charEquals)[1];
-                        }
-                        else if (CurrentArg.StartsWith("GroundSnap"))
-                        {
-                            newMoveTo.SnapToGround = bool.Parse(CurrentArg.Split(charEquals)[1]);
-                        }
-                        else if (OptionalArgs[i].StartsWith("Local"))
-                        {
-                            newMoveTo.Local = bool.Parse(CurrentArg.Split(charEquals)[1]);
-                        }
-                        else
-                        {
-                            Debug.LogError("Unrecognized optional argument in " + Command + ": " + OptionalArgs[i].Split(charEquals)[0] + "! Cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
-                        }
-                    }
-
-                    if (newMoveTo.Local)
-                    {
-                        newMoveTo.Origin = obj.transform.localPosition;
-                    }
-                    else
-                    {
-                        newMoveTo.Origin = obj.transform.position;
-                    }
-
-                    ActiveMoveTos.Add(newMoveTo);
-                        
-                }
-                else if (Command == "TurnTo")
-                {
-                    CutsceneTurnToHelper newTurnTo = new CutsceneTurnToHelper();
-                    newTurnTo.Obj = obj;
-
-                    string[] RotationAxes = args[ArgIndex].Split(charComma);
-                    newTurnTo.Destination = Quaternion.Euler(float.Parse(RotationAxes[0]), float.Parse(RotationAxes[1]), float.Parse(RotationAxes[2]));
-                    ArgIndex++;
-
-                    newTurnTo.Time = float.Parse(args[ArgIndex]);
-                    ArgIndex++;
-
-                    string[] OptionalArgs = new string[args.Length - ArgIndex];
-                    System.Array.Copy(args, 2, OptionalArgs, 0, args.Length - ArgIndex);
-                    string CurrentArg;
-                    for(int i = 0; i < OptionalArgs.Length; i++)
-                    {
-                        CurrentArg = OptionalArgs[i];
-                        if (CurrentArg.StartsWith("Local"))
-                        {
-                            newTurnTo.Local = bool.Parse(CurrentArg.Split(charEquals)[1]);
-                        }
-                        else
-                        {
-                            Debug.LogError("Unrecognized optional argument in " + Command + ": " + OptionalArgs[i].Split(charEquals)[0] + "! Cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
-                        }
-                    }
-
-                    if (newTurnTo.Local)
-                    {
-                        newTurnTo.Origin = obj.transform.localRotation;
-                    }
-                    else
-                    {
-                        newTurnTo.Origin = obj.transform.rotation;
-                    }
-
-                    ActiveTurnTos.Add(newTurnTo);
-
-
-
-                }
-                else if (Command == "PlayAnim")
-                {
-
-                }
-                else if (Command == "Dialogue")
-                {
-                    if (!DialogueOpen)
-                    {
-                        DialogueCleared = false;
-                        DialogueIteration = 0;
-                        DialogueOpen = true;
-                        DialogueStartLine = CurrentLine;
-                        DialogueStartTime = CutsceneTime;
-
-                        string dialogueLine = "";
-                        string CurrentWord;
-
-                        for (; ArgIndex < args.Length; ArgIndex++)
-                        {
-                            CurrentWord = args[ArgIndex];
-                            if (ArgIndex == 0)
-                            {
-                                CurrentWord = CurrentWord.TrimStart('\"');
-                            }
-                            if (CurrentWord.EndsWith("\""))
-                            {
-                                dialogueLine += " " + CurrentWord.TrimEnd('\"');
-                                ArgIndex++;//make sure to move on to the next arg still
-                                break;
-                            }
-                            dialogueLine += " " + CurrentWord;
-                        }
-
-                        dialogueText.text = dialogueLine;
-                        RectTransform textFrame = (RectTransform)dialogueText.transform.parent;
-                        textFrame.sizeDelta = new Vector2(dialogueText.preferredWidth + 120, textFrame.sizeDelta.y);
-
-                        textFrame.parent.gameObject.SetActive(true);
-                    }
-                    else//if dialogue is already open it means we've looped around
-                    {
-                        DialogueIteration++;
-                    }
-                    
-
-
-                }
-                else if (Command == "EndDialogue")
-                {
-                    if (!DialogueCleared)
-                    {
-                        CutsceneTime = DialogueStartTime;
-                        CurrentLine = DialogueStartLine;
                         break;
                     }
-                    else
+
+
+
+
+                    obj = null;
+                    if (System.Array.Exists(ControlledObjectNames, s => s.Equals(Line[LinePos])))
                     {
-                        DialogueOpen = false;
+                        obj = ControlledObjects[System.Array.IndexOf(ControlledObjectNames, Line[LinePos])];
+                        LinePos++;
                     }
-                }
-                else if (Command == "CameraChange")
-                {
-                    string CameraAngle = args[ArgIndex];
-                    CameraPosition camPos = null;
-                    ArgIndex++;
-                    if (CameraAngle != "null")
+
+                    Command = Line[LinePos];
+                    LinePos++;
+
+                    if (DialogueOpen && !DialogueFlag && DialogueIteration > 0 && Command != "EndDialogue")
                     {
-                        if (System.Array.Exists(CameraNames, s => s.Equals(CameraAngle)))
+                        CurrentLine++;
+                        continue;
+                    }
+
+                    int ArgsCount = Line.Length - LinePos;
+                    string[] args = new string[] { };
+                    if (ArgsCount > 0)
+                    {
+                        args = new string[ArgsCount];
+                        for (int i = 0; i < args.Length; i++, LinePos++)
                         {
-                            camPos = CameraPositions[System.Array.IndexOf(CameraNames, CameraAngle)].GetComponentInChildren<CameraPosition>();
-                            Debug.Log("setting camera position to " + CameraAngle);
+                            args[i] = Line[LinePos];
+                        }
+                    }
+
+                    int ArgIndex = 0;
+
+                    //check for and execute command
+                    if (Command == "Move")
+                    {
+                        CutsceneMoveHelper newMove = new CutsceneMoveHelper();
+                        newMove.Obj = obj;
+                        string[] MoveAxes = args[ArgIndex].Split(charComma);
+                        newMove.Movement = new Vector3(float.Parse(MoveAxes[0]), float.Parse(MoveAxes[1]), float.Parse(MoveAxes[2]));
+                        ArgIndex++;
+
+                        newMove.Time = float.Parse(args[ArgIndex]);
+                        ArgIndex++;
+
+                        ActiveMoves.Add(newMove);
+                    }
+
+                    else if (Command == "MoveTo")
+                    {
+                        CutsceneMoveToHelper newMoveTo = new CutsceneMoveToHelper();
+                        newMoveTo.Obj = obj;
+
+                        string[] PostitionAxes = args[ArgIndex].Split(charComma);
+                        newMoveTo.Destination = new Vector3(float.Parse(PostitionAxes[0]), float.Parse(PostitionAxes[1]), float.Parse(PostitionAxes[2]));
+                        ArgIndex++;
+
+                        newMoveTo.Time = float.Parse(args[ArgIndex]);
+                        ArgIndex++;
+
+                        string[] OptionalArgs = new string[args.Length - ArgIndex];
+                        System.Array.Copy(args, ArgIndex, OptionalArgs, 0, args.Length - ArgIndex);
+                        string CurrentArg;
+                        for (int i = 0; i < OptionalArgs.Length; i++)
+                        {
+                            CurrentArg = OptionalArgs[i];
+                            if (CurrentArg.StartsWith("Animation"))
+                            {
+                                newMoveTo.Animation = CurrentArg.Split(charEquals)[1];
+                            }
+                            else if (CurrentArg.StartsWith("GroundSnap"))
+                            {
+                                newMoveTo.SnapToGround = bool.Parse(CurrentArg.Split(charEquals)[1]);
+                            }
+                            else if (OptionalArgs[i].StartsWith("Local"))
+                            {
+                                newMoveTo.Local = bool.Parse(CurrentArg.Split(charEquals)[1]);
+                            }
+                            else
+                            {
+                                Debug.LogError("Unrecognized optional argument in " + Command + ": " + OptionalArgs[i].Split(charEquals)[0] + "! Cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
+                            }
+                        }
+
+                        if (newMoveTo.Local)
+                        {
+                            newMoveTo.Origin = obj.transform.localPosition;
                         }
                         else
                         {
-                            Debug.LogError("Invalid Camera angle name: " + CameraAngle + " in cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber);
+                            newMoveTo.Origin = obj.transform.position;
                         }
+
+                        ActiveMoveTos.Add(newMoveTo);
+
+                    }
+                    else if (Command == "TurnTo")
+                    {
+                        CutsceneTurnToHelper newTurnTo = new CutsceneTurnToHelper();
+                        newTurnTo.Obj = obj;
+
+                        string[] RotationAxes = args[ArgIndex].Split(charComma);
+                        newTurnTo.Destination = Quaternion.Euler(float.Parse(RotationAxes[0]), float.Parse(RotationAxes[1]), float.Parse(RotationAxes[2]));
+                        ArgIndex++;
+
+                        newTurnTo.Time = float.Parse(args[ArgIndex]);
+                        ArgIndex++;
+
+                        string[] OptionalArgs = new string[args.Length - ArgIndex];
+                        System.Array.Copy(args, ArgIndex, OptionalArgs, 0, args.Length - ArgIndex);
+                        string CurrentArg;
+                        for (int i = 0; i < OptionalArgs.Length; i++)
+                        {
+                            CurrentArg = OptionalArgs[i];
+                            if (CurrentArg.StartsWith("Local"))
+                            {
+                                newTurnTo.Local = bool.Parse(CurrentArg.Split(charEquals)[1]);
+                            }
+                            else
+                            {
+                                Debug.LogError("Unrecognized optional argument in " + Command + ": " + OptionalArgs[i].Split(charEquals)[0] + "! Cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
+                            }
+                        }
+
+                        if (newTurnTo.Local)
+                        {
+                            newTurnTo.Origin = obj.transform.localRotation;
+                        }
+                        else
+                        {
+                            newTurnTo.Origin = obj.transform.rotation;
+                        }
+
+                        ActiveTurnTos.Add(newTurnTo);
+
+
+
+                    }
+                    else if (Command == "Animation")
+                    {
+
+                    }
+
+                    else if (Command == "Animator")
+                    {
+                        string AnimName = args[ArgIndex];
+                        ArgIndex++;
+
+                        float BlendTime = float.Parse(args[ArgIndex]);
+                        ArgIndex++;
+
+                        Animator anim = obj.GetComponentInChildren<Animator>();
+                        if (anim)
+                        {
+                            anim.CrossFadeInFixedTime(AnimName, BlendTime);
+                        }
+                        else
+                        {
+                            Debug.LogError("No animator in " + obj + "! cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
+                        }
+                    }
+                    else if (Command == "Dialogue")
+                    {
+                        if (!DialogueOpen)
+                        {
+                            DialogueCleared = false;
+                            DialogueIteration = 0;
+                            DialogueOpen = true;
+                            DialogueStartLine = CurrentLine;
+                            DialogueStartTime = CutsceneTime;
+
+                            string dialogueLine = "";
+                            string CurrentWord;
+
+                            for (; ArgIndex < args.Length; ArgIndex++)
+                            {
+                                CurrentWord = args[ArgIndex];
+                                if (ArgIndex == 0)
+                                {
+                                    CurrentWord = CurrentWord.TrimStart('\"');
+                                }
+                                if (CurrentWord.EndsWith("\""))
+                                {
+                                    dialogueLine += " " + CurrentWord.TrimEnd('\"');
+                                    ArgIndex++;//make sure to move on to the next arg still
+                                    break;
+                                }
+                                dialogueLine += " " + CurrentWord;
+                            }
+
+                            dialogueText.text = dialogueLine;
+                            RectTransform textFrame = (RectTransform)dialogueText.transform.parent;
+                            textFrame.sizeDelta = new Vector2(dialogueText.preferredWidth + 120, textFrame.sizeDelta.y);
+
+                            textFrame.gameObject.SetActive(true);
+                        }
+                        else//if dialogue is already open it means we've looped around
+                        {
+                            DialogueIteration++;
+                        }
+
+
+
+                    }
+                    else if (Command == "EndDialogue")
+                    {
+                        bool Loop = true;
+
+                        string[] OptionalArgs = new string[args.Length - ArgIndex];
+                        System.Array.Copy(args, ArgIndex, OptionalArgs, 0, args.Length - ArgIndex);
+                        string CurrentArg;
+                        for (int i = 0; i < OptionalArgs.Length; i++)
+                        {
+                            CurrentArg = OptionalArgs[i];
+                            if (CurrentArg.StartsWith("Loop"))
+                            {
+                                Loop = bool.Parse(CurrentArg.Split(charEquals)[1]);
+                            }
+                            else
+                            {
+                                Debug.LogError("Unrecognized optional argument in " + Command + ": " + OptionalArgs[i].Split(charEquals)[0] + "! Cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
+                            }
+                        }
+
+                        if (!DialogueCleared)
+                        {
+                            if (Loop)
+                            {
+                                CutsceneTime = DialogueStartTime;
+                                CurrentLine = DialogueStartLine;
+                            }
+                            else
+                            {
+                                CutsceneTime = Timestamp;
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            DialogueOpen = false;
+                        }
+                    }
+                    else if (Command == "CameraChange")
+                    {
+                        string CameraAngle = args[ArgIndex];
+                        CameraPosition camPos = null;
+                        ArgIndex++;
+                        if (CameraAngle != "null")
+                        {
+                            if (System.Array.Exists(CameraNames, s => s.Equals(CameraAngle)))
+                            {
+                                camPos = CameraPositions[System.Array.IndexOf(CameraNames, CameraAngle)].GetComponentInChildren<CameraPosition>();
+                                //Debug.Log("setting camera position to " + CameraAngle);
+                            }
+                            else
+                            {
+                                Debug.LogError("Invalid Camera angle name: " + CameraAngle + " in cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber);
+                            }
+                        }
+                        else
+                        {
+                            //Debug.Log("Re-rendering camera at current position");
+                        }
+                        GlobalTools.currentCam.GetComponent<UpdateBG>().UpdateCamera(camPos);
+                    }
+                    else if (Command == "PlaySound")
+                    {
+
+                    }
+                    else if (Command == "LoadLevel")
+                    {
+                        string LevelName = args[0];
+                        string[] LevelTags = null;
+                        LoadingLevel = true;
+                        if (args.Length > 1)
+                        {
+                            LevelTags = args[1].Split(charComma);
+                        }
+                        LevelLoader.LoadLevel(LevelName, LevelTags);
+                    }
+                    else if (Command == "EndCutscene")
+                    {
+                        //skip to the end of the cutscene
+                        CurrentLine = CutsceneScriptParsed.Count;
                     }
                     else
                     {
-                        Debug.Log("Re-rendering camera at current position");
+                        Debug.Log("Command " + Command + " not valid! Script: " + CutsceneFile.name + ", Line: " + FileLineNumber, gameObject);
                     }
-                    GlobalTools.currentCam.GetComponent<UpdateBG>().UpdateCamera(camPos);
-                }
-                else if (Command == "PlaySound")
-                {
 
-                }
-                else if (Command == "LoadLevel")
-                {
-                    string LevelName = args[0];
-                    string[] LevelTags = null;
-                    if (args.Length > 1)
+                    CurrentLine++; //on to the next line
+
+                    if (CurrentLine >= CutsceneScriptParsed.Count) //we've reached the end of the script
                     {
-                        LevelTags = args[1].Split(charComma);
+                        Debug.Log("cutscene " + CutsceneFile.name + " finished");
+                        break;
                     }
-                    LevelLoader.LoadLevel(LevelName, LevelTags);
-                }
-                else
-                {
-                    Debug.Log("Command " + Command + " not valid! Script " + CutsceneFile.name + ", Line " + FileLineNumber, gameObject);
-                }
-
-                CurrentLine++; //on to the next line
-
-                if (CurrentLine == CutsceneScriptParsed.Count) //we've reached the end of the script
-                {
-                    Debug.Log("cutscene " + CutsceneFile.name + " finished");
-                    this.enabled = false;
-                    break;
                 }
             }
 
             //execute over-time functions
+
+            for(int i = 0; i<ActiveMoves.Count; i++)
+            {
+                CutsceneMoveHelper currentMove = ActiveMoves[i];
+                float MoveMult = Time.deltaTime;
+                if(currentMove.Progress + MoveMult > currentMove.Time)
+                {
+                    MoveMult = currentMove.Time - currentMove.Progress;
+                }
+                
+                Vector3 MoveVec = currentMove.Movement * MoveMult;
+                currentMove.Obj.transform.Translate(MoveVec, Space.Self);
+
+
+                currentMove.Progress += Time.deltaTime;
+                if(currentMove.Progress > currentMove.Time)
+                {
+                    ActiveMoves.RemoveAt(i);
+                    i--;
+                }
+            }
 
             for(int i = 0; i < ActiveMoveTos.Count; i++)
             {
@@ -693,9 +815,12 @@ public class CutsceneManager : MonoBehaviour
                 }
             }
 
+
             CutsceneTime += Time.deltaTime;
 
         }
+
+        WasPaused = false;
     }
     private void OnEnable()
     {
@@ -703,7 +828,8 @@ public class CutsceneManager : MonoBehaviour
         {
             Debug.Log("already playing a cutscene: " + currentCutsceneManager, gameObject);
             //gameObject.SetActive(false);
-            this.enabled = false;
+
+            Disable();
         }
         else
         {
@@ -716,6 +842,8 @@ public class CutsceneManager : MonoBehaviour
             DialogueOpen = false;
             Paused = false;
             HUD.SetActive(false);
+            dialogueText.transform.parent.parent.gameObject.SetActive(true); //endable the cutscene overlay
+            dialogueText.transform.parent.gameObject.SetActive(false); //make sure the dialogue text (and the textbox) is off
         }
     }
 
@@ -723,10 +851,15 @@ public class CutsceneManager : MonoBehaviour
     {
         if (currentCutsceneManager == this)
         {
+            GlobalTools.Unpause();
             CutscenePlaying = false;
             currentCutsceneManager = null;
-            GlobalTools.Unpause();
-            HUD.SetActive(true);
+            if (dialogueText) //this can be null if the disable is because of the scene being unloaded
+            {
+                dialogueText.transform.parent.parent.gameObject.SetActive(false);
+            }
+
+            if (!LoadingLevel) HUD.SetActive(true);
         }
     }
 
@@ -735,5 +868,31 @@ public class CutsceneManager : MonoBehaviour
         Debug.Log("Playing Cutscene: " + CutsceneFile.name, gameObject);
         //gameObject.SetActive(true);
         this.enabled = true;
+    }
+
+    void Disable()
+    {
+        if (ActivateWithObject)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            this.enabled = false;
+        }
+    }
+
+    public void ResumeFromPause()
+    {
+        Paused = false;
+        Time.timeScale = 1;
+        cutscenePause.SetActive(false);
+        WasPaused = true;
+    }
+
+    public void SkipCutscene()
+    {
+        Debug.Log("SkipCutscene not yet implemented!");
+        ResumeFromPause();
     }
 }

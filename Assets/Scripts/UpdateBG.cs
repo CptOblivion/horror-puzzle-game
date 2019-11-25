@@ -219,7 +219,7 @@ public class UpdateBG : MonoBehaviour
         {
             currentPosition = positionOverride;
             UpdatePosition();
-            Debug.Log("updating camera");
+            //Debug.Log("updating camera");
         }
     }
 

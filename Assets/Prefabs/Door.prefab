@@ -58,15 +58,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverName: Door
+  InteractMessage: 
+  InteractMessageConfirmation: 0
   InteractObject: {fileID: 5726970207689518460}
   Function: InteractWrongSide
-  InteractMessage: 
   KeyItem: {fileID: 0}
   NoItemText: Locked.
   GenericWrongItemText: 
   customWrongItemText: []
   ConsumeItem: 1
-  OneUse: 0
+  OneUse: 
+  ActivateOnSaveProperty: 
 --- !u!1 &5726970207586182792
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d8d8debde2e9b4f928da17794c5fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SaveName: 
   Locked: 0
   Closed: 1
   LockOpen: 1
@@ -339,15 +342,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HoverName: Door
+  InteractMessage: 
+  InteractMessageConfirmation: 0
   InteractObject: {fileID: 5726970207689518460}
   Function: Interact
-  InteractMessage: 
   KeyItem: {fileID: 0}
   NoItemText: Locked.
   GenericWrongItemText: 
   customWrongItemText: []
   ConsumeItem: 1
-  OneUse: 0
+  OneUse: 
+  ActivateOnSaveProperty: 
 --- !u!1 &6982461620936065067
 GameObject:
   m_ObjectHideFlags: 0

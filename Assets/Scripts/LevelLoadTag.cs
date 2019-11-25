@@ -8,7 +8,27 @@ public class LevelLoadTag : MonoBehaviour
     public Transform copyTransform;
     public GameObject activateObject;
     public bool OnlyOnTag = false;
+    public float Delay = 0;
     void Start()
+    {
+        if (Delay == 0)
+        {
+            CheckForTag();
+        }
+    }
+    private void Update()
+    {
+        if (Delay > 0)
+        {
+            Delay -= Time.deltaTime;
+        }
+        else
+        {
+            CheckForTag();
+        }
+    }
+
+    void CheckForTag()
     {
         bool TagFound = false;
         foreach (string tag in LevelLoader.LevelTags)
@@ -26,6 +46,11 @@ public class LevelLoadTag : MonoBehaviour
                     activateObject.SetActive(true);
                 }
 
+                Debug.Log("activating with tag " + Tag, gameObject);
+
+                this.enabled = false;
+                //gameObject.SetActive(false);
+
                 break;
             }
 
@@ -33,5 +58,4 @@ public class LevelLoadTag : MonoBehaviour
         if (!TagFound && OnlyOnTag)
             gameObject.SetActive(false);
     }
-
 }

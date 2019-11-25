@@ -75,7 +75,7 @@ public class TankControls : MonoBehaviour
             //interacting with the "use" button
             if (!GlobalTools.Paused && !GlobalTools.WasPaused && GlobalTools.inputsGameplay.FindAction("Submit").triggered)
             {
-                Debug.Log("click");
+                //Debug.Log("click");
                 if (playerInteract.target)
                 {
                     playerInteract.target.Interact();

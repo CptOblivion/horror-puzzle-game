@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public MenuManager menuManager;
     public void Start()
     {
+        SaveManager.UpdateSavePath();
         Debug.Log(SaveManager.SaveName);
         if (File.Exists(SaveManager.SaveName))
         {

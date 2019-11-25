@@ -1,0 +1,17 @@
+ObNames: Player
+CamNames: TVCloseup
+
+SCRIPT
+0 Dialogue "There's something in the TV?"
+//wait here
++0 EndDialogue
+
++0 Player MoveTo -5.578141,0.83,-3.704679 0 GroundSnap=true //snap to TV
++0 Player TurnTo 0,-94,0 0
+	+.3 Player Animator BaseLayer.Crouch .4
++0 CameraChange TVCloseup
+
++0 Dialogue "I'd better have a closer look."
++.7 EndDialogue
++0 Player Animator EnterTV 0
++2 LoadLevel School FallInFirst

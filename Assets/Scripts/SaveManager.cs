@@ -16,14 +16,40 @@ public class SaveData
     public string SaveLocation; //think of a better name! This refers to the name of the location in the level where the save was made (EG the chair at the apartment)
 }
 
-public class SaveManager
+public class SaveDataUpdateHelper
+{
+    public enum Types {NOTYPE, boolType, intType, floatType, stringType};
+    public AccessesSaveData obj = null;
+    public string Property = null;
+    public Types type = Types.NOTYPE;
+}
+
+public interface AccessesSaveData
+{
+    void SavePropertyUpdated();
+}
+public class SaveManager:MonoBehaviour
 {
     static SaveData saveData = new SaveData();
     public static string scene;
     public static string SaveLocation;
     public static float? LastSaveTime;
     public static int SaveSlot = 0;
-    public static string SaveName = Application.persistentDataPath + "/SaveGame" + SaveSlot;
+    public static string SaveName;
+    public static SaveManager saveManager;
+    List<SaveDataUpdateHelper> ObjectsToUpdate;
+
+    private void Awake()
+    {
+        saveManager = this;
+        UpdateSavePath();
+        ObjectsToUpdate = new List<SaveDataUpdateHelper>();
+    }
+
+    public static void UpdateSavePath()
+    {
+         SaveName = Application.persistentDataPath + "/SaveGame" + SaveSlot;
+    }
 
     public static void LoadSaveFile()
     {
@@ -88,6 +114,29 @@ public class SaveManager
         scene = null;
     }
 
+    public static void AddObjectToUpdate(AccessesSaveData obj, string PropName, SaveDataUpdateHelper.Types type)
+    {
+        if (saveManager != null)
+        {
+            SaveDataUpdateHelper newHelper = new SaveDataUpdateHelper();
+            newHelper.obj = obj;
+            newHelper.Property = PropName;
+            newHelper.type = type;
+            saveManager.ObjectsToUpdate.Add(newHelper);
+        }
+    }
+
+    void UpdateObjects(string PropName, SaveDataUpdateHelper.Types type)
+    {
+        for (int i = 0; i < ObjectsToUpdate.Count; i++)
+        {
+            if (ObjectsToUpdate[i].Property == PropName && type == ObjectsToUpdate[i].type)
+            {
+                ObjectsToUpdate[i].obj.SavePropertyUpdated();
+            }
+        }
+    }
+
     public static bool? GetBool(string boolName)
     {
         if (saveData.SaveFlagsBool.ContainsKey(boolName))
@@ -120,17 +169,33 @@ public class SaveManager
     {
         saveData.SaveFlagsBool[boolName] = value;
         Debug.Log("setting bool " + boolName + " to " + value);
+        if (saveManager)
+        {
+            saveManager.UpdateObjects(boolName, SaveDataUpdateHelper.Types.boolType);
+        }
     }
     public static void SetInt(string intName, int value)
     {
         saveData.SaveFlagsInt[intName] = value;
+        if (saveManager)
+        {
+            saveManager.UpdateObjects(intName, SaveDataUpdateHelper.Types.intType);
+        }
     }
     public static void SetFloat(string floatName, float value)
     {
         saveData.SaveFlagsFloat[floatName] = value;
+        if (saveManager)
+        {
+            saveManager.UpdateObjects(floatName, SaveDataUpdateHelper.Types.floatType);
+        }
     }
     public static void SetString(string stringName, string value)
     {
         saveData.SaveFlagsString[stringName] = value;
+        if (saveManager)
+        {
+            saveManager.UpdateObjects(stringName, SaveDataUpdateHelper.Types.stringType);
+        }
     }
 }

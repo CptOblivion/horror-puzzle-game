@@ -6100,6 +6100,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 886524699}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &916212290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 916212291}
+  - component: {fileID: 916212292}
+  m_Layer: 0
+  m_Name: Fall Into School
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &916212291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916212290}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 6.515, y: 18.43, z: 32.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1991213629}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &916212292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916212290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29f8c039f20fee43836023109d2498d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutsceneFile: {fileID: 4900000, guid: a892e90bf98ba7e40b7d34820b114508, type: 3}
+  ControlledObjects:
+  - {fileID: 7969407859552178670}
+  CameraPositions:
+  - {fileID: 1905490011}
+  ActivateWithObject: 1
 --- !u!1001 &931208505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9135,6 +9184,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1804163460}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1357986753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1357986754}
+  - component: {fileID: 1357986755}
+  m_Layer: 0
+  m_Name: Trigger_Fall Into School
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1357986754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357986753}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1991213629}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1357986755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357986753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f220a027606fb41af846ac8eddf4d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tag: FallIn
+  copyTransform: {fileID: 0}
+  activateObject: {fileID: 916212290}
+  OnlyOnTag: 1
+  Delay: 1
 --- !u!4 &1376871816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5159468951625495379, guid: 13abba034801a61449842a7d96a431a5,
@@ -10047,6 +10144,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13abba034801a61449842a7d96a431a5, type: 3}
+--- !u!1 &1441804362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1441804363}
+  - component: {fileID: 1441804364}
+  m_Layer: 0
+  m_Name: Fall Into School FirstTime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1441804363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441804362}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 6.515, y: 18.43, z: 32.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1991213629}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1441804364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441804362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29f8c039f20fee43836023109d2498d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutsceneFile: {fileID: 4900000, guid: ab8b4adbf56b46944bf56a42f1809ac4, type: 3}
+  ControlledObjects:
+  - {fileID: 7969407859552178670}
+  CameraPositions:
+  - {fileID: 1905490011}
+  ActivateWithObject: 1
 --- !u!4 &1458289260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2274057628322500352, guid: 2e3a018342573ca489e2150c7feb8f8c,
@@ -10620,6 +10766,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bf0aae03b2924742a1504f035ba7efd, type: 3}
+--- !u!1 &1549577745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1549577746}
+  - component: {fileID: 1549577747}
+  m_Layer: 0
+  m_Name: Trigger_Fall Into School FirstTime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1549577746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549577745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1991213629}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549577747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549577745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f220a027606fb41af846ac8eddf4d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tag: FallInFirst
+  copyTransform: {fileID: 0}
+  activateObject: {fileID: 1441804362}
+  OnlyOnTag: 1
+  Delay: 1
 --- !u!4 &1599020316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5629386332989401268, guid: 6bf0aae03b2924742a1504f035ba7efd,
@@ -12791,12 +12985,12 @@ PrefabInstance:
     - target: {fileID: 7446211677595947311, guid: 13abba034801a61449842a7d96a431a5,
         type: 3}
       propertyPath: m_Size.z
-      value: 3.0194817
+      value: 4.4156284
       objectReference: {fileID: 0}
     - target: {fileID: 7446211677595947311, guid: 13abba034801a61449842a7d96a431a5,
         type: 3}
       propertyPath: m_Center.z
-      value: -0.41845322
+      value: 0.27962017
       objectReference: {fileID: 0}
     - target: {fileID: 7446211677595947311, guid: 13abba034801a61449842a7d96a431a5,
         type: 3}
@@ -12920,6 +13114,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13abba034801a61449842a7d96a431a5, type: 3}
+--- !u!114 &1905490011 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7360942606670103813, guid: 13abba034801a61449842a7d96a431a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1905490010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11dfe000d7a260043b12054ec0fd25a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1909809193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5159468951625495379, guid: 13abba034801a61449842a7d96a431a5,
@@ -13231,6 +13437,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Kind: 0
   m_Material: {fileID: 2100000, guid: 2edfdce60ac549f4cbbc94241ef5bdd2, type: 2}
+--- !u!1 &1991213628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1991213629}
+  m_Layer: 0
+  m_Name: Cutscenes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1991213629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991213628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.162447, y: -15.907295, z: -16.477139}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1357986754}
+  - {fileID: 916212291}
+  - {fileID: 1549577746}
+  - {fileID: 1441804363}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2024246594
 GameObject:
   m_ObjectHideFlags: 0
@@ -15642,22 +15882,32 @@ PrefabInstance:
     - target: {fileID: 2936968508948734485, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2936968508948734485, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.59
+      value: 2.48
       objectReference: {fileID: 0}
     - target: {fileID: 2936968508948734485, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.5
+      value: 13.96
       objectReference: {fileID: 0}
     - target: {fileID: 2936968508948734485, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757654007644545633, guid: 0681b3758907fce419618f48f61614d2,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757654007644545633, guid: 0681b3758907fce419618f48f61614d2,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7969407857699694202, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
@@ -15687,3 +15937,43 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0681b3758907fce419618f48f61614d2, type: 3}
+--- !u!1 &7969407859552178670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2204912878638796806, guid: 0681b3758907fce419618f48f61614d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7969407859552178669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7969407859552178671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7969407859552178670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f220a027606fb41af846ac8eddf4d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tag: FallIn
+  copyTransform: {fileID: 916212291}
+  activateObject: {fileID: 0}
+  OnlyOnTag: 0
+  Delay: 0
+--- !u!114 &7969407859552178672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7969407859552178670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f220a027606fb41af846ac8eddf4d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tag: FallInFirst
+  copyTransform: {fileID: 1441804363}
+  activateObject: {fileID: 0}
+  OnlyOnTag: 0
+  Delay: 0

@@ -1,0 +1,16 @@
+ObNames: Player
+CamNames: Lobby
+
+SCRIPT
++0 Dialogue "Whooooaagh!"
++0 EndDialogue
+0 Player MoveTo 0,2.48,13.5 0
+0 Player TurnTo 0,180,0 0
++0 Player Animator BaseLayer.Fall_In 0
++4 Player Animator BaseLayer.Idle 0
++0 Player TurnTo 0,120,0 .65
++1 Player TurnTo 0,-120,0 1
++0 Dialogue "Where is this, now?"
++1 EndDialogue Loop=false
++0 Player TurnTo 0,-180,0 .5
++.5 EndCutscene

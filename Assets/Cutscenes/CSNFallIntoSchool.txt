@@ -1,0 +1,7 @@
+ObNames: Player
+CamNames: Lobby
+
+SCRIPT
++1 Player MoveTo 0,2.48,14.5 0
++0 Player Animator BaseLayer.Fall_In 0
++4 Player Animator BaseLayer.Idle 0

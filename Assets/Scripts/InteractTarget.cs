@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractTarget : MonoBehaviour
+public class InteractTarget : MonoBehaviour, AccessesSaveData
 {
     [Tooltip("Name to show when aiming at the object")]
     public string HoverName = "";
@@ -25,12 +25,26 @@ public class InteractTarget : MonoBehaviour
     public CustomWrongItemText[] customWrongItemText = new CustomWrongItemText[] { };
     [Tooltip("If true, the inventory item is removed upon use")]
     public bool ConsumeItem = true;
-    [Tooltip("oneuse targets disable themselves after interacting")]
-    public bool OneUse = false;
+    [Tooltip("oneuse targets disable themselves after interacting. The string is the name of the property to use in the save file (be verbose! A long name is better than overlapping properties)")]
+    public string OneUse = "";
+    [Tooltip("only activate if the named property exists in the save system as a bool and is equal to true (EG pairing with OneUse on another trigger)")]
+    public string ActivateOnSaveProperty = "";
 
     //prevents the function from being called until the displayed text is dismissed
     bool TextDelay = false;
 
+    private void Start()
+    {
+        if (SaveManager.GetBool(OneUse) == true)
+        {
+            gameObject.SetActive(false);
+        }
+        else if (ActivateOnSaveProperty!= "")
+        {
+            SavePropertyUpdated();
+            SaveManager.AddObjectToUpdate(this, ActivateOnSaveProperty, SaveDataUpdateHelper.Types.boolType);
+        }
+    }
     private void Update()
     {
         if (TextDelay && Time.timeScale > 0)
@@ -84,9 +98,10 @@ public class InteractTarget : MonoBehaviour
                 TextDelay = false;
             }
 
-            if (OneUse)
+            if (OneUse != "")
             {
                 gameObject.SetActive(false);
+                SaveManager.SetBool(OneUse, true);
             }
         }
         else
@@ -107,5 +122,16 @@ public class InteractTarget : MonoBehaviour
             }
         }
         return feedback;
+    }
+    public void SavePropertyUpdated()
+    {
+        if (SaveManager.GetBool(ActivateOnSaveProperty) == true)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

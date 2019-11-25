@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 4b921c78409f15147b727c5b485a8613
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: 8005240801913785362
@@ -18,6 +18,15 @@ ModelImporter:
   - first:
       74: 6831910018716387903
     second: Character_AR|Walk_F
+  - first:
+      74: -3350573328960754996
+    second: Character_AR|Character_Crouch
+  - first:
+      74: 8156823215037935465
+    second: Character_AR|Character_EnterTV
+  - first:
+      74: -7972153699577928620
+    second: Character_AR|Character_Fall_In
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -47,8 +56,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Character_AR|Aim
-      takeName: Character_AR|Aim
+      name: Character_AR|Character_Aim
+      takeName: Character_AR|Character_Aim
       internalID: 8005240801913785362
       firstFrame: 0
       lastFrame: 1
@@ -76,11 +85,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Character_AR|Idle
-      takeName: Character_AR|Idle
+      name: Character_AR|Character_Idle
+      takeName: Character_AR|Character_Idle
       internalID: -2022562527882817021
       firstFrame: 0
-      lastFrame: 48
+      lastFrame: 240
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -105,11 +114,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Character_AR|Run_F
-      takeName: Character_AR|Run_F
+      name: Character_AR|Character_Run_F
+      takeName: Character_AR|Character_Run_F
       internalID: -1235786526860057431
       firstFrame: 0
-      lastFrame: 48
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -134,11 +143,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Character_AR|Walk_B
-      takeName: Character_AR|Walk_B
+      name: Character_AR|Character_Walk_B
+      takeName: Character_AR|Character_Walk_B
       internalID: -3527955327814927872
       firstFrame: 0
-      lastFrame: 48
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -163,11 +172,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Character_AR|Walk_F
-      takeName: Character_AR|Walk_F
+      name: Character_AR|Chraacter_Walk_F
+      takeName: Character_AR|Chraacter_Walk_F
       internalID: 6831910018716387903
       firstFrame: 0
-      lastFrame: 48
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -175,6 +184,93 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Character_AR|Character_Crouch
+      takeName: Character_AR|Character_Crouch
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Character_AR|Character_EnterTV
+      takeName: Character_AR|Character_EnterTV
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Character_AR|Character_Fall_In
+      takeName: Character_AR|Character_Fall_In
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 239
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -198,6 +294,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
