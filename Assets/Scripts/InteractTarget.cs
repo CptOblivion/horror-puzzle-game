@@ -9,12 +9,20 @@ public class InteractTarget : MonoBehaviour, AccessesSaveData
     public string HoverName = "";
     [Tooltip("Text to display when interacting (if no key item assigned)")]
     public string InteractMessage = "";
+    [Tooltip("manually shift the contents of the message vertically")]
+    public float MessageOffset = 0;
     [Tooltip("if true, displays a confirmation dialog allowing the player to cancel the interaction")]
     public bool InteractMessageConfirmation = false;
+    [Tooltip("Use this camera while displaying the message")]
+    public MoveCameraToPosition cameraOverride;
+    [Tooltip("To prevent the player character from blocking the camera during closeups")]
+    public bool HidePlayer = false;
+
     [Tooltip("Object to call a function on (if blank, calls on self)")]
     public GameObject InteractObject;
     [Tooltip("Function to call")]
     public string Function = "Interact";
+
     [Tooltip("name of the inventory item required to interact with this (leave empty if none)")]
     public InventoryItem KeyItem;
     [Tooltip("What to say when attempting to interact without an item (if a keyitem is assigned)")]
@@ -25,6 +33,7 @@ public class InteractTarget : MonoBehaviour, AccessesSaveData
     public CustomWrongItemText[] customWrongItemText = new CustomWrongItemText[] { };
     [Tooltip("If true, the inventory item is removed upon use")]
     public bool ConsumeItem = true;
+
     [Tooltip("oneuse targets disable themselves after interacting. The string is the name of the property to use in the save file (be verbose! A long name is better than overlapping properties)")]
     public string OneUse = "";
     [Tooltip("only activate if the named property exists in the save system as a bool and is equal to true (EG pairing with OneUse on another trigger)")]
@@ -49,6 +58,14 @@ public class InteractTarget : MonoBehaviour, AccessesSaveData
     {
         if (TextDelay && Time.timeScale > 0)
         {
+            if (cameraOverride)
+            {
+                GlobalTools.currentCam.GetComponent<UpdateBG>().UpdateCamera();
+                if (HidePlayer)
+                {
+                    GlobalTools.player.GetComponentInChildren<Renderer>().gameObject.layer = (int)GlobalTools.LayerMasks.RenderOBJ;
+                }
+            }
             if (InteractMessageConfirmation)
             {
                 if (ScreenText.SelectedOption == "Confirm")
@@ -78,8 +95,16 @@ public class InteractTarget : MonoBehaviour, AccessesSaveData
                 {
                     MessageOptions = new string[] { "Cancel", "Confirm" };
                 }
-                ScreenText.DisplayText(InteractMessage, ButtonOptions:MessageOptions);
+                ScreenText.DisplayText(InteractMessage, ButtonOptions:MessageOptions, offset:MessageOffset);
                 TextDelay = true;
+                if (cameraOverride)
+                {
+                    GlobalTools.currentCam.GetComponent<UpdateBG>().UpdateCamera(cameraOverride.GetComponentInChildren<CameraPosition>());
+                    if (HidePlayer)
+                    {
+                        GlobalTools.player.GetComponentInChildren<Renderer>().gameObject.layer = (int)GlobalTools.LayerMasks.Default;
+                    }
+                }
             }
             else if (InteractObject)
             {

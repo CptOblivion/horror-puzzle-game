@@ -195,8 +195,8 @@ public class UpdateBG : MonoBehaviour
             drawBG.texture = currentOutputTexture;
             //drawBG.material.SetTexture("_Color", currentOutputTexture);
         }
-
-        UpdateCamera();
+        UpdateRender = true;
+        //UpdateCamera();
     }
     private void UpdateAnims(float t)
     {
@@ -220,6 +220,11 @@ public class UpdateBG : MonoBehaviour
             currentPosition = positionOverride;
             UpdatePosition();
             //Debug.Log("updating camera");
+        }
+        else
+        {
+            currentPosition = camVolumes[camVolumes.Count - 1];
+            UpdatePosition();
         }
     }
 

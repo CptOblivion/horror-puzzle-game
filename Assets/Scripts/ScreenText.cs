@@ -22,34 +22,44 @@ public class ScreenText : MonoBehaviour
     GameObject previewOb;
     public static string SelectedOption = null;
 
+    GameObject HUD;
+    RectTransform textParent;
+
     GameObject buttonParent; //track the button parent object, if it exists
 
     private void Awake()
     {
         screenText = this;
         canvas = GetComponent<Canvas>();
+        textParent = (RectTransform)textOb.transform.parent;
     }
     private void Start()
     {
         canvas.enabled = false;
+        HUD = GameObject.Find("HUD");
     }
 
-    public static void DisplayText(string text, bool pause = true, float displayTime = -1, GameObject showObject = null, string[] ButtonOptions = null)
+    public static void DisplayText(string text, bool pause = true, float displayTime = -1, GameObject showObject = null, string[] ButtonOptions = null, float offset = 0, float MarginsOverride = -1)
     {
         //start a list of all the things we're showing on the screen to keep track of what goes where
         List<GameObject> DisplayList = new List<GameObject>();
         screenText.WaitAFrame = true;
         //Debug.Log(text);
         screenText.canvas.enabled = true;
+        screenText.HUD.SetActive(false);
+
+
         text = text.Replace("\\n", "\n");
         screenText.textOb.text = text;
+        Canvas.ForceUpdateCanvases();
+        screenText.textParent.sizeDelta = screenText.textOb.rectTransform.sizeDelta + new Vector2(100,100);// = (new Vector2(screenText.textOb.preferredWidth + 120, screenText.textOb.preferredHeight + 20));
         if (showObject)
         {
             screenText.previewOb = GameObject.Instantiate(showObject, screenText.canvas.transform);
             DisplayList.Add(screenText.previewOb); //the preview object goes on top
             InventoryManager.eventSystem.SetSelectedGameObject(screenText.canvas.gameObject);
         }
-        DisplayList.Add(screenText.textOb.gameObject); //next up is the text itself
+        DisplayList.Add(screenText.textParent.gameObject); //next up is the text itself (well, the frame it sits in)
         if (pause)
         {
             GlobalTools.Pause();
@@ -80,8 +90,15 @@ public class ScreenText : MonoBehaviour
             }
 
             float CanvasHeight = screenText.canvas.rootCanvas.pixelRect.height;
-            float EntrySpacing = (CanvasHeight - screenText.Margins * 2) / (DisplayList.Count + 1);
-            float position = CanvasHeight/2 - screenText.Margins - EntrySpacing;
+            float margins = screenText.Margins;
+            if (MarginsOverride >= 0)
+            {
+                margins = MarginsOverride;
+            }
+            float TopMargin = (margins - Mathf.Min(offset, 0)) * CanvasHeight;
+            float BottomMargin = (margins + Mathf.Max(offset, 0)) * CanvasHeight;
+            float EntrySpacing = (CanvasHeight - (TopMargin + BottomMargin)) / (DisplayList.Count);
+            float position = CanvasHeight/2 - TopMargin - (EntrySpacing/2);
             foreach(GameObject ob in DisplayList)
             {
                 ob.transform.localPosition = new Vector3(0, position, 0);
@@ -148,5 +165,6 @@ public class ScreenText : MonoBehaviour
             Destroy(screenText.buttonParent);
         }
         canvas.enabled = false;
+        HUD.SetActive(true);
     }
 }
