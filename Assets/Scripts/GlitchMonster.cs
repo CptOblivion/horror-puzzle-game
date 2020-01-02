@@ -20,6 +20,13 @@ public class GlitchMonster : MonoBehaviour
     public float WakeTurnSpeed = .3f;
     public float HomeThreshold = .01f;
     public float GroundSnapDistance = 1;
+    public AudioSource AudioAwake;
+    float AudioAwakeMaxVolume;
+    public AudioSource AudioClose;
+    float AudioCloseMaxVolume;
+    public float SafeDistance = 15;
+    public HueAggression hueAggression;
+
     SphereCollider detectPlayer;
 
     public enum AIState { Idle, Activating, FollowingPlayer, FacingHome, ReturningHome, FacingIdle}
@@ -57,6 +64,8 @@ public class GlitchMonster : MonoBehaviour
         ActivateTimer = 0;
         animator.SetFloat("WalkSpeed", WalkSpeed);
         path = new NavMeshPath();
+        AudioAwakeMaxVolume = AudioAwake.volume;
+        AudioCloseMaxVolume = AudioClose.volume;
     }
     void OnTriggerStay(Collider other)
     {
@@ -82,7 +91,6 @@ public class GlitchMonster : MonoBehaviour
         }
 
     }
-    // Update is called once per frame
     void Update()
     {
         if (aiState == AIState.Activating)
@@ -96,6 +104,8 @@ public class GlitchMonster : MonoBehaviour
             ActivateTimer -= Time.deltaTime;
             TurnToFace(GlobalTools.player.transform.position, WakeTurnSpeed);
             if (ActivateTimer <= 0) ChangeAIState(AIState.FollowingPlayer);
+            AudioAwake.volume = (1 - ActivateTimer / WakeTime) * AudioAwakeMaxVolume;
+            AudioClose.volume = (1 - ActivateTimer / WakeTime) * PlayerDistance() * AudioCloseMaxVolume;
         }
         else if (aiState == AIState.FollowingPlayer)
         {
@@ -109,6 +119,7 @@ public class GlitchMonster : MonoBehaviour
             {
                 UpdateWalk(GlobalTools.player.transform.position);
             }
+            AudioClose.volume = PlayerDistance() * AudioCloseMaxVolume;
         }
         else if (aiState == AIState.FacingHome)
         {
@@ -116,6 +127,8 @@ public class GlitchMonster : MonoBehaviour
             {
                 ActivateTimer -= Time.deltaTime;
                 TurnToFace(SpawnPosition, WakeTurnSpeed);
+                AudioAwake.volume = (ActivateTimer / WakeTime) * AudioAwakeMaxVolume;
+                AudioClose.volume = (ActivateTimer / WakeTime) * PlayerDistance() * AudioCloseMaxVolume;
             }
             else
             {
@@ -157,9 +170,19 @@ public class GlitchMonster : MonoBehaviour
         {
             ActivateTimer = WakeTime;
             animator.SetBool("Walking", false);
+
+            float AudioOffset = Random.Range(0.0f, 1.0f);
+            AudioAwake.time = AudioOffset * AudioAwake.clip.length;
+            AudioClose.time = AudioOffset * AudioAwake.clip.length;
+
+            AudioAwake.volume = 0;
+            AudioClose.volume = 0;
+            AudioAwake.Play();
+            AudioClose.Play();
         }
         else if (newState == AIState.FollowingPlayer)
         {
+            AudioAwake.volume = AudioAwakeMaxVolume;
             animator.SetBool("Walking", true);
             WalkPauseTimer = .001f; //set tiny value so first walking frame will calculate a new path
 
@@ -173,6 +196,8 @@ public class GlitchMonster : MonoBehaviour
         {
             animator.SetBool("Walking", true);
             WalkPauseTimer = .001f;
+            AudioAwake.Stop();
+            AudioClose.Stop();
         }
         else if (newState == AIState.FacingIdle)
         {
@@ -254,5 +279,15 @@ public class GlitchMonster : MonoBehaviour
         {
             return false;
         }
+    }
+
+    float PlayerDistance()
+    {
+        return 1 - Mathf.Clamp01(Vector3.Distance(transform.position, GlobalTools.player.transform.position) / SafeDistance);
+    }
+
+    public void Footstep()
+    {
+        hueAggression.StepFlash();
     }
 }

@@ -31,7 +31,7 @@ class CutsceneTurnToHelper
     public float Progress = 0;
 }
 
-public class CutsceneManager : MonoBehaviour
+public class CutscenePlayer : MonoBehaviour
 {
     public TextAsset CutsceneFile;
     public GameObject[] ControlledObjects;
@@ -39,7 +39,7 @@ public class CutsceneManager : MonoBehaviour
     public bool ActivateWithObject = false;
 
     public static bool CutscenePlaying;
-    public static CutsceneManager currentCutsceneManager;
+    public static CutscenePlayer currentCutsceneManager;
 
 
 
@@ -62,9 +62,6 @@ public class CutsceneManager : MonoBehaviour
     bool Paused; //dialogue has its own special pause screen, so we'll track pauses separately from the global pause
     bool LoadingLevel = false;
     bool WasPaused = false;
-    Text dialogueText;
-    GameObject cutscenePause;
-    GameObject HUD;
 
     char[] charWhiteSpace = new char[] { ' ', '\t' };
     char[] charEquals = new char[] { '=' };
@@ -78,14 +75,11 @@ public class CutsceneManager : MonoBehaviour
     private void Awake()
     {
         Disable();
-        dialogueText = GlobalTools.cutsceneOverlay.GetComponentInChildren<Text>();
-        //dialogueText.transform.parent.parent.gameObject.SetActive(false);
-        HUD = GameObject.Find("HUD");
+        //CutscenePlayerObjects.cutscenePlayerObjects.gameObject.SetActive(false);
     }
     private void Start()
     {
-        cutscenePause = GameObject.Find("CutscenePause");
-        cutscenePause.SetActive(false);
+        CutscenePlayerObjects.cutscenePlayerObjects.cutscenePause.SetActive(false);
         //parsing the cutscene script file into pieces
         {
             CutsceneScriptParsed = new List<string>();
@@ -365,7 +359,7 @@ public class CutsceneManager : MonoBehaviour
             {
                 Paused = true;
                 Time.timeScale = 0;
-                cutscenePause.SetActive(true);
+                CutscenePlayerObjects.cutscenePlayerObjects.cutscenePause.SetActive(true);
             }
         }
         else
@@ -385,7 +379,7 @@ public class CutsceneManager : MonoBehaviour
                 {
                     Debug.Log(WasPaused);
                     DialogueCleared = true;
-                    dialogueText.transform.parent.gameObject.SetActive(false);
+                    CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.transform.parent.gameObject.SetActive(false);
                 }
             }
 
@@ -616,9 +610,13 @@ public class CutsceneManager : MonoBehaviour
                                 dialogueLine += " " + CurrentWord;
                             }
 
-                            dialogueText.text = dialogueLine;
-                            RectTransform textFrame = (RectTransform)dialogueText.transform.parent;
-                            textFrame.sizeDelta = new Vector2(dialogueText.preferredWidth + 120, textFrame.sizeDelta.y);
+                            CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.text = dialogueLine;
+                            RectTransform textFrame = (RectTransform)CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.transform.parent;
+                            textFrame.sizeDelta = new Vector2(CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.preferredWidth + 120, textFrame.sizeDelta.y);
+                            Transform dialogueArrow = CutscenePlayerObjects.cutscenePlayerObjects.DialogueContinueArrow.transform;
+                            Vector3 DialogueArrowPosition = dialogueArrow.localPosition;
+                            DialogueArrowPosition.x = CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.preferredWidth/2 + 30;
+                            dialogueArrow.localPosition = DialogueArrowPosition;
 
                             textFrame.gameObject.SetActive(true);
                         }
@@ -841,9 +839,9 @@ public class CutsceneManager : MonoBehaviour
             CutsceneTime = 0;
             DialogueOpen = false;
             Paused = false;
-            HUD.SetActive(false);
-            dialogueText.transform.parent.parent.gameObject.SetActive(true); //endable the cutscene overlay
-            dialogueText.transform.parent.gameObject.SetActive(false); //make sure the dialogue text (and the textbox) is off
+            CutscenePlayerObjects.cutscenePlayerObjects.HUD.SetActive(false);
+            CutscenePlayerObjects.cutscenePlayerObjects.gameObject.SetActive(true); //enable the cutscene overlay
+            CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.transform.parent.gameObject.SetActive(false); //make sure the dialogue text (and the textbox) is off
         }
     }
 
@@ -854,12 +852,12 @@ public class CutsceneManager : MonoBehaviour
             GlobalTools.Unpause();
             CutscenePlaying = false;
             currentCutsceneManager = null;
-            if (dialogueText) //this can be null if the disable is because of the scene being unloaded
+            if (CutscenePlayerObjects.cutscenePlayerObjects) //this can be null if the disable is because of the scene being unloaded
             {
-                dialogueText.transform.parent.parent.gameObject.SetActive(false);
+                CutscenePlayerObjects.cutscenePlayerObjects.gameObject.SetActive(false);
             }
 
-            if (!LoadingLevel) HUD.SetActive(true);
+            if (!LoadingLevel) CutscenePlayerObjects.cutscenePlayerObjects.HUD.SetActive(true);
         }
     }
 
@@ -886,7 +884,7 @@ public class CutsceneManager : MonoBehaviour
     {
         Paused = false;
         Time.timeScale = 1;
-        cutscenePause.SetActive(false);
+        CutscenePlayerObjects.cutscenePlayerObjects.cutscenePause.SetActive(false);
         WasPaused = true;
     }
 

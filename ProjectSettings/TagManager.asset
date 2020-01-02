@@ -17,9 +17,9 @@ TagManager:
   - RenderOBJ
   - RenderBG
   - 
-  - 
-  - 
-  - 
+  - RenderOBJLightGroup1
+  - RenderOBJLightGroup2
+  - RenderOBJLightGroup3
   - 
   - 
   - 

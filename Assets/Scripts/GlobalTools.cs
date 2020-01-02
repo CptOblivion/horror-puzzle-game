@@ -40,13 +40,9 @@ public class GlobalTools : MonoBehaviour
         currentCam = startingCam;
         //playerInput = this.GetComponent<PlayerInput>();
         inputActions = this.inputActionAsset;
+        PlaySFX.Initialize();
         Unpause();
         Cursor.visible = false;
-        cutsceneOverlay = GameObject.Find("CutsceneOverlay");
-        if (cutsceneOverlay)
-        {
-            cutsceneOverlay.SetActive(false);
-        }
 
         if (!StartupFinished)
         {
@@ -144,6 +140,7 @@ public class GlobalTools : MonoBehaviour
     {
         Time.timeScale = 0;
         Paused = true;
+        PlaySFX.audioMixer.TransitionToSnapshots(new UnityEngine.Audio.AudioMixerSnapshot[] { PlaySFX.audioMixer.FindSnapshot("Menus") }, new float[] { 1 }, 0);
         //globalTools.playerInput.SwitchCurrentActionMap("Menus");
         //inputsGameplay.Disable();
         //inputsMenus.Enable();
@@ -153,6 +150,7 @@ public class GlobalTools : MonoBehaviour
         Time.timeScale = 1;
         Paused = false;
         GlobalTools.WasPaused = true;
+        PlaySFX.audioMixer.TransitionToSnapshots(new UnityEngine.Audio.AudioMixerSnapshot[] { PlaySFX.audioMixer.FindSnapshot("Gameplay") }, new float[] { 1 }, 0);
         //globalTools.playerInput.SwitchCurrentActionMap("Gameplay");
         //inputsGameplay.Enable();
         //inputsMenus.Disable();
@@ -214,10 +212,10 @@ public class GlobalTools : MonoBehaviour
     }
     public void CutsceneResume()
     {
-        CutsceneManager.currentCutsceneManager.ResumeFromPause();
+        CutscenePlayer.currentCutsceneManager.ResumeFromPause();
     }
     public void CutsceneSkip()
     {
-        CutsceneManager.currentCutsceneManager.SkipCutscene();
+        CutscenePlayer.currentCutsceneManager.SkipCutscene();
     }
 }

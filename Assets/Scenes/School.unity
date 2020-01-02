@@ -4175,6 +4175,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.9999057
       objectReference: {fileID: 0}
+    - target: {fileID: 2406608729702274684, guid: 4496f4a3d3941c34fb0d9b589cd5ebbf,
+        type: 3}
+      propertyPath: StepSounds_k.Array.data[1]
+      value: Fallback
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4496f4a3d3941c34fb0d9b589cd5ebbf, type: 3}
 --- !u!4 &681999686 stripped
@@ -12349,8 +12354,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 78.57
+  m_Color: {r: 0.4056604, g: 0.8726321, b: 1, a: 1}
+  m_Intensity: 200
   m_Range: 7.7
   m_SpotAngle: 39.1
   m_InnerSpotAngle: 21.80208
@@ -12393,7 +12398,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
-  m_ColorTemperature: 11654
+  m_ColorTemperature: 10521
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0.2578125, z: 0.03515625, w: -0.0546875}
   m_UseBoundingSphereOverride: 0
@@ -13248,6 +13253,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6782004420875203861}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1929953058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929953056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5afb45eb83ac6b43b84e322f3cbfe80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Uniform: 1
+  Material: Tile
+  FloorTagPairs: []
 --- !u!64 &1929953060
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15909,6 +15929,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2125832040472462506, guid: 0681b3758907fce419618f48f61614d2,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125832040472462506, guid: 0681b3758907fce419618f48f61614d2,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7969407857699694202, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
       propertyPath: m_IsActive
@@ -15919,16 +15949,16 @@ PrefabInstance:
       propertyPath: TestNumber
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 4507032553490543328, guid: 0681b3758907fce419618f48f61614d2,
+    - target: {fileID: 2510337544219861753, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
-      propertyPath: m_Color.a
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4507032553490543328, guid: 0681b3758907fce419618f48f61614d2,
+    - target: {fileID: 1682643027241573327, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7969407857591836173, guid: 0681b3758907fce419618f48f61614d2,
         type: 3}
       propertyPath: m_Material

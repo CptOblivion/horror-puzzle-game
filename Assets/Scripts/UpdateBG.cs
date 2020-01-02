@@ -17,12 +17,17 @@ public class UpdateBG : MonoBehaviour
     public Shader blitShader;
     public bool ScaleWithShader = true;
 
+    public delegate void CameraWasChangedDelegate(Camera cam);
+    public static CameraWasChangedDelegate CameraWasChanged;
+
     public static RenderTexture BGTexture;
     public static RenderTexture BGIntermediary;
+    public static UpdateBG updateBG;
     Texture2D currentOutputTexture;
     Camera camBG;
     public Camera camOB;
-    CameraPosition currentPosition;
+    [HideInInspector]
+    public CameraPosition currentPosition;
     int FrameCount;
     BGFrame[] frameTiming;
     int CurrentFrame;
@@ -32,6 +37,7 @@ public class UpdateBG : MonoBehaviour
     private void Awake()
     {
         camBG = GetComponent<Camera>();
+        updateBG = this;
         if (BGTexture == null)
         {
             int[] texSize = { camOB.targetTexture.width * BGScale, camOB.targetTexture.height * BGScale };
@@ -196,6 +202,11 @@ public class UpdateBG : MonoBehaviour
             //drawBG.material.SetTexture("_Color", currentOutputTexture);
         }
         UpdateRender = true;
+
+        if (CameraWasChanged != null)
+        {
+            CameraWasChanged(newCamera);
+        }
         //UpdateCamera();
     }
     private void UpdateAnims(float t)

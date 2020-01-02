@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: School TileFloor
+  m_Name: School Floor Tile
   m_Shader: {fileID: 4800000, guid: 091fe4d744049a040853dbadea3adf7a, type: 3}
   m_ShaderKeywords: _MAPPING_PLANAR _NORMALMAP _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4

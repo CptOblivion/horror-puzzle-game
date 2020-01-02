@@ -94,7 +94,7 @@ public class InventoryManager : MonoBehaviour
         {
             if(GlobalTools.inputsGameplay.FindAction("Cancel").triggered)
             {
-                PlaySFX.Play(menuOpenSound);
+                PlaySFX.Play(menuOpenSound, Menu:true);
                 OpenInventory();
             }
         }
@@ -108,7 +108,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 if (eventSystem.currentSelectedGameObject != LastSelected)
                 {
-                    PlaySFX.Play(menuMoveSound);
+                    PlaySFX.Play(menuMoveSound, Menu: true);
                     UpdateItemText();
                 }
             }
@@ -203,11 +203,11 @@ public class InventoryManager : MonoBehaviour
         //Debug.Log("using item");
         if (!currentItem)
         {
-            PlaySFX.Play(noItemSound);
+            PlaySFX.Play(noItemSound, Menu: true);
             //Debug.Log("empty slot");
             return;
         }
-        PlaySFX.Play(buttonPressSound);
+        PlaySFX.Play(buttonPressSound, Menu: true);
         CloseInventory();
         InteractTarget target = GlobalTools.player.GetComponentInChildren<PlayerInteract>().target;
         if (currentItem.Interact)

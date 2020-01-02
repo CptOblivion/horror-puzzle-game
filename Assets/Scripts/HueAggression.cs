@@ -8,8 +8,13 @@ public class HueAggression : MonoBehaviour
     public Color IdleColor;
     public Color SafeColor;
     public Color DangerColor;
+    public Color StepFlashColor;
     public float SafeDistance = 15;
+    public float StepFlashTime = .1f;
     GlitchMonster glitchMonster;
+
+    [SerializeField]
+    float StepFlashTimer = 0;
     void Awake()
     {
         mat = GetComponent<SkinnedMeshRenderer>().material;
@@ -44,14 +49,24 @@ public class HueAggression : MonoBehaviour
         {
             if (distance > SafeDistance)
             {
-                mat.SetColor("_Color", SafeColor);
-                mat.SetColor("_ScrollColor", Color.white);
+                mat.SetColor("_Color", Color.Lerp(SafeColor, StepFlashColor, StepFlashTimer / StepFlashTime));
+                mat.SetColor("_ScrollColor", Color.Lerp(Color.white, StepFlashColor, StepFlashTimer / StepFlashTime));
             }
             else
             {
-                mat.SetColor("_Color", FollowColor);
+                mat.SetColor("_Color", Color.Lerp(FollowColor, StepFlashColor, StepFlashTimer / StepFlashTime));
                 mat.SetColor("_ScrollColor", Color.Lerp(Color.white, Color.black, (ScrollThreat)));
             }
         }
+
+        if (StepFlashTimer > 0)
+        {
+            StepFlashTimer -= Time.deltaTime;
+        }
+    }
+
+    public void StepFlash()
+    {
+        StepFlashTimer = StepFlashTime;
     }
 }
