@@ -10,11 +10,26 @@ public class MoveCameraToPositionEditor : Editor
     void OnSceneGUI()
     {
         Handles.BeginGUI();
-        if (GUI.Button(new Rect(10, 10, 170, 30), "Move Camera To Position"))
+        if (GUI.Button(new Rect(10, 10, 200, 25), "Move Game Cam To Cam Position"))
         {
             MoveCameraToPosition moveCameraToPosition = (MoveCameraToPosition)target;
-            moveCameraToPosition.enabled = true;
+            moveCameraToPosition.MoveGameCamToCam();
+            //moveCameraToPosition.enabled = true;
         }
+        if (!SceneView.lastActiveSceneView.orthographic && GUI.Button(new Rect (10, 40, 180, 25), "Move View To Cam Position"))
+        {
+
+            MoveCameraToPosition moveCameraToPosition = (MoveCameraToPosition)target;
+            moveCameraToPosition.MoveViewToCam();
+        }
+        if (!SceneView.lastActiveSceneView.orthographic && GUI.Button(new Rect(10, 70, 190, 25), "Align Cam Position With View"))
+        {
+
+            MoveCameraToPosition moveCameraToPosition = (MoveCameraToPosition)target;
+            moveCameraToPosition.MoveCamToView();
+        }
+
+
         Handles.EndGUI();
     }
     /*
