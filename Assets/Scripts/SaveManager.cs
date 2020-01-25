@@ -137,12 +137,13 @@ public class SaveManager:MonoBehaviour
         }
     }
 
-    public static bool? GetBool(string boolName)
+    public static bool? GetBool(string boolName, bool FalseIfNull = false)
     {
         if (saveData.SaveFlagsBool.ContainsKey(boolName))
             return saveData.SaveFlagsBool[boolName];
         else
-            return null;
+            if (FalseIfNull) return false;
+            else return null;
     }
     public static int? GetInt(string intName)
     {

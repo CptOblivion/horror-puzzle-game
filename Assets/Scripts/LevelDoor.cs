@@ -6,7 +6,8 @@ public class LevelDoor : MonoBehaviour
 {
     public string Level;
     public bool OnCollide = true;
-    public string[] Tags = { };
+    public string[] LevelTags = { };
+    public string[] SaveTags = { };
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +23,10 @@ public class LevelDoor : MonoBehaviour
 
     public void LoadLevel()
     {
-        LevelLoader.LoadLevel(Level, Tags);
+        for (int i = 0; i < SaveTags.Length; i++)
+        {
+            SaveManager.SetBool(SaveTags[i], true);
+        }
+        LevelLoader.LoadLevel(Level, LevelTags);
     }
 }

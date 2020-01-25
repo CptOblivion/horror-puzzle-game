@@ -7430,8 +7430,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Level: Apartment
   OnCollide: 1
-  Tags:
+  LevelTags:
   - FromSchoolEntrance
+  SaveTags:
+  - SchoolLockerAppears
 --- !u!65 &1136400720
 BoxCollider:
   m_ObjectHideFlags: 0
