@@ -1,0 +1,4 @@
+ObNames: Player, Monster
+CamNames: TVCloseup
+
+SCRIPT

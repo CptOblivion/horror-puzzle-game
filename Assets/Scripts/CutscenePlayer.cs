@@ -37,6 +37,7 @@ public class CutscenePlayer : MonoBehaviour
     public GameObject[] ControlledObjects;
     public MoveCameraToPosition[] CameraPositions;
     public bool ActivateWithObject = false;
+    public bool verbose = false;
 
     public static bool CutscenePlaying;
     public static CutscenePlayer currentCutsceneManager;
@@ -62,6 +63,7 @@ public class CutscenePlayer : MonoBehaviour
     bool Paused; //dialogue has its own special pause screen, so we'll track pauses separately from the global pause
     bool LoadingLevel = false;
     bool WasPaused = false;
+    bool SkipToEnd = false; //when true, parse commands instantly (skip loops, dialogue, anything that doesn't affect the final state of objects)
 
     char[] charWhiteSpace = new char[] { ' ', '\t' };
     char[] charEquals = new char[] { '=' };
@@ -69,8 +71,10 @@ public class CutscenePlayer : MonoBehaviour
     char[] charComma = new char[] { ',' };
     string[] newLine = new string[] { "\r\n", "\n" };
     string[] GlobalCommands = new string[] {"Dialogue", "EndDialogue",  "CameraChange", "PlaySound", "LoadLevel", "EndCutscene"};
-    string[] ObjectCommands = new string[] {"Move", "MoveTo", "TurnTo", "Animation", "Animator" };
+    string[] ObjectCommands = new string[] {"Move", "MoveTo", "TurnTo", "Animation", "Animator", "SetActive" };
 
+    //SkipToEnd commands: LoadLevel, EndCutscene, MoveTo, TurnTo, SetActive
+    //Try to avoid using Move without then following up with a MoveTo, to ensure final position doesn't get wonky
 
     private void Awake()
     {
@@ -377,7 +381,7 @@ public class CutscenePlayer : MonoBehaviour
             {
                 if (GlobalTools.inputsGameplay.FindAction("Submit").triggered && !WasPaused)
                 {
-                    Debug.Log(WasPaused);
+                    //Debug.Log(WasPaused);
                     DialogueCleared = true;
                     CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.transform.parent.gameObject.SetActive(false);
                 }
@@ -392,14 +396,25 @@ public class CutscenePlayer : MonoBehaviour
             GameObject obj;
             string Command;
 
+            //if we've reached the end of the cutscene
             if (CurrentLine >= CutsceneScriptParsed.Count)
             {
                 Disable();
             }
+
             else
             {
                 while (true)
                 {
+                    if (SkipToEnd)
+                    {
+                        CurrentLine++;
+                        if (CurrentLine >= CutsceneScriptParsed.Count)
+                        {
+                            Debug.Log("cutscene " + CutsceneFile.name + " skipped");
+                            break;
+                        }
+                    }
                     Line = CutsceneScriptParsed[CurrentLine].Split(charWhiteSpace);
                     LinePos = 0;
 
@@ -416,15 +431,14 @@ public class CutscenePlayer : MonoBehaviour
                     Timestamp = float.Parse(Line[LinePos]);
                     LinePos++;
 
-                    if (Timestamp > CutsceneTime) //we haven't reached the next command yet
+                    if (!SkipToEnd && Timestamp > CutsceneTime) //we haven't reached the next command yet
                     {
                         break;
                     }
 
-
-
-
+                    //establish the object to be acted upon, if it exists:
                     obj = null;
+                    //check the first line of the command against the objects list (which has already been filtered to not to contain commands, so no need to also check that it's not a command)
                     if (System.Array.Exists(ControlledObjectNames, s => s.Equals(Line[LinePos])))
                     {
                         obj = ControlledObjects[System.Array.IndexOf(ControlledObjectNames, Line[LinePos])];
@@ -434,9 +448,10 @@ public class CutscenePlayer : MonoBehaviour
                     Command = Line[LinePos];
                     LinePos++;
 
+                    //if we're currently in a dialogue line and the current line is not flagged to loop during dialogue AND we've already looped the dialogue commands once, skip to the next line
                     if (DialogueOpen && !DialogueFlag && DialogueIteration > 0 && Command != "EndDialogue")
                     {
-                        CurrentLine++;
+                        if (!SkipToEnd) CurrentLine++;
                         continue;
                     }
 
@@ -456,6 +471,7 @@ public class CutscenePlayer : MonoBehaviour
                     //check for and execute command
                     if (Command == "Move")
                     {
+                        if (SkipToEnd) continue;
                         CutsceneMoveHelper newMove = new CutsceneMoveHelper();
                         newMove.Obj = obj;
                         string[] MoveAxes = args[ArgIndex].Split(charComma);
@@ -466,6 +482,8 @@ public class CutscenePlayer : MonoBehaviour
                         ArgIndex++;
 
                         ActiveMoves.Add(newMove);
+
+                        if (verbose) Debug.Log($"{FileLineNumber} moving {obj}");
                     }
 
                     else if (Command == "MoveTo")
@@ -514,7 +532,7 @@ public class CutscenePlayer : MonoBehaviour
                         }
 
                         ActiveMoveTos.Add(newMoveTo);
-
+                        if (verbose) Debug.Log($"{FileLineNumber} Moving {obj} to {newMoveTo.Destination}");
                     }
                     else if (Command == "TurnTo")
                     {
@@ -555,16 +573,19 @@ public class CutscenePlayer : MonoBehaviour
 
                         ActiveTurnTos.Add(newTurnTo);
 
-
-
+                        if (verbose) Debug.Log($"{FileLineNumber} Turning {obj} to {newTurnTo.Destination.eulerAngles}");
                     }
                     else if (Command == "Animation")
                     {
+                        if (SkipToEnd) continue;
 
+                        if (verbose) Debug.Log($"{FileLineNumber} Playing [animation] on {obj}");
                     }
 
                     else if (Command == "Animator")
                     {
+                        if (SkipToEnd) continue;
+
                         string AnimName = args[ArgIndex];
                         ArgIndex++;
 
@@ -580,9 +601,24 @@ public class CutscenePlayer : MonoBehaviour
                         {
                             Debug.LogError("No animator in " + obj + "! cutscene script: " + CutsceneFile.name + ", line: " + FileLineNumber, gameObject);
                         }
+                        if (verbose) Debug.Log($"{FileLineNumber} Playing {AnimName} on {obj}");
+                    }
+                    else if (Command == "SetActive")
+                    {
+
+                        bool active = bool.Parse(args[ArgIndex]);
+                        ArgIndex++;
+                        obj.SetActive(active);
+                        if (verbose)
+                        {
+                            if (active) Debug.Log($"{FileLineNumber} enabling {obj}");
+                            else Debug.Log($"{FileLineNumber} disabling {obj}");
+                        }
                     }
                     else if (Command == "Dialogue")
                     {
+                        if (SkipToEnd) continue;
+
                         if (!DialogueOpen)
                         {
                             DialogueCleared = false;
@@ -619,17 +655,22 @@ public class CutscenePlayer : MonoBehaviour
                             dialogueArrow.localPosition = DialogueArrowPosition;
 
                             textFrame.gameObject.SetActive(true);
+                            if (verbose) Debug.Log($"{FileLineNumber} Displaying dialogue: \"{dialogueLine}\"");
                         }
                         else//if dialogue is already open it means we've looped around
                         {
                             DialogueIteration++;
                         }
 
-
-
                     }
                     else if (Command == "EndDialogue")
                     {
+                        if (SkipToEnd)
+                        {
+                            DialogueOpen = false;
+                            continue;
+                        }
+
                         bool Loop = true;
 
                         string[] OptionalArgs = new string[args.Length - ArgIndex];
@@ -665,9 +706,12 @@ public class CutscenePlayer : MonoBehaviour
                         {
                             DialogueOpen = false;
                         }
+                        if (verbose) Debug.Log($"{FileLineNumber} Resuming from dialogue");
                     }
                     else if (Command == "CameraChange")
                     {
+                        if (SkipToEnd) continue;
+
                         string CameraAngle = args[ArgIndex];
                         CameraPosition camPos = null;
                         ArgIndex++;
@@ -688,10 +732,13 @@ public class CutscenePlayer : MonoBehaviour
                             //Debug.Log("Re-rendering camera at current position");
                         }
                         GlobalTools.currentCam.GetComponent<UpdateBG>().UpdateCamera(camPos);
+                        if (verbose) Debug.Log($"{FileLineNumber} Switching to camera {camPos}");
                     }
                     else if (Command == "PlaySound")
                     {
+                        if (SkipToEnd) continue;
 
+                        if (verbose) Debug.Log($"{FileLineNumber} Playing sound [sound]");
                     }
                     else if (Command == "LoadLevel")
                     {
@@ -703,11 +750,13 @@ public class CutscenePlayer : MonoBehaviour
                             LevelTags = args[1].Split(charComma);
                         }
                         LevelLoader.LoadLevel(LevelName, LevelTags);
+                        if (verbose) Debug.Log($"{FileLineNumber} Loading level {LevelName}");
                     }
                     else if (Command == "EndCutscene")
                     {
                         //skip to the end of the cutscene
                         CurrentLine = CutsceneScriptParsed.Count;
+                        if (verbose) Debug.Log($"{FileLineNumber} Cutscene end command reached");
                     }
                     else
                     {
@@ -728,6 +777,11 @@ public class CutscenePlayer : MonoBehaviour
 
             for(int i = 0; i<ActiveMoves.Count; i++)
             {
+                if (SkipToEnd)
+                {
+                    ActiveMoves = new List<CutsceneMoveHelper>();
+                    break;
+                }
                 CutsceneMoveHelper currentMove = ActiveMoves[i];
                 float MoveMult = Time.deltaTime;
                 if(currentMove.Progress + MoveMult > currentMove.Time)
@@ -751,7 +805,7 @@ public class CutscenePlayer : MonoBehaviour
             {
                 CutsceneMoveToHelper CurrentMoveTo = ActiveMoveTos[i];
 
-                if (CurrentMoveTo.Time == 0)
+                if (CurrentMoveTo.Time == 0 || SkipToEnd)
                 {
                     CurrentMoveTo.Progress = 1;
                 }
@@ -788,7 +842,7 @@ public class CutscenePlayer : MonoBehaviour
             {
                 CutsceneTurnToHelper CurrentTurnTo = ActiveTurnTos[i];
 
-                if (CurrentTurnTo.Time == 0)
+                if (CurrentTurnTo.Time == 0 || SkipToEnd)
                 {
                     CurrentTurnTo.Progress = 1;
                 }
@@ -878,6 +932,7 @@ public class CutscenePlayer : MonoBehaviour
         {
             this.enabled = false;
         }
+        //resuming gameplay and whatnot happens in OnDisable()
     }
 
     public void ResumeFromPause()
@@ -890,7 +945,11 @@ public class CutscenePlayer : MonoBehaviour
 
     public void SkipCutscene()
     {
-        Debug.Log("SkipCutscene not yet implemented!");
+        SkipToEnd = true;
+        if (verbose) Debug.Log($"initiating cutscene skip, line {CurrentLine}");
+        CurrentLine--; //compensate for the initial currentline++ when the parsing loop starts next frame
+        DialogueCleared = true;
+        CutscenePlayerObjects.cutscenePlayerObjects.dialogueText.transform.parent.gameObject.SetActive(false);
         ResumeFromPause();
     }
 }

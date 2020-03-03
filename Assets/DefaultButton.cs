@@ -11,7 +11,9 @@ public class DefaultButton : MonoBehaviour
     {
         if (SelectOnWake)
         {
-            EventSystem.current.SetSelectedGameObject(SelectOnWake.gameObject);
+            //EventSystem.current.SetSelectedGameObject(SelectOnWake.gameObject);
+            SelectOnWake.Select();
+            SelectOnWake.OnSelect(null);
         }
     }
 }
