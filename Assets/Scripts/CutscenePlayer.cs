@@ -79,7 +79,6 @@ public class CutscenePlayer : MonoBehaviour
     private void Awake()
     {
         Disable();
-        //CutscenePlayerObjects.cutscenePlayerObjects.gameObject.SetActive(false);
     }
     private void Start()
     {
