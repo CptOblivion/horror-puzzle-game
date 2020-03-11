@@ -7,6 +7,8 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
+    public int SaveVersionNumber = 2;
+
     public Dictionary<string, bool> SaveFlagsBool = new Dictionary<string, bool>();
     public Dictionary<string, int> SaveFlagsInt = new Dictionary<string, int>();
     public Dictionary<string, float> SaveFlagsFloat = new Dictionary<string, float>();
@@ -14,6 +16,13 @@ public class SaveData
     public List<string> Inventory;
     public string Scene;
     public string SaveLocation; //think of a better name! This refers to the name of the location in the level where the save was made (EG the chair at the apartment)
+    public string SkinColor;
+    public string ShirtColor;
+    public string PantsColor;
+    public int BodyType;
+
+    // TO ADD NEW VARIABLES, USE THE FOLLOWING (increment the version number, and match above):
+    //[System.Runtime.Serialization.OptionalField(VersionAdded = 2)]
 }
 
 public class SaveDataUpdateHelper
@@ -31,8 +40,13 @@ public interface AccessesSaveData
 public class SaveManager:MonoBehaviour
 {
     static SaveData saveData = new SaveData();
+    public static int SaveVersionNumber;
     public static string scene;
     public static string SaveLocation;
+    public static string SkinColor;
+    public static string ShirtColor;
+    public static string PantsColor;
+    public static int BodyType;
     public static float? LastSaveTime;
     public static int SaveSlot = 0;
     public static string SaveName;
@@ -48,19 +62,30 @@ public class SaveManager:MonoBehaviour
 
     public static void UpdateSavePath()
     {
-         SaveName = Application.persistentDataPath + "/SaveGame" + SaveSlot;
+         SaveName = $"{Application.persistentDataPath}/SaveGame{SaveSlot}.sav";
     }
 
     public static void LoadSaveFile()
     {
-        if (File.Exists(Application.persistentDataPath + "/SaveGame" + SaveSlot))
+        if (File.Exists($"{Application.persistentDataPath}/SaveGame{SaveSlot}.sav"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/SaveGame" + SaveSlot, FileMode.Open);
+            FileStream file = File.Open($"{Application.persistentDataPath}/SaveGame{SaveSlot}.sav", FileMode.Open);
+
             saveData = (SaveData)bf.Deserialize(file);
             file.Close();
+
+
+            SaveVersionNumber = saveData.SaveVersionNumber;
+            Debug.Log($"Save file version number {SaveVersionNumber}");
+
             scene = saveData.Scene;
             SaveLocation = saveData.SaveLocation;
+            SkinColor = saveData.SkinColor;
+            ShirtColor = saveData.ShirtColor;
+            PantsColor = saveData.PantsColor;
+            BodyType = saveData.BodyType;
+
             if (saveData.Inventory != null)
             {
                 InventoryManager.Inventory = new InventoryItem[InventoryManager.InventorySize];
@@ -95,11 +120,16 @@ public class SaveManager:MonoBehaviour
         }
         else
             saveData.Inventory = null;
+
         saveData.Scene = scene;
         saveData.SaveLocation = SaveLocation;
+        saveData.SkinColor = SkinColor;
+        saveData.ShirtColor = ShirtColor;
+        saveData.PantsColor = PantsColor;
+        saveData.BodyType = BodyType;
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/SaveGame" + SaveSlot);
+        FileStream file = File.Create($"{Application.persistentDataPath}/SaveGame{SaveSlot}.sav");
         bf.Serialize(file, saveData);
         file.Close();
 
@@ -112,6 +142,13 @@ public class SaveManager:MonoBehaviour
         InventoryManager.Inventory = null;
         SaveLocation = null;
         scene = null;
+        //caucasian: #C8AA80
+        SkinColor = "#C8AA80";
+        //white shirt: #D9D8E7
+        ShirtColor = "#D9D8E7";
+        //jeans: #7B7BD6
+        PantsColor = "#7B7BD6";
+        BodyType = 1;
     }
 
     public static void AddObjectToUpdate(AccessesSaveData obj, string PropName, SaveDataUpdateHelper.Types type)

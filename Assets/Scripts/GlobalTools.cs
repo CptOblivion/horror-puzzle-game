@@ -186,23 +186,9 @@ public class GlobalTools : MonoBehaviour
 
     }
 
-    public void NewGame()
-    {
-        LevelLoader.ClearTemp = true;
-        string[] levelTags = { "newgame" };
-        SaveManager.ClearSaveData();
-        LevelLoader.LoadLevel("Apartment", levelTags);
-    }
     public void SaveGame()
     {
         SaveManager.SaveSaveFile();
-    }
-
-    public void LoadGame()
-    {
-        LevelLoader.ClearTemp = true;
-        SaveManager.LoadSaveFile();
-        LevelLoader.LoadLevel(SaveManager.scene, new string[] { SaveManager.SaveLocation });
     }
     public void ChairSave()
     {

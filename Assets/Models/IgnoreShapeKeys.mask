@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IgnoreShapeKeys
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Character_AR
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Leg1.l
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Leg1.r
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+    m_Weight: 1
+  - m_Path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+    m_Weight: 1
+  - m_Path: Character_ME_Pants
+    m_Weight: 0
+  - m_Path: Character_ME_Shirt
+    m_Weight: 0
+  - m_Path: Character_ME_Skin
+    m_Weight: 0

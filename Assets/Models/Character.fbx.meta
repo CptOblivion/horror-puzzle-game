@@ -45,8 +45,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: Event Footstep has a time (1.992248) outside the clip's
-      valid range (0.000000..1.983333). It will never be fired
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -59,35 +58,6 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
-    - serializedVersion: 16
-      name: Character_AR|Character_Aim
-      takeName: Character_AR|Character_Aim
-      internalID: 8005240801913785362
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Idle
       takeName: Character_AR|Character_Idle
@@ -113,16 +83,64 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Run_F
       takeName: Character_AR|Character_Run_F
       internalID: -1235786526860057431
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 119
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -142,23 +160,71 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.499007
+      - time: 0.256092
         functionName: Footstep
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.98062015
+      - time: 0.7538995
         functionName: Footstep
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Walk_B
@@ -199,9 +265,57 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Walk_F
@@ -242,9 +356,57 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Crouch
@@ -271,9 +433,57 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_EnterTV
@@ -300,9 +510,57 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Fall_In
@@ -329,9 +587,57 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Character_AR|Character_Recoil
@@ -358,9 +664,57 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Character_AR
+        weight: 1
+      - path: Character_AR/MoveCompensate
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.l/Leg2.l/Leg2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Leg1.r/Leg2.r/Leg2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.l/Arm2.l/Arm2.l_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Arm1.r/Arm2.r/Arm2.r_end
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head
+        weight: 1
+      - path: Character_AR/MoveCompensate/Origin/Waist/Chest/Neck/Head/Head_end
+        weight: 1
+      - path: Character_ME_Pants
+        weight: 0
+      - path: Character_ME_Shirt
+        weight: 0
+      - path: Character_ME_Skin
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 62060bea53ffc504a891c2124d1542d9, type: 2}
       additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
@@ -396,7 +750,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 1
+    blendShapeNormalImportMode: 0
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1

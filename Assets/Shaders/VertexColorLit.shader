@@ -1,4 +1,4 @@
-﻿Shader " Vertex Colored" {
+﻿Shader "Vertex Color Lit" {
 Properties {
     _Color ("Main Color", Color) = (1,1,1,1)
     _Emission ("Emmisive Color", Color) = (0,0,0,0)

@@ -247,6 +247,25 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7c148fb7357963446b9f84ec740eb190, type: 3}
     - {fileID: 8300000, guid: 6d7b770921b353e46977e5d926fe3b00, type: 3}
   PitchRand: 0.05
+--- !u!114 &192075355043574318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649626633015675054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6990cb85b0ef8a4fafc978a40ba4655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyTypes: 0
+  SkinColor: {r: 0.7830189, g: 0.66496, b: 0.50231403, a: 1}
+  ShirtColor: {r: 0.8522797, g: 0.8458526, b: 0.9056604, a: 1}
+  PantsColor: {r: 0.48317906, g: 0.48317906, b: 0.8396226, a: 1}
+  SkinObject: {fileID: 1100733675453792796}
+  ShirtObject: {fileID: 8531015541745647836}
+  PantsObject: {fileID: 5116565659850054458}
 --- !u!1001 &803972309192216999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -529,6 +548,36 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -8961280523671663847, guid: 4b921c78409f15147b727c5b485a8613,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4904629436352093010, guid: 4b921c78409f15147b727c5b485a8613,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062256368659778999, guid: 4b921c78409f15147b727c5b485a8613,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 319438897536619451, guid: 4b921c78409f15147b727c5b485a8613,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e50effe508e4bde4b8e20eb9a669fad4, type: 2}
+    - target: {fileID: 5488192317841214109, guid: 4b921c78409f15147b727c5b485a8613,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e50effe508e4bde4b8e20eb9a669fad4, type: 2}
+    - target: {fileID: -194769819198746245, guid: 4b921c78409f15147b727c5b485a8613,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e50effe508e4bde4b8e20eb9a669fad4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b921c78409f15147b727c5b485a8613, type: 3}
 --- !u!1 &8649626633015675054 stripped
@@ -546,6 +595,24 @@ Transform:
 --- !u!95 &2366922534054139847 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 4b921c78409f15147b727c5b485a8613,
+    type: 3}
+  m_PrefabInstance: {fileID: 803972309192216999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5116565659850054458 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5488192317841214109, guid: 4b921c78409f15147b727c5b485a8613,
+    type: 3}
+  m_PrefabInstance: {fileID: 803972309192216999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8531015541745647836 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -194769819198746245, guid: 4b921c78409f15147b727c5b485a8613,
+    type: 3}
+  m_PrefabInstance: {fileID: 803972309192216999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1100733675453792796 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 319438897536619451, guid: 4b921c78409f15147b727c5b485a8613,
     type: 3}
   m_PrefabInstance: {fileID: 803972309192216999}
   m_PrefabAsset: {fileID: 0}
