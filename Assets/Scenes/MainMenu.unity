@@ -1905,7 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5b0286c73b76a4f8a0624df7bc72e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkipSplashScreens: 1
+  SkipSplashScreens: 0
   enableOnEnd: {fileID: 1960687938}
   splashScreens:
   - image: {fileID: 0}
