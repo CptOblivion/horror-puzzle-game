@@ -4,58 +4,58 @@ using UnityEngine;
 
 public class LevelLoadTag : MonoBehaviour
 {
-    public string Tag;
-    public Transform copyTransform;
-    public GameObject activateObject;
-    public bool OnlyOnTag = false;
-    public float Delay = 0;
-    void Start()
+  public string Tag;
+  public Transform copyTransform;
+  public GameObject activateObject;
+  public bool OnlyOnTag = false;
+  public float Delay = 0;
+  void Start()
+  {
+    if (Delay == 0)
     {
-        if (Delay == 0)
-        {
-            CheckForTag();
-        }
+      CheckForTag();
     }
-    private void Update()
+  }
+  private void Update()
+  {
+    if (Delay > 0)
     {
-        if (Delay > 0)
-        {
-            Delay -= Time.deltaTime;
-        }
-        else
-        {
-            CheckForTag();
-        }
+      Delay -= Time.deltaTime;
     }
-
-    void CheckForTag()
+    else
     {
-        bool TagFound = false;
-        foreach (string tag in LevelLoader.LevelTags)
-        {
-            if (tag == Tag)
-            {
-                TagFound = true;
-                if (copyTransform != null)
-                {
-                    transform.SetPositionAndRotation(copyTransform.position, copyTransform.rotation);
-                }
-
-                if (activateObject != null)
-                {
-                    activateObject.SetActive(true);
-                }
-
-                Debug.Log("activating with tag " + Tag, gameObject);
-
-                this.enabled = false;
-                //gameObject.SetActive(false);
-
-                break;
-            }
-
-        }
-        if (!TagFound && OnlyOnTag)
-            gameObject.SetActive(false);
+      CheckForTag();
     }
+  }
+
+  void CheckForTag()
+  {
+    bool TagFound = false;
+    foreach (string tag in LevelLoader.LevelTags)
+    {
+      if (tag == Tag)
+      {
+        TagFound = true;
+        if (copyTransform != null)
+        {
+          transform.SetPositionAndRotation(copyTransform.position, copyTransform.rotation);
+        }
+
+        if (activateObject != null)
+        {
+          activateObject.SetActive(true);
+        }
+
+        Debug.Log("activating with tag " + Tag, gameObject);
+
+        this.enabled = false;
+        //gameObject.SetActive(false);
+
+        break;
+      }
+
+    }
+    if (!TagFound && OnlyOnTag)
+      gameObject.SetActive(false);
+  }
 }

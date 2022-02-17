@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CameraPosition : MonoBehaviour
 {
-    public Camera newCamera;
+  public Camera newCamera;
 }

@@ -6,32 +6,32 @@ using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject selectOnWake;
-    public AudioClip moveSound;
-    GameObject lastSelected;
+  public GameObject selectOnWake;
+  public AudioClip moveSound;
+  GameObject lastSelected;
 
-    bool WaitAFrame = false;
-    private void OnEnable()
+  bool WaitAFrame = false;
+  private void OnEnable()
+  {
+    WaitAFrame = true;
+  }
+
+  private void LateUpdate()
+  {
+
+    if (WaitAFrame)
     {
-        WaitAFrame = true;
+      WaitAFrame = false;
+      if (selectOnWake)
+      {
+        EventSystem.current.SetSelectedGameObject(selectOnWake);
+        lastSelected = EventSystem.current.currentSelectedGameObject;
+      }
     }
-
-    private void LateUpdate()
+    else if (lastSelected != EventSystem.current.currentSelectedGameObject)
     {
-
-        if (WaitAFrame)
-        {
-            WaitAFrame = false;
-            if (selectOnWake)
-            {
-                EventSystem.current.SetSelectedGameObject(selectOnWake);
-                lastSelected = EventSystem.current.currentSelectedGameObject;
-            }
-        }
-        else if (lastSelected != EventSystem.current.currentSelectedGameObject)
-        {
-            PlaySFX.Play(moveSound);
-            lastSelected = EventSystem.current.currentSelectedGameObject;
-        }
+      PlaySFX.Play(moveSound);
+      lastSelected = EventSystem.current.currentSelectedGameObject;
     }
+  }
 }

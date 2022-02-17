@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class CameraPositionCollider : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+  private void OnTriggerEnter(Collider other)
+  {
+    CameraPosition cameraPosition = other.GetComponent<CameraPosition>();
+    if (!GlobalTools.Paused && cameraPosition)
     {
-        CameraPosition cameraPosition = other.GetComponent<CameraPosition>();
-        if (!GlobalTools.Paused && cameraPosition)
-        {
-            UpdateBG updateBG = GlobalTools.currentCam.GetComponent<UpdateBG>();
-            updateBG.camVolumes.Add(cameraPosition);
-            updateBG.CheckForUpdate();
-        }
+      UpdateBG updateBG = GlobalTools.currentCam.GetComponent<UpdateBG>();
+      updateBG.camVolumes.Add(cameraPosition);
+      updateBG.CheckForUpdate();
     }
-    private void OnTriggerExit(Collider other)
+  }
+  private void OnTriggerExit(Collider other)
+  {
+    CameraPosition cameraPosition = other.GetComponent<CameraPosition>();
+    if (cameraPosition)
     {
-        CameraPosition cameraPosition = other.GetComponent<CameraPosition>();
-        if (cameraPosition)
-        {
-            UpdateBG updateBG = GlobalTools.currentCam.GetComponent<UpdateBG>();
-            bool removed = updateBG.camVolumes.Remove(cameraPosition);
-            if (removed)
-            {
-                updateBG.CheckForUpdate();
-            }
-            else
-            {
-                Debug.Log("not in list! (shouldn't be possible)");
-            }
-        }
+      UpdateBG updateBG = GlobalTools.currentCam.GetComponent<UpdateBG>();
+      bool removed = updateBG.camVolumes.Remove(cameraPosition);
+      if (removed)
+      {
+        updateBG.CheckForUpdate();
+      }
+      else
+      {
+        Debug.Log("not in list! (shouldn't be possible)");
+      }
     }
+  }
 }

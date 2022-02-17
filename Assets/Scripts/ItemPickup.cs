@@ -5,29 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class ItemPickup : MonoBehaviour
 {
-    public InventoryItem item;
-    public string SaveName;
+  public InventoryItem item;
+  public string SaveName;
 
-    public void Start()
+  public void Start()
+  {
+    SaveName = SceneManager.GetActiveScene().name + " PICKUP " + item.name;
+    bool? collected = SaveManager.GetBool(SaveName);
+    if (collected == true)
     {
-        SaveName = SceneManager.GetActiveScene().name + " PICKUP " + item.name;
-        bool? collected = SaveManager.GetBool(SaveName);
-        if (collected == true)
-        {
-            GameObject.Destroy(gameObject);
-        }
+      GameObject.Destroy(gameObject);
     }
-    public void Pickup()
+  }
+  public void Pickup()
+  {
+    if (InventoryManager.AddItem(item))
     {
-        if (InventoryManager.AddItem(item))
-        {
-            ScreenText.DisplayText(item.ItemName, showObject:item.gameObject);
-            SaveManager.SetBool(SaveName, true);
-            GameObject.Destroy(gameObject);
-        }
-        else
-        {
-            ScreenText.DisplayText("I can't carry any more things.");
-        }
+      ScreenText.DisplayText(item.ItemName, showObject: item.gameObject);
+      SaveManager.SetBool(SaveName, true);
+      GameObject.Destroy(gameObject);
     }
+    else
+    {
+      ScreenText.DisplayText("I can't carry any more things.");
+    }
+  }
 }

@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class PlayerInTrigger : MonoBehaviour
 {
-    public bool playerInTrigger = false;
+  public bool playerInTrigger = false;
 
-    private void OnTriggerEnter(Collider other)
+  private void OnTriggerEnter(Collider other)
+  {
+    if (other.gameObject == GlobalTools.player)
     {
-        if (other.gameObject == GlobalTools.player)
-        {
-            playerInTrigger = true;
-        }
+      playerInTrigger = true;
     }
+  }
 
-    private void OnTriggerExit(Collider other)
+  private void OnTriggerExit(Collider other)
+  {
+    if (other.gameObject == GlobalTools.player)
     {
-        if (other.gameObject == GlobalTools.player)
-        {
-            playerInTrigger = false;
-        }
+      playerInTrigger = false;
     }
+  }
 }

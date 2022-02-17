@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class LimitToCameras : MonoBehaviour
 {
-    public MoveCameraToPosition[] CameraPositions;
+  public MoveCameraToPosition[] CameraPositions;
 
-    private void Start()
+  private void Start()
+  {
+    UpdateBG.CameraWasChanged += OnCameraChange;
+  }
+
+  private void OnDestroy()
+  {
+    UpdateBG.CameraWasChanged -= OnCameraChange;
+  }
+
+  void OnCameraChange(Camera cam)
+  {
+    bool InCamera = false;
+    for (int i = 0; i < CameraPositions.Length; i++)
     {
-        UpdateBG.CameraWasChanged += OnCameraChange;
+      if (CameraPositions[i].GetComponentInChildren<Camera>(true) == cam)
+      {
+        InCamera = true;
+        break;
+      }
     }
 
-    private void OnDestroy()
-    {
-        UpdateBG.CameraWasChanged -= OnCameraChange;
-    }
-
-    void OnCameraChange(Camera cam)
-    {
-        bool InCamera = false;
-        for(int i = 0; i < CameraPositions.Length; i++)
-        {
-            if (CameraPositions[i].GetComponentInChildren<Camera>(true) == cam)
-            {
-                InCamera = true;
-                break;
-            }
-        }
-
-        gameObject.SetActive(InCamera);
-    }
+    gameObject.SetActive(InCamera);
+  }
 }
