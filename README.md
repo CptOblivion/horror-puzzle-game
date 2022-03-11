@@ -7,3 +7,9 @@ Unity 2019.2.6f1
 - elements in the pre-rendered scene are still game objects that can be modified (and then visually updated by re-rendering the scene), allowing for a great deal of flexibility in designing the gameplay and interactions with the environment without adding much rendering overhead or breaking the visual style.
 
 ## Screenshots
+
+![A screenshot of the game showing the main character in the entry of an apartment](./Admin/Screenshots/Entry.png)
+![A screenshot of the game showing the main character in the living room of an apartment](./Admin/Screenshots/Living_Room.png)
+![A screenshot of the game showing the main character in the entry of an abandoned school](./Admin/Screenshots/School.png)
+![A screenshot of the game showing the main character confronting monsters in an abandoned school](./Admin/Screenshots/Monsters.png)
+![A screenshot of the game showing the main character having collected a key](./Admin/Screenshots/Key.png)
